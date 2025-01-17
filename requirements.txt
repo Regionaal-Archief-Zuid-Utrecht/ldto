@@ -1,0 +1,3 @@
+pytest>=7.4.0
+pyshacl>=0.25.0
+rdflib>=7.0.0
