@@ -42,9 +42,9 @@ python scripts/validate.py path/to/file.ttl
 
 ### Tests uitvoeren
 
-Ter controle van de SHACL-bestanden zelf, is er een PyTest test suite.
+Ter controle van de SHACL-bestanden zelf, is er een PyTest testsuite.
 
-Run de test suite met PyTest:
+Run de testsuite met PyTest:
 
 ```bash
 pytest tests/test_shacl.py -v
