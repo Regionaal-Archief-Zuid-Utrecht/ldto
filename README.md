@@ -6,6 +6,9 @@ Onderscheid met MDTO is dat bij LDTO de nadruk niet zozeer ligt op het uitwissel
 
 Deze repostory bevat de SHACL shapes voor het valideren van linked data volgens het LDTO model.
 
+**LET OP: LDTO en de SHACL shapes zijn in ontwikkeling en kunnen in deze fase nog zonder waarschuwing vooraf veranderen.**
+
+
 ## Projectstructuur
 
 - `shacl/` - SHACL shapes voor validatie
