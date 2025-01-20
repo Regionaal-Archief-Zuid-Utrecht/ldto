@@ -11,16 +11,16 @@ Deze repostory bevat de SHACL shapes voor het valideren van linked data volgens 
 
 ## Projectstructuur
 
-- `shacl/` - SHACL shapes voor validatie
-  - `ldto-core.ttl` - Kern met SHACL shapes voor het LDTO model
-  - `ldto-extensions.ttl` - Aanvullende shapes voor validatie van niet-LDTO vocabulaires, zoals toegepast binnen het informatiemodel van het RAZU e-Depot.
-- `examples/` - Voorbeelden van LDTO RDF, die voldoet aan zowel de *core* als ook de *extension* shapes.
-- `tests/` - Test suite
-  - `core/invalid/` - RDF bestanden die niet zouden moeten valideren tegen core shapes
-  - `extensions/invalid/` - RDF bestanden die niet zouden moeten valideren tegen extension shapes
-  - `test_shacl.py` - PyTest testsuite voor SHACL validatie
-- `scripts/` - Hulpscripts
-  - `validate.py` - Script voor het valideren van RDF bestanden
+- [`shacl/`](shacl/) - SHACL shapes voor validatie
+  - [`ldto-core.ttl`](shacl/ldto-core.ttl) - Kern met SHACL shapes voor het LDTO model
+  - [`ldto-extensions.ttl`](shacl/ldto-extensions.ttl) - Aanvullende shapes voor validatie van niet-LDTO vocabulaires, zoals toegepast binnen het informatiemodel van het RAZU e-Depot.
+- [`examples/`](examples/) - Voorbeelden van LDTO RDF, die voldoet aan zowel de *core* als ook de *extension* shapes.
+- [`tests/`](tests/) - Test suite
+  - [`core/invalid/`](tests/core/invalid/) - RDF bestanden die niet zouden moeten valideren tegen core shapes
+  - [`extensions/invalid/`](tests/extensions/invalid/) - RDF bestanden die niet zouden moeten valideren tegen extension shapes
+  - [`test_shacl.py`](tests/test_shacl.py) - PyTest testsuite voor SHACL validatie
+- [`scripts/`](scripts/) - Hulpscripts
+  - [`validate.py`](scripts/validate.py) - Script voor het valideren van RDF bestanden
 
 ## SHACL Shapes
 
