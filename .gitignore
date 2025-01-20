@@ -24,3 +24,6 @@ venv.bak/
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Project specific
+bug/

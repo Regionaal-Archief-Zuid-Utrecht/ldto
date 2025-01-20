@@ -105,8 +105,6 @@
 
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-998.meta.json> a premis:File .
 
-<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.meta.json> a premis:File .
-
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.pdf> a premis:File ;
     premis:originalName "20221019_Bestuursvergadering/Bijlage_1_3_RAZU_Infographic_def.pdf" .
 

@@ -4,7 +4,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-0> a ldto:Bestand ;
-    dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.meta.json> ;
+    dct:hasFormaat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.meta.json> ;
     ldto:URLBestand "https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.xlsx"^^xsd:anyURI ;
     ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/05a706b052b1a34d26bd32bd0982fbab> ;
     ldto:checksum [ a ldto:ChecksumGegevens ;

@@ -1,0 +1,59 @@
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh:       <http://www.w3.org/ns/shacl#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix ldto:     <https://data.razu.nl/def/ldto/> .
+@prefix ldto_sh:  <https://data.razu.nl/def/ldto-shacl/> .
+@prefix ldto_esh: <https://data.razu.nl/def/ldto-extended-shacl/> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix premis:   <http://www.loc.gov/premis/rdf/v3/> .
+
+ldto_esh: 
+    a owl:Ontology ;
+    rdfs:label "LDTO Extension SHACL Shapes" ;
+    owl:versionInfo "0.5.0" ;
+    dcterms:created "2025-01-20"^^xsd:date ;
+    dcterms:modified "2025-01-20"^^xsd:date ;
+    dcterms:creator <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
+    rdfs:comment "SHACL shapes voor door RAZU toegepaste uitbreidingen op LDTO."@nl .
+
+ldto_esh:ObjectShape
+    sh:name "ObjectShape" ;
+    sh:description "Een fysiek, digitaal of conceptueel ding dat van belang is voor een organisatie." ;
+    a sh:NodeShape ;
+    sh:property [
+        sh:name "MetadataFileShape" ;
+        sh:description "URI bestand waar metadata opgeslagen staat." ;
+        a sh:PropertyShape ;
+        sh:path dcterms:hasFormat ;
+        sh:minCount 1 ;
+        sh:maxCount 1;
+        sh:node ldto_esh:MetadataFileNode 
+    ] .
+
+ldto_esh:InformatieobjectShape
+    sh:name "Informatieobject" ;
+    sh:description "Een op zichzelf staand geheel van gegevens met een eigen identiteit." ;
+    a sh:NodeShape ;
+    sh:targetClass ldto:Informatieobject ;
+    sh:node ldto_esh:ObjectShape .
+
+ldto_esh:BestandShape
+    sh:name "Bestand" ;
+    a sh:NodeShape ;
+    sh:targetClass ldto:Bestand ;
+    sh:node ldto_esh:ObjectShape .
+
+ 
+ldto_esh:MetadataFileNode
+    a sh:NodeShape;
+    sh:targetClass premis:File ;
+    sh:class premis:File ;
+    sh:property [
+        sh:path premis:originalName ;
+        sh:minCount 0 ;
+        sh:maxCount 1;
+        sh:datatype xsd:string 
+    ] .

@@ -140,9 +140,9 @@ ldto_sh:InformatieobjectShape
                 a sh:PropertyShape ;
                 sh:path ldto:dekkingInTijdBeginDatum ;
                 sh:or (
-                    [ sh:datatype xsd:date ]
-                    [ sh:datatype xsd:gYearMonth ]
-                    [ sh:datatype xsd:gYear ]
+                    [ sh:node ldto_sh:DateShape ]
+                    [ sh:node ldto_sh:YearMonthShape ]
+                    [ sh:node ldto_sh:YearShape ]
                 ) ;
                 sh:minCount 1 ;
                 sh:maxCount 1 
@@ -153,9 +153,9 @@ ldto_sh:InformatieobjectShape
                 a sh:PropertyShape ;
                 sh:path ldto:dekkingInTijdEindDatum ;
                 sh:or (
-                    [ sh:datatype xsd:date ]
-                    [ sh:datatype xsd:gYearMonth ]
-                    [ sh:datatype xsd:gYear ]
+                    [ sh:node ldto_sh:DateShape ]
+                    [ sh:node ldto_sh:YearMonthShape ]
+                    [ sh:node ldto_sh:YearShape ]
                 ) ;
                 sh:minCount 0 ;
                 sh:maxCount 1 ;
