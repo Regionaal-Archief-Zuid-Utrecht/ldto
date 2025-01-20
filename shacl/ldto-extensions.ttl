@@ -25,7 +25,7 @@ ldto_esh:ObjectShape
     a sh:NodeShape ;
     sh:property [
         sh:name "MetadataFileShape" ;
-        sh:description "URI bestand waar metadata opgeslagen staat." ;
+        sh:description "URI van het bestand waar metadata opgeslagen staat." ;
         a sh:PropertyShape ;
         sh:path dcterms:hasFormat ;
         sh:minCount 1 ;
@@ -46,8 +46,9 @@ ldto_esh:BestandShape
     sh:targetClass ldto:Bestand ;
     sh:node ldto_esh:ObjectShape .
 
- 
 ldto_esh:MetadataFileNode
+    sh:name "MetadataFile" ;
+    sh:description "De URI van het bestand met metadata op het storagesysteem." ;
     a sh:NodeShape;
     sh:targetClass premis:File ;
     sh:class premis:File ;
