@@ -15,6 +15,8 @@ Deze repostory bevat de SHACL shapes voor het valideren van linked data volgens 
   - [`ldto-core.ttl`](shacl/ldto-core.ttl) - Kern met SHACL shapes voor het LDTO model
   - [`ldto-extensions.ttl`](shacl/ldto-extensions.ttl) - Aanvullende shapes voor validatie van niet-LDTO vocabulaires, zoals toegepast binnen het informatiemodel van het RAZU e-Depot.
 - [`examples/`](examples/) - Voorbeelden van LDTO RDF, die voldoet aan zowel de *core* als ook de *extension* shapes.
+  - [`bestuursarchief.ttl`](examples/bestuursarchief.ttl) - Voorbeeld 'bestuursarchief' met LDTO metadata
+  - [`luchtfotos.ttl`](examples/luchtfotos.ttl) - Voorbeeld 'luchtfotos' met LDTO metadata
 - [`tests/`](tests/) - Test suite
   - [`core/invalid/`](tests/core/invalid/) - RDF bestanden die niet zouden moeten valideren tegen core shapes
   - [`extensions/invalid/`](tests/extensions/invalid/) - RDF bestanden die niet zouden moeten valideren tegen extension shapes
