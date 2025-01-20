@@ -1,10 +1,10 @@
 # LDTO - Linked Data voor Duurzaam Toegankelijke Overheidsinformatie
 
-LDTO is een op [MDTO](https://www.nationaalarchief.nl/archiveren/mdto) gebaseerd model voor het beschrijven van duurzaam te bewaren overheidsinformatie als linked data. Het model wordt gebruik in het e-Depot van het [Regionaal Archief Zuid-Utrecht](https://www.razu.nl/).
+LDTO is een op [MDTO](https://www.nationaalarchief.nl/archiveren/mdto) gebaseerd model voor het beschrijven van duurzaam te bewaren overheidsinformatie als *linked data*. Het model wordt gebruik in het e-Depot van het [Regionaal Archief Zuid-Utrecht](https://www.razu.nl/).
 
-Een verschilmet MDTO is dat bij LDTO de nadruk niet zozeer ligt op het *uitwisselen* van metadatagegevens maar meer op de *duurzame opslag en toegang*, en daarbij aansluit bij *linked data-principes*. LDTO metadata zal altijd vertaald kunnen worden naar MDTO.
+Bij LDTO ligt de nadruk minder dan bij MDTO op het *uitwisselen* van metadatagegevens maar meer op de *duurzame opslag en toegang*. Bovendien is LDTO gebaseerd op *RDF* en *linked data-principes*. LDTO-metadata zal altijd vertaald kunnen worden naar MDTO.
 
-Deze repostory bevat de SHACL shapes voor het valideren van linked data volgens het LDTO model.
+Deze repostory bevat de *SHACL shapes* voor het valideren van linked data volgens het LDTO-model.
 
 **LET OP: LDTO en de SHACL shapes zijn in ontwikkeling en kunnen in deze fase nog zonder waarschuwing vooraf veranderen.**
 
@@ -15,25 +15,25 @@ Deze repostory bevat de SHACL shapes voor het valideren van linked data volgens 
   - [`ldto-core.ttl`](shacl/ldto-core.ttl) - Kern met SHACL shapes voor het LDTO model
   - [`ldto-extensions.ttl`](shacl/ldto-extensions.ttl) - Aanvullende shapes voor validatie van niet-LDTO vocabulaires, zoals toegepast binnen het informatiemodel van het RAZU e-Depot.
 - [`examples/`](examples/) - Voorbeelden van LDTO RDF, die voldoet aan zowel de *core* als ook de *extension* shapes.
-  - [`bestuursarchief.ttl`](examples/bestuursarchief.ttl) - Voorbeeld 'bestuursarchief' met LDTO metadata
+  - [`bestuursarchief.ttl`](examples/bestuursarchief.ttl) - Voorbeeld 'bestuursarchief' met LDTO-metadata
   - [`luchtfotos.ttl`](examples/luchtfotos.ttl) - Voorbeeld 'luchtfotos' met LDTO metadata
 - [`tests/`](tests/) - Test suite
-  - [`core/invalid/`](tests/core/invalid/) - RDF bestanden die niet zouden moeten valideren tegen core shapes
-  - [`extensions/invalid/`](tests/extensions/invalid/) - RDF bestanden die niet zouden moeten valideren tegen extension shapes
-  - [`test_shacl.py`](tests/test_shacl.py) - PyTest testsuite voor SHACL validatie
+  - [`core/invalid/`](tests/core/invalid/) - RDF bestanden die niet zouden moeten valideren tegen de *core* shapes
+  - [`extensions/invalid/`](tests/extensions/invalid/) - RDF-bestanden die niet valideren tegen de *extension* shapes
+  - [`test_shacl.py`](tests/test_shacl.py) - PyTest testsuite voor twee sets SHACL shapes
 - [`scripts/`](scripts/) - Hulpscripts
-  - [`validate.py`](scripts/validate.py) - Script voor het valideren van RDF bestanden
+  - [`validate.py`](scripts/validate.py) - Script voor het valideren van RDF-bestanden
 
 ## SHACL Shapes
 
 Het project bevat twee sets van SHACL shapes:
 
-1. **Core Shapes** (`ldto-core.ttl`): Bevat de basis-validatieregels voor het LDTO model zelf.
-2. **Extension Shapes** (`ldto-extensions.ttl`): Bevat aanvullende validatieregels voor andere vocabulaires die in combinatie met LDTO worden gebruikt.
+1. **Core Shapes** (`ldto-core.ttl`): Bevat de basis-validatieregels voor het LDTO-model zelf.
+2. **Extension Shapes** (`ldto-extensions.ttl`): Bevat aanvullende validatieregels voor andere vocabulaires die door het RAZU in combinatie met LDTO worden gebruikt.
 
 ## Gebruik
 
-De SHACL shapes kunnen met ieder op SHACL gebaseerde validator worden gebruikt ter validatie van RDF bestanden. Het is ook mogelijk om LDTO RDF bestanden te valideren met het python script `scripts/validate.py`.
+De SHACL shapes kunnen met iedere op SHACL gebaseerde validator worden gebruikt ter validatie van RDF-bestanden. Het is ook mogelijk om LDTO bestanden te valideren met het pythonscript `scripts/validate.py`.
 
 ### Installatie validatie-script
 
@@ -45,7 +45,7 @@ De SHACL shapes kunnen met ieder op SHACL gebaseerde validator worden gebruikt t
 
 ### Validatiescript
 
-Valideer een RDF bestand tegen de LDTO SHACL shapes:
+Valideer een RDF-bestand tegen de LDTO SHACL shapes:
 
 ```bash
 python scripts/validate.py path/to/file.ttl [core|extensions]
@@ -63,4 +63,4 @@ Run de testsuite met PyTest:
 pytest tests/test_shacl.py -v
 ```
 
-Dit zal alle tests uitvoeren, inclusief validatie tegen zowel de core als de extension shapes.
+Dit zal alle tests uitvoeren, inclusief validatie tegen zowel de *core* als de *extension* shapes.
