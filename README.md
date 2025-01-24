@@ -11,6 +11,8 @@ Deze repostory bevat de *SHACL shapes* voor het valideren van linked data volgen
 
 ## Projectstructuur
 
+- [`def/`](def/) - Definitiebestanden
+  - [`ldto.ttl`](def/ldto.ttl) - De RDF-ontologie van LDTO, gebaseerd op MDTO
 - [`shacl/`](shacl/) - SHACL shapes voor validatie
   - [`ldto-core.ttl`](shacl/ldto-core.ttl) - Kern met SHACL shapes voor het LDTO model
   - [`ldto-extensions.ttl`](shacl/ldto-extensions.ttl) - Aanvullende shapes voor validatie van niet-LDTO vocabulaires, zoals toegepast binnen het informatiemodel van het RAZU e-Depot.
@@ -28,7 +30,7 @@ Deze repostory bevat de *SHACL shapes* voor het valideren van linked data volgen
 
 Het project bevat twee sets van SHACL shapes:
 
-1. **Core Shapes** (`ldto-core.ttl`): Bevat de basis-validatieregels voor het LDTO-model zelf.
+1. **Core Shapes** (`ldto-core.ttl`): Bevat de basis-validatieregels voor het [LDTO-model](def/ldto.ttl).
 2. **Extension Shapes** (`ldto-extensions.ttl`): Bevat aanvullende validatieregels voor andere vocabulaires die door het RAZU in combinatie met LDTO worden gebruikt.
 
 ## Gebruik
