@@ -22,10 +22,8 @@
     dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-1.meta.json> ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> ;
     ldto:archiefvormer <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
-    ldto:beperkingGebruik [ a ldto:BeperkingGebruikGegevens ;
-        ldto:beperkingGebruikType <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ],
-    [ a ldto:BeperkingGebruikGegevens ;
-        ldto:beperkingGebruikType <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ] ;
+    ldto:beperkingGebruik <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ,
+        <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ;
     ldto:bevatOnderdeel <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-32> ;
     ldto:classificatie <https://data.razu.nl/id/soort/40d7459d77bc1fefb775b88e4b4b42cc> ;
     ldto:dekkingInTijd [ a ldto:DekkingInTijdGegevens ;
@@ -43,10 +41,8 @@
     dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-32.meta.json> ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ;
     ldto:archiefvormer <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
-    ldto:beperkingGebruik [ a ldto:BeperkingGebruikGegevens ;
-        ldto:beperkingGebruikType <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ],
-    [ a ldto:BeperkingGebruikGegevens ;
-        ldto:beperkingGebruikType <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ] ;
+    ldto:beperkingGebruik <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ,
+        <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ;
     ldto:bevatOnderdeel <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-998> ;
     ldto:classificatie <https://data.razu.nl/id/soort/a5a736ade5e176ad95d42ea91b7d3cbf> ;
     ldto:event [ a ldto:EventGegevens ;
@@ -64,10 +60,8 @@
     dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-998.meta.json> ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;
     ldto:archiefvormer <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
-    ldto:beperkingGebruik [ a ldto:BeperkingGebruikGegevens ;
-        ldto:beperkingGebruikType <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ],
-    [ a ldto:BeperkingGebruikGegevens ;
-        ldto:beperkingGebruikType <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ] ;
+    ldto:beperkingGebruik <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ,
+        <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ;
     ldto:classificatie <https://data.razu.nl/id/soort/b514faf97ce3619b6a2d520dee49930f> ;
     ldto:event [ a ldto:EventGegevens ;
         ldto:eventVerantwoordelijkeActor <https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9> ;
