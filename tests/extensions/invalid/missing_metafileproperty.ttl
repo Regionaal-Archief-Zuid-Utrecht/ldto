@@ -1,0 +1,114 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ldto: <https://data.razu.nl/def/ldto/> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-0> a ldto:Bestand ;
+    dct:hasFormaat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.meta.json> ;
+    ldto:URLBestand "https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.xlsx"^^xsd:anyURI ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/05a706b052b1a34d26bd32bd0982fbab> ;
+    ldto:checksum [ a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+        ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime ;
+        ldto:checksumWaarde "2f01c68bb4098d55c3483021b898aa33" ] ;
+    ldto:identificatie [ a ldto:IdentificatieGegevens ;
+        ldto:identificatieBron "e-Depot RAZU" ;
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-0> ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-1> ;
+    ldto:naam "metadata_bestuursarchief.xlsx" ;
+    ldto:omvang 89404 .
+
+<https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-1> a ldto:Informatieobject ;
+    dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-1.meta.json> ;
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> ;
+    ldto:archiefvormer <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
+    ldto:beperkingGebruik [ a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ],
+    [ a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ] ;
+    ldto:bevatOnderdeel <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-32> ;
+    ldto:classificatie <https://data.razu.nl/id/soort/40d7459d77bc1fefb775b88e4b4b42cc> ;
+    ldto:dekkingInTijd [ a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdBeginDatum "2010"^^xsd:gYear ;
+        ldto:dekkingInTijdEindDatum "2024"^^xsd:gYear ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/6647a78a0dc0920a5fa61df580cef511> ] ;
+    ldto:heeftRepresentatie <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-0> ;
+    ldto:identificatie [ a ldto:IdentificatieGegevens ;
+        ldto:identificatieBron "e-Depot RAZU" ;
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-1> ] ;
+    ldto:naam "Bestuursarchief Regionaal Archief Zuid-Utrecht en voorgangers" ;
+    ldto:waardering <https://data.razu.nl/id/waardering/f41d48ac0e70962eb37cae19e87c577f> .
+
+<https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-32> a ldto:Informatieobject ;
+    dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-32.meta.json> ;
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ;
+    ldto:archiefvormer <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
+    ldto:beperkingGebruik [ a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ],
+    [ a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ] ;
+    ldto:bevatOnderdeel <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-998> ;
+    ldto:classificatie <https://data.razu.nl/id/soort/a5a736ade5e176ad95d42ea91b7d3cbf> ;
+    ldto:event [ a ldto:EventGegevens ;
+        ldto:eventVerantwoordelijkeActor <https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9> ;
+        ldto:eventTijd "2022-10-19"^^xsd:date ;
+        ldto:eventType <https://data.razu.nl/id/eventtype/c8f575d14cf17c15461fc24c8eddb4f3> ] ;
+    ldto:identificatie [ a ldto:IdentificatieGegevens ;
+        ldto:identificatieBron "e-Depot RAZU" ;
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-32> ] ;
+    ldto:isOnderdeelVan <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-1> ;
+    ldto:naam "20221019 Bestuursvergadering" ;
+    ldto:waardering <https://data.razu.nl/id/waardering/f41d48ac0e70962eb37cae19e87c577f> .
+
+<https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-998> a ldto:Informatieobject ;
+    dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-998.meta.json> ;
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;
+    ldto:archiefvormer <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
+    ldto:beperkingGebruik [ a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ],
+    [ a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ] ;
+    ldto:classificatie <https://data.razu.nl/id/soort/b514faf97ce3619b6a2d520dee49930f> ;
+    ldto:event [ a ldto:EventGegevens ;
+        ldto:eventVerantwoordelijkeActor <https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9> ;
+        ldto:eventTijd "2022-10-19"^^xsd:date ;
+        ldto:eventType <https://data.razu.nl/id/eventtype/c8f575d14cf17c15461fc24c8eddb4f3> ] ;
+    ldto:heeftRepresentatie <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-999> ;
+    ldto:identificatie [ a ldto:IdentificatieGegevens ;
+        ldto:identificatieBron "e-Depot RAZU" ;
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-998> ] ;
+    ldto:isOnderdeelVan <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-32> ;
+    ldto:naam "Bijlage 1 3 RAZU Infographic def" ;
+    ldto:trefwoord "E-depot" ;
+    ldto:waardering <https://data.razu.nl/id/waardering/f41d48ac0e70962eb37cae19e87c577f> .
+
+<https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-999> a ldto:Bestand ;
+    dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.meta.json> ;
+    ldto:URLBestand "https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.pdf"^^xsd:anyURI ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/1d00779c8136003a8719fb13e8f47d55> ;
+    ldto:checksum [ a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+        ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime ;
+        ldto:checksumWaarde "c2c90c72aa8516a171324793cba37407" ] ;
+    ldto:identificatie [ a ldto:IdentificatieGegevens ;
+        ldto:identificatieBron "e-Depot RAZU" ;
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-999> ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-998> ;
+    ldto:naam "Bijlage_1_3_RAZU_Infographic_def.pdf" ;
+    ldto:omvang 370539 .
+
+<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.meta.json> a premis:File .
+
+<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-1.meta.json> a premis:File .
+
+<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-32.meta.json> a premis:File .
+
+<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-998.meta.json> a premis:File .
+
+<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.meta.json> a premis:File .
+
+<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.pdf> a premis:File ;
+    premis:originalName "20221019_Bestuursvergadering/Bijlage_1_3_RAZU_Infographic_def.pdf" .
+
+<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.xlsx> a premis:File ;
+    premis:originalName "metadata_bestuursarchief.xlsx" .
