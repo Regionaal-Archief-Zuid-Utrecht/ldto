@@ -9,7 +9,7 @@
     ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/05a706b052b1a34d26bd32bd0982fbab> ;
     ldto:checksum [ a ldto:ChecksumGegevens ;
         ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
-        ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime ;
+        ldto:checksumDatum "2025-01"^^xsd:dateTime ;
         ldto:checksumWaarde "2f01c68bb4098d55c3483021b898aa33" ] ;
     ldto:identificatie [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "e-Depot RAZU" ;
@@ -98,8 +98,6 @@
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-32.meta.json> a premis:File .
 
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-998.meta.json> a premis:File .
-
-<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.meta.json> a premis:File .
 
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.pdf> a premis:File ;
     premis:originalName "20221019_Bestuursvergadering/Bijlage_1_3_RAZU_Infographic_def.pdf" .

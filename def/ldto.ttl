@@ -12,9 +12,9 @@ ldto:
     rdf:type owl:Ontology ;
     rdfs:comment "De RDF-ontologie van LDTO (Linked-data Duurzaam Toegankelijke Overheidsinformatie)" ;
     rdfs:label "LDTO" ;
-    owl:versionInfo "0.5" ;
+    owl:versionInfo "0.6.1" ;
     dcterms:created "2025-01-16"^^xsd:date ;
-    dcterms:modified "2025-01-24"^^xsd:date ;
+    dcterms:modified "2025-01-28"^^xsd:date ;
     dcterms:creator <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
     dcterms:isVersionOf <http://www.nationaalarchief.nl/mdto#> ;
     # sh:suggestedShapesGraph <http://www.nationaalarchief.nl/mdto-shacl#> ;
@@ -85,13 +85,6 @@ ldto:EventGegevens
     rdfs:label "Eventgegevens"@nl ;
     rdfs:subClassOf ldto:Gegevensgroep ;
     skos:closeMatch mdto:EventGegevens ;
-    .
-
-ldto:BeperkingGebruikGegevens
-    rdf:type owl:Class ;
-    rdfs:label "Beperkinggebruik-gegevens"@nl ;
-    rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:BeperkingGebruikGegevens ;
     .
 
 ldto:BetrokkeneGegevens
@@ -323,20 +316,6 @@ ldto:beperkingGebruik
     rdfs:domain ldto:Informatieobject ;
     rdfs:range ldto:BeperkingGebruikGegevens ;
     skos:closeMatch mdto:beperkingGebruik ;
-    .
-
-ldto:beperkingGebruikType
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Beperking gebruik type"@nl ;
-    rdfs:domain ldto:BeperkingGebruikGegevens ;
-    skos:closeMatch mdto:beperkingGebruikType ;
-    .
-
-ldto:beperkingGebruikNadereBeschrijving
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Beperking gebruik nadere beschrijving"@nl ;
-    rdfs:domain ldto:BeperkingGebruikGegevens ;
-    skos:closeMatch mdto:beperkingGebruikNadereBeschrijving ;
     .
 
 ldto:betrokkene

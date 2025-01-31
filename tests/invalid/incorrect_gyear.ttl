@@ -27,7 +27,7 @@
     ldto:bevatOnderdeel <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-32> ;
     ldto:classificatie <https://data.razu.nl/id/soort/40d7459d77bc1fefb775b88e4b4b42cc> ;
     ldto:dekkingInTijd [ a ldto:DekkingInTijdGegevens ;
-        ldto:dekkingInTijdBeginDatum "2010"^^xsd:gYear ;
+        ldto:dekkingInTijdBeginDatum "2010-10"^^xsd:gYear ;
         ldto:dekkingInTijdEindDatum "2024"^^xsd:gYear ;
         ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/6647a78a0dc0920a5fa61df580cef511> ] ;
     ldto:heeftRepresentatie <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-0> ;
@@ -98,8 +98,6 @@
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-32.meta.json> a premis:File .
 
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-998.meta.json> a premis:File .
-
-<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.meta.json> a premis:File .
 
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.pdf> a premis:File ;
     premis:originalName "20221019_Bestuursvergadering/Bijlage_1_3_RAZU_Infographic_def.pdf" .

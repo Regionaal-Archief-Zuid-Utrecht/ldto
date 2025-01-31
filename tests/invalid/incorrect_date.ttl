@@ -47,7 +47,7 @@
     ldto:classificatie <https://data.razu.nl/id/soort/a5a736ade5e176ad95d42ea91b7d3cbf> ;
     ldto:event [ a ldto:EventGegevens ;
         ldto:eventVerantwoordelijkeActor <https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9> ;
-        ldto:eventTijd "2022-10-19"^^xsd:date ;
+        ldto:eventTijd "2022-10"^^xsd:date ;
         ldto:eventType <https://data.razu.nl/id/eventtype/c8f575d14cf17c15461fc24c8eddb4f3> ] ;
     ldto:identificatie [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "e-Depot RAZU" ;
@@ -98,8 +98,6 @@
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-32.meta.json> a premis:File .
 
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-998.meta.json> a premis:File .
-
-<https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.meta.json> a premis:File .
 
 <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.pdf> a premis:File ;
     premis:originalName "20221019_Bestuursvergadering/Bijlage_1_3_RAZU_Infographic_def.pdf" .
