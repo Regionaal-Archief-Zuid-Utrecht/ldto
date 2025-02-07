@@ -68,7 +68,7 @@ ldto_sh:NaamPropertyShape
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:minLength 2 .
+    sh:minLength 1 .
 
 ldto_sh:InformatieobjectShape
     sh:name "Informatieobject" ;
