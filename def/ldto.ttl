@@ -411,3 +411,12 @@ ldto:identificatie
     skos:definition "De unieke aanduiding van het informatieobject."@nl ;
     skos:closeMatch mdto:identificatie ;
     .
+
+ldto:URLBestand
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ldto:Bestand ;
+  rdfs:label "URL Bestand"@nl ;
+  rdfs:range rdfs:Resource ;
+  skos:definition "Actuele verwijzing naar het bestand."@nl ;
+  skos:closeMatch mdto:URLBestand ;
+  .
