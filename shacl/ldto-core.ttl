@@ -30,7 +30,7 @@ ldto_sh:IdentificatiePropertyShape
     sh:description "Gegevens waarmee het object geïdentificeerd kan worden." ; 
     a sh:PropertyShape ; 
     sh:path ldto:identificatie ;
-    sh:minCount 1 ;
+    sh:minCount 0 ;
     sh:node [
         a sh:NodeShape ; 
         sh:class ldto:IdentificatieGegevens ;
@@ -83,7 +83,7 @@ ldto_sh:InformatieobjectShape
         sh:path ldto:aggregatieniveau ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
-        sh:nodekind sh:IRI
+        sh:nodeKind sh:IRI
     ] ;
     sh:property [
         sh:name "Classificatie" ;
@@ -132,7 +132,7 @@ ldto_sh:InformatieobjectShape
                 sh:path ldto:dekkingInTijdType ;
                 sh:minCount 1 ;
                 sh:maxCount 1 ;
-                sh:nodekind sh:IRI 
+                sh:nodeKind sh:IRI 
             ] ;
             sh:property [
                 sh:name "Begindatum" ;
@@ -140,9 +140,10 @@ ldto_sh:InformatieobjectShape
                 a sh:PropertyShape ;
                 sh:path ldto:dekkingInTijdBeginDatum ;
                 sh:or (
-                    [ sh:node ldto_sh:DateShape ]
-                    [ sh:node ldto_sh:YearMonthShape ]
-                    [ sh:node ldto_sh:YearShape ]
+                    [ sh:datatype xsd:date ]
+                    [ sh:datatype xsd:gYearMonth ]
+                    [ sh:datatype xsd:gYear ]
+                    [ sh:datatype xsd:dateTime ]
                 ) ;
                 sh:minCount 1 ;
                 sh:maxCount 1 
@@ -153,9 +154,10 @@ ldto_sh:InformatieobjectShape
                 a sh:PropertyShape ;
                 sh:path ldto:dekkingInTijdEindDatum ;
                 sh:or (
-                    [ sh:node ldto_sh:DateShape ]
-                    [ sh:node ldto_sh:YearMonthShape ]
-                    [ sh:node ldto_sh:YearShape ]
+                    [ sh:datatype xsd:date ]
+                    [ sh:datatype xsd:gYearMonth ]
+                    [ sh:datatype xsd:gYear ]
+                    [ sh:datatype xsd:dateTime ]
                 ) ;
                 sh:minCount 0 ;
                 sh:maxCount 1 ;
@@ -166,7 +168,7 @@ ldto_sh:InformatieobjectShape
         a sh:PropertyShape ;
         sh:path ldto:dekkingInRuimte ;
         sh:minCount 0 ;
-        sh:nodekind sh:IRI
+        sh:nodeKind sh:IRI
     ] ;
     sh:property [
         sh:name "Event" ;
@@ -221,7 +223,7 @@ ldto_sh:InformatieobjectShape
         sh:description "De waardering van het informatieobject volgens de van toepassing zijnde en vastgestelde selectielijst." ;
         a sh:PropertyShape ;
         sh:path ldto:waardering ;
-        sh:minCount 1 ;
+        sh:minCount 0 ;
         sh:maxCount 1 ;
         sh:nodeKind sh:IRI
     ] ;
@@ -264,7 +266,7 @@ ldto_sh:InformatieobjectShape
         a sh:PropertyShape ;
         sh:path ldto:archiefvormer ; 
         sh:minCount 1 ; 
-        sh:nodekind sh:IRI 
+        sh:nodeKind sh:IRI 
     ] ;
     sh:property [
         sh:name "Beperking gebruik" ;
@@ -272,7 +274,7 @@ ldto_sh:InformatieobjectShape
         a sh:PropertyShape ;
         sh:path ldto:beperkingGebruik ;
         sh:minCount 0 ; 
-        sh:nodekind sh:IRI
+        sh:nodeKind sh:IRI
     ] ;
     sh:property [
         sh:name "Betrokkene" ;
@@ -290,7 +292,7 @@ ldto_sh:InformatieobjectShape
                 sh:path ldto:betrokkeneTypeRelatie ;
                 sh:minCount 1 ;
                 sh:maxCount 1 ;
-                sh:nodekind sh:IRI
+                sh:nodeKind sh:IRI
             ] ;
             sh:property [
                 sh:name "Actor" ;
@@ -299,7 +301,7 @@ ldto_sh:InformatieobjectShape
                 sh:path ldto:betrokkeneActor ;
                 sh:minCount 1 ;
                 sh:maxCount 1 ;
-                sh:nodekind sh:IRI
+                sh:nodeKind sh:IRI
             ]
         ] 
     ] .
