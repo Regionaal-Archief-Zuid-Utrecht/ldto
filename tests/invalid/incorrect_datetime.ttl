@@ -5,7 +5,7 @@
 
 <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-0> a ldto:Bestand ;
     dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.meta.json> ;
-    ldto:URLBestand "https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.xlsx"^^xsd:anyURI ;
+    ldto:URLBestand <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-0.xlsx> ;
     ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/05a706b052b1a34d26bd32bd0982fbab> ;
     ldto:checksum [ a ldto:ChecksumGegevens ;
         ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
@@ -78,7 +78,7 @@
 
 <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-999> a ldto:Bestand ;
     dct:hasFormat <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.meta.json> ;
-    ldto:URLBestand "https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.pdf"^^xsd:anyURI ;
+    ldto:URLBestand <https://k50907905.opslag.razu.nl/NL-WbDRAZU-K50907905-500-999.pdf> ;
     ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/1d00779c8136003a8719fb13e8f47d55> ;
     ldto:checksum [ a ldto:ChecksumGegevens ;
         ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;

@@ -55,7 +55,7 @@
         schema:value 60 ] ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;
     ldto:archiefvormer <https://data.razu.nl/id/actor/424280985651f416dfb6a68ee8ee6c6a> ;
-ldto:kingGebruik <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ,
+    ldto:kingGebruik <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ,
         <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ;
     ldto:betrokkene [ a ldto:BetrokkeneGegevens ;
         ldto:betrokkeneActor <https://data.razu.nl/id/actor/ccedcee97bc84c621b2a04f2731bf86c> ;
@@ -92,7 +92,7 @@ ldto:kingGebruik <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054ae
 
 <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-3> a ldto:Bestand ;
     dct:hasFormat <https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-3.meta.json> ;
-    ldto:URLBestand "https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-3.jpg"^^xsd:anyURI ;
+    ldto:URLBestand <https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-3.jpg> ;
     ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/159f7f525dd2df49645de2b16beeb731> ;
     ldto:checksum [ a ldto:ChecksumGegevens ;
         ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;

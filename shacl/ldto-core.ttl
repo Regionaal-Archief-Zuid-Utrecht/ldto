@@ -372,7 +372,7 @@ ldto_sh:BestandShape
         sh:description "Actuele verwijzing naar het bestand." ; 
         a sh:PropertyShape ;
         sh:path ldto:URLBestand ;
-        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:maxCount 1 
     ] ;
