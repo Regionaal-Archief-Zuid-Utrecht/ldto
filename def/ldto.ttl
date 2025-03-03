@@ -434,6 +434,14 @@ ldto:BeperkingGebruikGegevens
   rdfs:subClassOf ldto:Gegevensgroep ;
   skos:closeMatch mdto:BeperkingGebruikGegevens .
 
+ldto:beperkingGebruikType
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "Beperking gebruik type"@nl ;
+  rdfs:domain ldto:BeperkingGebruikGegevens ;
+  rdfs:range ldto:BegripGegevens ;
+  skos:definition "Typering van de beperking. Op grond waarvan bepaald kan worden wie toegang heeft tot het informatieobject en welke voorwaarden op het gebruik van toepassing zijn."@nl ;
+  skos:closeMatch mdto:beperkingGebruikType .
+
 ldto:beperkingGebruikTermijn
     rdf:type owl:ObjectProperty ;
     rdfs:domain ldto:BeperkingGebruikGegevens ;

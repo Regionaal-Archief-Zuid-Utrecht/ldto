@@ -391,3 +391,16 @@ ldto_sh:BestandShape
             sh:class ldto:Informatieobject
         ]
     ] .
+
+ldto_sh:BeperkingGebruikGegevensShape
+    sh:name "BeperkingGebruikGegevens" ;
+    a sh:NodeShape ;
+    sh:targetClass ldto:BeperkingGebruikGegevens ;
+    sh:property [
+        sh:name "beperkingGebruikType" ;
+        a sh:PropertyShape ;
+        sh:path ldto:beperkingGebruikType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI
+    ] .
