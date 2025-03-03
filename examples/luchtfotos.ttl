@@ -55,8 +55,13 @@
         schema:value 60 ] ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;
     ldto:archiefvormer <https://data.razu.nl/id/actor/424280985651f416dfb6a68ee8ee6c6a> ;
-    ldto:beperkingGebruik <https://data.razu.nl/id/licentie/c9ff6ea52d650cc82c5c04dd054aeb1f> ,
-        <https://data.razu.nl/id/openbaarheid/f81312ea826c9bb47e5555df43306d0d> ;
+    ldto:beperkingGebruik  [
+       a ldto:BeperkingGebruikGegevens ; 
+       ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20> 
+    ] , [
+        a ldto:BeperkingGebruikGegevens ; 
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/c9ff6ea52d650cc82c5c04dd054aeb1f>
+    ] ;
     ldto:betrokkene [ a ldto:BetrokkeneGegevens ;
         ldto:betrokkeneActor <https://data.razu.nl/id/actor/ccedcee97bc84c621b2a04f2731bf86c> ;
         ldto:betrokkeneTypeRelatie <https://data.razu.nl/id/betrokkenheid/6424a4b2a1b054d78ca1c9c69ca16016> ] ;

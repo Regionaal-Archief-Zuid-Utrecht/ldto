@@ -11,9 +11,9 @@
         ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
         ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime ;
         ldto:checksumWaarde "2f01c68bb4098d55c3483021b898aa33" ] ;
-    ldto:identificatie [ a ldto:IdentificatieGegevens ;
-        ldto:identificatieBron "e-Depot RAZU" ;
-        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-0> ] ;
+    ldto:identificatie [
+         a ldto:IdentificatieGegevens ;
+        ] ;
     ldto:isRepresentatieVan <https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-500-1> ;
     ldto:naam "metadata_bestuursarchief.xlsx" ;
     ldto:omvang 89404 .

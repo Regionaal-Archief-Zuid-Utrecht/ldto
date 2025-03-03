@@ -274,7 +274,10 @@ ldto_sh:InformatieobjectShape
         a sh:PropertyShape ;
         sh:path ldto:beperkingGebruik ;
         sh:minCount 0 ; 
-        sh:nodeKind sh:IRI
+        sh:node [
+            a sh:NodeShape ;
+            sh:class ldto:BeperkingGebruikGegevens
+        ]
     ] ;
     sh:property [
         sh:name "Betrokkene" ;
