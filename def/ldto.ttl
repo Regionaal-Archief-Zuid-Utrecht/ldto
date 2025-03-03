@@ -12,9 +12,9 @@ ldto:
     rdf:type owl:Ontology ;
     rdfs:comment "De RDF-ontologie van LDTO (Linked-data Duurzaam Toegankelijke Overheidsinformatie)" ;
     rdfs:label "LDTO" ;
-    owl:versionInfo "0.6.1" ;
+    owl:versionInfo "0.6.9" ;
     dcterms:created "2025-01-16"^^xsd:date ;
-    dcterms:modified "2025-01-28"^^xsd:date ;
+    dcterms:modified "2025-03-03"^^xsd:date ;
     dcterms:creator <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
     dcterms:isVersionOf <http://www.nationaalarchief.nl/mdto#> ;
     # sh:suggestedShapesGraph <http://www.nationaalarchief.nl/mdto-shacl#> ;
@@ -299,8 +299,21 @@ ldto:heeftRepresentatie
     rdfs:label "Heeft representatie"@nl ;
     rdfs:domain ldto:Informatieobject ;
     rdfs:range ldto:Bestand ;
+    owl:inverseOf mdto:isRepresentatieVan ;
+    skos:definition "Verwijzing naar het bestand dat een (deel van een)  representatie van het informatieobject is."@nl ;
     skos:closeMatch mdto:heeftRepresentatie ;
     .
+
+ldto:isRepresentatieVan
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain mdto:Bestand ;
+  rdfs:label "Is representatie van"@nl ;
+  rdfs:range ldto:Informatieobject ;
+  owl:inverseOf mdto:heeftRepresentatie ;
+  skos:definition "Verwijzing naar het informatieobject waarvan het bestand een (deel van de) fysieke representatie van is."@nl ;
+  skos:closeMatch mdto:isRepresentatieVan ;
+.
+
 
 ldto:archiefvormer
     rdf:type owl:ObjectProperty ;
@@ -395,22 +408,16 @@ ldto:checksumDatum
     skos:closeMatch mdto:checksumDatum ;
     .
 
-ldto:type
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Type"@nl ;
-    rdfs:range ldto:BegripGegevens ;
-    skos:definition "Typering van de beperking. Op grond waarvan bepaald kan worden wie toegang heeft tot het informatieobject en welke voorwaarden op het gebruik van toepassing zijn."@nl ;
-    skos:closeMatch mdto:type ;
-    .
 
 ldto:identificatie
-    rdf:type owl:DatatypeProperty ;
+    rdf:type owl:ObjectProperty ;
     rdfs:label "Identificatie"@nl ;
     rdfs:domain ldto:Informatieobject ;
-    rdfs:range xsd:string ;
-    skos:definition "De unieke aanduiding van het informatieobject."@nl ;
+    rdfs:range ldto:IdentificatieGegevens ;
+    skos:definition "Gegevens waarmee het object geïdentificeerd kan worden."@nl ;
     skos:closeMatch mdto:identificatie ;
     .
+
 
 ldto:URLBestand
   rdf:type owl:ObjectProperty ;
@@ -420,3 +427,57 @@ ldto:URLBestand
   skos:definition "Actuele verwijzing naar het bestand."@nl ;
   skos:closeMatch mdto:URLBestand ;
   .
+
+ldto:BeperkingGebruikGegevens
+  rdf:type owl:Class ;
+  rdfs:label "Beperking gebruik gegevens"@nl ;
+  rdfs:subClassOf ldto:Gegevensgroep ;
+  skos:closeMatch mdto:BeperkingGebruikGegevens .
+
+ldto:beperkingGebruikTermijn
+    rdf:type owl:ObjectProperty ;
+    rdfs:domain ldto:BeperkingGebruikGegevens ;
+    rdfs:label "Termijn"@nl ;
+    rdfs:range ldto:TermijnGegevens ;
+    skos:definition "De termijn waarbinnen de beperking op het gebruik van toepassing is."@nl ;
+    skos:scopeNote "Een beperking kan tijdelijk van aard zijn. In dat geval geeft dit attribuut aan wanneer de beperking eindigt. Na afloop van deze termijn hoeft niet meer aan de beperking voldaan te worden.  Als dit attribuut geen waarde heeft, dan blijft de beperking van toepassing."@nl ;
+    skos:closeMatch mdto:beperkingGebruikTermijn .
+
+ldto:TermijnGegevens
+  rdf:type owl:Class ;
+  rdfs:label "Termijn gegevens"@nl ;
+  rdfs:subClassOf ldto:Gegevensgroep ;
+  skos:closeMatch mdto:TermijnGegevens .
+
+ldto:termijnEinddatum
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain ldto:TermijnGegevens ;
+  rdfs:label "Einddatum"@nl ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          xsd:date
+          xsd:gYear
+          xsd:gYearMonth
+        ) ;
+    ] ;
+  skos:definition "Datum waarop de termijn eindigt."@nl ;
+  skos:closeMatch mdto:termijnEinddatum .
+
+ldto:termijnLooptijd
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain ldto:TermijnGegevens ;
+  rdfs:label "Looptijd"@nl ;
+  rdfs:range xsd:duration ;
+  skos:definition "De hoeveelheid tijd waarin de termijnEinddatum bereikt wordt, nadat de trigger heeft plaatsgevonden."@nl ;
+  skos:closeMatch mdto:termijnLooptijd .
+
+ldto:Actor
+  rdf:type owl:Class ;
+  rdfs:label "Actor"@nl ;
+  rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Agent> ;
+  rdfs:subClassOf ldto:Object ;
+  skos:definition "Persoon, groep, organisatie of functionaris."@nl ;
+  skos:example "Een overheidsorganisatie, een natuurlijk persoon, een bedrijf."@nl ;
+  skos:closeMatch mdto:Actor ;
+.
