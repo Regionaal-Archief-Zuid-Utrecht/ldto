@@ -404,3 +404,20 @@ ldto_sh:BeperkingGebruikGegevensShape
         sh:maxCount 1 ;
         sh:nodeKind sh:IRI
     ] .
+
+ldto_sh:BeperkingGebruikConstraint
+    a sh:NodeShape ;
+    sh:targetClass ldto:Informatieobject ;
+    sh:message "beperkingGebruik 2x (openbaarheid, auteursrecht) verplicht als aggregatieniveau 'archiefstuk' is." ;
+    sh:rule [
+        sh:condition [
+            sh:property [
+                sh:path ldto:aggregatieniveau ;
+                sh:hasValue <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;
+            ]
+        ] ;
+        sh:property [
+            sh:path ldto:beperkingGebruik ;
+            sh:minCount 2 ;
+        ]
+    ] .
