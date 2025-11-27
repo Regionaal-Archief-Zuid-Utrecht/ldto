@@ -5,16 +5,18 @@ from pathlib import Path
 import pyshacl
 from rdflib import Graph
 
+ALLOWED_EXTENSIONS = {".ttl", ".meta.json"}
+
 def validate_rdf(input_file, shapes_type='core'):
     # Load the data graph from the input file
     data_graph = Graph()
     data_graph.parse(input_file)
 
     # Load the SHACL shapes graph
-    if shapes_type not in ['core', 'extensions']:
-        raise ValueError("shapes_type must be either 'core' or 'extensions'")
-        
     shapes_file = Path(__file__).parent.parent / "shacl" / f"ldto-{shapes_type}.ttl"
+    if not shapes_file.exists():
+        raise ValueError(f"SHACL shapes file not found for variant '{shapes_type}': {shapes_file}")
+
     shapes_graph = Graph()
     shapes_graph.parse(shapes_file)
 
@@ -45,22 +47,34 @@ def validate_rdf(input_file, shapes_type='core'):
 
 def main():
     if len(sys.argv) not in [2, 3]:
-        print("Usage: python validate.py <rdf-file> [core|extensions]")
+        print("Usage: python validate.py <rdf-file-or-directory> [shapes-variant]")
         return 2
 
-    input_file = sys.argv[1]
-    if not Path(input_file).exists():
-        print(f"Error: File {input_file} does not exist")
+    input_path = Path(sys.argv[1])
+    if not input_path.exists():
+        print(f"Error: Path {input_path} does not exist")
         return 2
 
     shapes_type = 'core'  # default value
     if len(sys.argv) == 3:
         shapes_type = sys.argv[2]
-        if shapes_type not in ['core', 'extensions']:
-            print("Error: Second parameter must be either 'core' or 'extensions'")
+        shapes_file = Path(__file__).parent.parent / "shacl" / f"ldto-{shapes_type}.ttl"
+        if not shapes_file.exists():
+            print(f"Error: SHACL shapes file not found for variant '{shapes_type}': {shapes_file}")
             return 2
 
-    return validate_rdf(input_file, shapes_type)
+    if input_path.is_dir():
+        overall_status = 0
+        for file_path in sorted(
+            p for p in input_path.rglob("*")
+            if p.is_file() and any(str(p).endswith(ext) for ext in ALLOWED_EXTENSIONS)
+        ):
+            status = validate_rdf(str(file_path), shapes_type)
+            if status > overall_status:
+                overall_status = status
+        return overall_status
+    else:
+        return validate_rdf(str(input_path), shapes_type)
 
 if __name__ == "__main__":
     sys.exit(main())
