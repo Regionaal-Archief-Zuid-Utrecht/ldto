@@ -1,10 +1,10 @@
-# LDTO - Linked Data voor Duurzaam Toegankelijke Overheidsinformatie
+# LDTO **+** : Linked Data voor Duurzaam Toegankelijke Overheidsinformatie
 
-LDTO is een op [MDTO](https://www.nationaalarchief.nl/archiveren/mdto) gebaseerd model voor het beschrijven van duurzaam te bewaren overheidsinformatie als *linked data*. Het model wordt gebruik in het e-Depot van het [Regionaal Archief Zuid-Utrecht](https://www.razu.nl/).
+LDTO is een bijna één-op-één op [MDTO](https://www.nationaalarchief.nl/archiveren/mdto) gebaseerd model voor het beschrijven van duurzaam te bewaren overheidsinformatie als *linked data* (RDF). LDTO wordt gebruik in het e-depot van het [Regionaal Archief Zuid-Utrecht](https://www.razu.nl/). Daarbij wordt de LDTO-ontologie aangevuld met een vastgelegde set van eigenschappen uit andere ontologiëen of vocabulaires. In die context, metadatabeschrijvingen gebaseerd op LDTO en aangevuld met andere eigenschappen, spreken we over LDTO **+**.  
 
-Bij LDTO ligt de nadruk minder dan bij MDTO op het *uitwisselen* van metadatagegevens maar meer op de *duurzame opslag en toegang*. Bovendien is LDTO gebaseerd op *RDF* en *linked data-principes*. LDTO-metadata zal altijd vertaald kunnen worden naar MDTO.
+Anders dan bij MDTO ligt de nadruk van LDTO ligt de nadruk niet zozeer op het *uitwisselen* van metadatagegevens maar meer op de *duurzame opslag en toegang*. Bovendien is LDTO gebaseerd op *RDF* en *linked data-principes*. LDTO-metadata zal altijd vertaald kunnen worden naar MDTO.
 
-Deze repostory bevat de *SHACL shapes* voor het valideren van linked data volgens het LDTO-model.
+Deze repostory bevat de *SHACL shapes* voor het valideren van linked data volgens het LDTO **+** -model zoals toegepast door het RAZU.
 
 **LET OP: LDTO en de SHACL shapes zijn in ontwikkeling en kunnen in deze fase nog zonder waarschuwing vooraf veranderen.**
 

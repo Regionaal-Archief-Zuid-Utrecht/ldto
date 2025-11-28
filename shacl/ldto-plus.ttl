@@ -1,0 +1,580 @@
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh:       <http://www.w3.org/ns/shacl#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix ldto:     <https://data.razu.nl/def/ldto/> .
+@prefix ldto_sh:  <https://data.razu.nl/def/ldto-shacl/> .
+@prefix ldto_esh: <https://data.razu.nl/def/ldto-extended-shacl/> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix schema: <http://schema.org/> .
+
+ldto_sh: 
+    a owl:Ontology ;
+    rdfs:label "LDTO core SHACL Shapes" ;
+    dcterms:creator <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
+    rdfs:comment "LDTO SHACL shapes, inclusief voor RAZU geldende constraints." .
+
+ldto_sh:ObjectShape
+    sh:name "ObjectShape" ;
+    sh:description "Een fysiek, digitaal of conceptueel ding dat van belang is voor een organisatie." ;
+    a sh:NodeShape ;
+    sh:property ldto_sh:IdentificatiePropertyShape ;
+    sh:property ldto_sh:NaamPropertyShape ;
+    sh:property ldto_sh:MetadataFileLocationShape .
+
+ldto_sh:PremisFileShape
+    a sh:NodeShape ;
+    sh:name "Premis File" ;
+    sh:targetClass <http://www.loc.gov/premis/rdf/v3/File> ;
+    rdfs:comment "Alles bestanden in de opslag zijn een Premis File.";
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <http://www.loc.gov/premis/rdf/v3/originalName> ;
+        sh:description "Oorspronkelijke bestandsnaam, zoals gebruikt bij de overdracht van archiefvormer." ;
+        sh:datatype xsd:string ;
+        sh:minCount 0;
+        sh:maxCount 1
+    ] .
+
+ldto_sh:IdentificatiePropertyShape
+    sh:name "Identificatie" ;
+    sh:description "Gegevens waarmee het object geïdentificeerd kan worden." ; 
+    a sh:PropertyShape ; 
+    sh:path ldto:identificatie ;
+    sh:minCount 0 ;
+    sh:node [
+        a sh:NodeShape ; 
+        sh:class ldto:IdentificatieGegevens ;
+        sh:property [
+            sh:name "Kenmerk" ;
+            sh:description "Een kenmerk waarmee een object geïdentificeerd kan worden." ;      
+            a sh:PropertyShape ;
+            sh:path ldto:identificatieKenmerk ;
+            sh:or (
+                [ sh:datatype xsd:string ]
+                [ sh:nodeKind sh:IRI ]
+            ) ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+        sh:property [
+            sh:name "Bron" ;
+            sh:description "Herkomst van het kenmerk." ;
+            a sh:PropertyShape ;
+            sh:path ldto:identificatieBron ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:node [
+                a sh:NodeShape ;
+                sh:datatype xsd:string 
+            ]
+        ] 
+    ] .
+
+ldto_sh:NaamPropertyShape
+    sh:name "Naam" ;
+    sh:description "Een betekenisvolle aanduiding waaronder het object bekend is." ;
+    rdfs:comment "Voor bestanden is dit de korte bestandsnaam zoals gebruikt in de storage." ; 
+    a sh:PropertyShape ; 
+    sh:path ldto:naam ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:minLength 1 .
+
+ldto_sh:MetadataFileLocationShape
+    sh:name "MetadataFileLocationShape" ;
+    sh:description "Locatie van de het bestand waar de metadata van het object te vinden is." ;
+    a sh:PropertyShape ;
+    sh:path dcterms:hasFormat ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:class <http://www.loc.gov/premis/rdf/v3/File> .
+
+ldto_sh:InformatieobjectShape
+    sh:name "Informatieobject" ;
+    sh:description "Een op zichzelf staand geheel van gegevens met een eigen identiteit." ;
+    a sh:NodeShape ;
+    sh:targetClass ldto:Informatieobject ;
+    sh:node ldto_sh:ObjectShape ;
+    sh:property [
+        sh:name "Aggregatieniveau" ;
+        sh:description "Het aggregatieniveau van het informatieobject." ;
+        a sh:PropertyShape ;
+        sh:path ldto:aggregatieniveau ;
+        sh:minCount 0 ; 
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI
+    ] ;
+    sh:property [
+        sh:name "Classificatie" ;
+        sh:description "Ordening van informatieobjecten in een logisch verband, zoals vastgelegd in een classificatieschema." ;
+        a sh:PropertyShape ;
+        sh:path ldto:classificatie ;
+        sh:minCount 0    ;
+        sh:nodeKind sh:IRI
+    ] ;
+    sh:property [
+        sh:name "Trefwoord" ;
+        sh:description "Trefwoord dat aan het informatieobject is toegekend." ;
+        a sh:PropertyShape ;
+        sh:path ldto:trefwoord ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ; 
+        sh:minLength 1 
+    ] ;
+    sh:property [
+        sh:name "Omschrijving" ;
+        sh:description "Omschrijving van de inhoud van het informatieobject." ;
+        a sh:PropertyShape ;
+        sh:path ldto:omschrijving ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ; 
+        rdfs:comment "Een omschrijving is zeer wenselijk, maar niet vereist." ;
+        sh:minLength 1 
+    ] ;
+    sh:property [
+        sh:name "Raadpleeglocatie" ;
+        sh:description "Actuele verwijzing naar de locatie waar het informatieobject ter inzage ligt." ;
+        a sh:PropertyShape ;
+        sh:path ldto:raadpleeglocatie ;
+        sh:minCount 0 ;
+        rdfs:comment "nog niet uitgewerkt" 
+    ];
+    sh:property [
+        sh:name "Dekking in tijd" ;
+        sh:description "Een tijdstip of de periode waarop de inhoud van het informatieobject betrekking heeft." ;
+        a sh:PropertyShape ;
+        sh:path ldto:dekkingInTijd ;
+        sh:minCount 1 ;
+        rdfs:comment "Een dekking in tijd is, anders dan bij MDTO, vereist." ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:class ldto:DekkingInTijdGegevens ;
+            sh:property [
+                sh:path ldto:dekkingInTijdType ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+                sh:nodeKind sh:IRI 
+            ] ;
+            sh:property [
+                sh:name "Begindatum" ;
+                sh:description "Datum waar de inhoud van het informatieobject betrekking op heeft. Bij een periode is dit de begindatum." ;
+                a sh:PropertyShape ;
+                sh:path ldto:dekkingInTijdBeginDatum ;
+                sh:or (
+                    [ sh:datatype xsd:date ]
+                    [ sh:datatype xsd:gYearMonth ]
+                    [ sh:datatype xsd:gYear ]
+                    [ sh:datatype xsd:dateTime ]
+                ) ;
+                sh:minCount 1 ;
+                sh:maxCount 1 
+            ] ;
+            sh:property [
+                sh:name "Einddatum" ;
+                sh:description "Einddatum van de periode waar de inhoud van het informatieobject betrekking op heeft." ;
+                a sh:PropertyShape ;
+                sh:path ldto:dekkingInTijdEindDatum ;
+                sh:or (
+                    [ sh:datatype xsd:date ]
+                    [ sh:datatype xsd:gYearMonth ]
+                    [ sh:datatype xsd:gYear ]
+                    [ sh:datatype xsd:dateTime ]
+                ) ;
+                sh:minCount 0 ;
+                sh:maxCount 1 ;
+            ]
+        ] 
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path ldto:dekkingInRuimte ;
+        sh:minCount 0 ;
+        rdfs:comment "Indien van toepassing, verplicht." ;
+        sh:nodeKind sh:IRI
+    ] ;
+    sh:property [
+        sh:name "Event" ;
+        sh:description "Gebeurtenis die heeft plaatsgevonden met betrekking tot het ontstaan, wijzigen, vernietigen en beheer van het informatieobject en de bijbehorende metagegevens." ;  
+        a sh:PropertyShape ;
+        rdfs:comment "We gebruiken deze property niet voor events binnen de duurzame opslag, alleen voor relevante events vanuit de archiefvormer." ;
+        sh:path ldto:event ;
+        sh:minCount 0 ; 
+        sh:node [
+            a sh:NodeShape ;
+            sh:class ldto:EventGegevens ;
+            sh:property [
+                a sh:PropertyShape ;
+                sh:path ldto:eventType ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+                sh:nodeKind sh:IRI 
+            ] ;
+            sh:property [
+                sh:name "Event-Tijd" ;
+                sh:description "Het tijdstip waarop het event heeft plaatsgevonden." ;
+                a sh:PropertyShape ;
+                sh:path ldto:eventTijd ;
+                sh:or (
+                    [ sh:datatype xsd:date ]
+                    [ sh:datatype xsd:gYearMonth ]
+                    [ sh:datatype xsd:gYear ]
+                    [ sh:datatype xsd:dateTime ]
+                ) ;
+                sh:minCount 1 ;
+                sh:maxCount 1 
+            ];
+            sh:property [
+                a sh:PropertyShape ;
+                sh:path ldto:eventVerantwoordelijkeActor ;
+                sh:minCount 0 ;
+                sh:maxCount 1 ;
+                sh:nodeKind sh:IRI 
+            ] ;
+            sh:property [
+                sh:name "Event Resultaat" ;
+                sh:description "Beschrijving van het resultaat van het event voor zover relevant voor de duurzame toegankelijkheid van het informatieobject." ;
+                a sh:PropertyShape ;
+                sh:path ldto:eventResultaat ;
+                sh:datatype xsd:string ;
+                sh:minCount 0 ;
+                sh:maxCount 1 
+            ] 
+        ] 
+    ] ;
+    sh:property [
+        sh:name "Waardering" ;
+        sh:description "De waardering van het informatieobject volgens de van toepassing zijnde en vastgestelde selectielijst." ;
+        a sh:PropertyShape ;
+        sh:path ldto:waardering ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI
+    ] ;
+    sh:property [
+        sh:name "Is onderdeel van" ;
+        sh:description "De direct bovenliggende aggregatie waar dit informatieobject onderdeel van is." ;
+        a sh:PropertyShape ;
+        sh:path ldto:isOnderdeelVan ;
+        sh:minCount 0 ;
+        sh:or (
+            [ sh:node [
+                a sh:NodeShape ;
+                sh:class ldto:Informatieobject
+            ]
+            ]
+        [ sh:nodeKind sh:IRI ]
+    )
+    ] ;
+    sh:property [
+        sh:name "Bevat onderdeel" ;
+        sh:description "Een informatieobject dat direct onderliggend onderdeel is van deze aggregatie." ;
+        a sh:PropertyShape ;
+        sh:path ldto:bevatOnderdeel ;
+        sh:minCount 0 ;
+        rdfs:comment "Om praktische redenen verwijzen we van deel naar geheel (isOnderdeelVan) ipv omgekeerd (bevatOnderdeel)." ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:class ldto:Informatieobject 
+        ]
+    ];
+    sh:property [
+        sh:name "Heeft representatie" ;
+        sh:description "Verwijzing naar het bestand dat een (deel van een) representatie van het informatieobject is." ;
+        a sh:PropertyShape ;
+        sh:path ldto:heeftRepresentatie ;
+        sh:minCount 0 ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:class ldto:Bestand 
+        ]
+    ] ;
+    sh:property [
+        sh:name "Archiefvormer" ;
+        sh:description "De organisatie die verantwoordelijk is voor het opmaken en/of ontvangen van het informatieobject." ;
+        a sh:PropertyShape ;
+        sh:path ldto:archiefvormer ; 
+        sh:minCount 0 ; 
+        rdfs:comment "Verplicht voor archiefwettelijk materiaal" ;
+        sh:nodeKind sh:IRI 
+    ] ;
+    sh:property [
+        sh:name "Beperking gebruik" ;
+        sh:description "Een beperking die gesteld is aan het gebruik van het informatieobject." ;
+        a sh:PropertyShape ;
+        sh:path ldto:beperkingGebruik ;
+        sh:minCount 0 ; 
+        rdfs:comment "Verplicht voor alle informatieobjecten die naar bronbestanden verwijzen." ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:class ldto:BeperkingGebruikGegevens
+        ]
+    ] ;
+    sh:property [
+        sh:name "Betrokkene" ;
+        sh:description "Persoon of organisatie die relevant is binnen de context van het ontstaan en gebruik van dit informatieobject , anders dan de archiefvormer." ;
+        a sh:PropertyShape ;
+        sh:path ldto:betrokkene ;
+        sh:minCount 0 ; 
+        sh:node [
+            a sh:NodeShape ;
+            sh:class ldto:BetrokkeneGegevens ;
+            sh:property [
+                sh:name "Type relatie" ;
+                sh:description "Typering van de betrokkenheid van de actor bij het informatieobject." ;
+                a sh:PropertyShape ;
+                sh:path ldto:betrokkeneTypeRelatie ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+                sh:nodeKind sh:IRI
+            ] ;
+            sh:property [
+                sh:name "Actor" ;
+                sh:description "De persoon of organisatie die betrokken is bij het informatieobject." ;
+                a sh:PropertyShape ;
+                sh:path ldto:betrokkeneActor ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+                sh:nodeKind sh:IRI
+            ]
+        ] 
+    ] ; 
+    sh:property [
+        sh:name "Hoofdonderwerp";
+        sh:description "Het hoofdonderwerp van het informatieobject, waar het één-op-één naar verwijst.";
+        rdfs:comment "Is specifieker dan schema:about.";
+        a sh:PropertyShape;
+        sh:path schema:mainEntity;
+        sh:minCount 0;
+        sh:maxCount 1;
+        sh:nodeKind sh:BlankNodeOrIRI 
+    ] .
+
+ldto_sh:BestandShape
+    sh:name "Bestand" ;
+    a sh:NodeShape ;
+    sh:targetClass ldto:Bestand ;
+    sh:node ldto_sh:ObjectShape ;
+    sh:property [
+        sh:name "Omvang" ;
+        sh:description "Aantal bytes in het bestand." ; 
+        a sh:PropertyShape ;
+        sh:path ldto:omvang ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 
+    ] ;
+    sh:property [
+        sh:name "Bestandsformaat" ;
+        sh:description "De manier waarop de informatie in een computerbestand binair gecodeerd is." ;
+        a sh:PropertyShape ;
+        sh:path ldto:bestandsformaat ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI
+    ] ;
+    sh:property [
+        sh:name "Checksum" ;
+        sh:description "Gegevens om te bepalen of het bestand beschadigd of gewijzigd is." ;
+        a sh:PropertyShape ;
+        sh:path ldto:checksum ;
+        sh:minCount 1 ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:class ldto:ChecksumGegevens ;
+            sh:property [
+                sh:name "Algoritme" ;
+                sh:description "Het algoritme dat is gebruikt om de checksum te maken." ;
+                a sh:PropertyShape ;
+                sh:path ldto:checksumAlgoritme ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+                sh:nodeKind sh:IRI
+            ] ;
+            sh:property [
+                sh:name "Waarde" ;
+                sh:description "De waarde van de checksum." ;
+                a sh:PropertyShape ;
+                sh:path ldto:checksumWaarde ;
+                sh:datatype xsd:string ;
+                sh:minCount 1 ;
+                sh:maxCount 1 
+            ] ;
+            sh:property [
+                sh:name "Datum checksum" ;
+                sh:description "Datum waarop de checksum is gemaakt." ;
+                a sh:PropertyShape ;
+                sh:path ldto:checksumDatum ;
+                sh:datatype xsd:dateTime ;
+                sh:minCount 1 ;
+                sh:maxCount 1 
+            ] 
+        ]
+    ] ;
+    sh:property [
+        sh:name "URL bestand" ; 
+        sh:description "Actuele verwijzing naar het bestand." ; 
+        rdfs:comment "Anders dan bij MDTO verwijst deze property naar een URI in plaats van naar een string met anyUrl als datatype." ;
+        a sh:PropertyShape ;
+        sh:path ldto:URLBestand ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 
+    ] ;
+    sh:property [
+        sh:name "Is representatie van" ;
+        sh:description "Verwijzing naar het informatieobject waarvan het bestand een (deel van de) fysieke representatie van is." ;
+        a sh:PropertyShape ;
+        sh:path ldto:isRepresentatieVan ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:or (
+            [ sh:node [
+                a sh:NodeShape ;
+                sh:class ldto:Informatieobject
+                ]
+            ]
+            [ sh:nodeKind sh:IRI ]
+        )
+    ] ; 
+    sh:property [
+        sh:name "Positie" ; 
+        sh:description "Als meerdere bestanden een representatie van hetzelfde informatieobject zijn, dan geeft dit de positie van het bestand binnen de set." ; 
+        a sh:PropertyShape ;
+        sh:path  schema:position ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 
+    ] ;
+    sh:property [
+        sh:name "Breedte" ; 
+        sh:description "Voor afbeeldingen: de breedte in pixels." ; 
+        a sh:PropertyShape ;
+        sh:path  schema:width ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 
+    ] ;
+    sh:property [
+        sh:name "Hoogte" ; 
+        sh:description "Voor afbeeldingen: de hoogte in pixels." ; 
+        a sh:PropertyShape ;
+        sh:path  schema:height ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 
+    ] ;
+    sh:node [
+        sh:or (
+            [
+                sh:property [
+                    sh:path schema:width ;
+                    sh:maxCount 0 ;
+                ] ;
+                sh:property [
+                    sh:path schema:height ;
+                    sh:maxCount 0 ;
+                ]
+            ]
+            [
+                sh:property [
+                    sh:path schema:width ;
+                    sh:minCount 1 ;
+                ] ;
+                sh:property [
+                    sh:path schema:height ;
+                    sh:minCount 1 ;
+                ]
+            ]
+        )
+    ] .
+
+ldto_sh:BeperkingGebruikGegevensShape
+    sh:name "BeperkingGebruikGegevens" ;
+    a sh:NodeShape ;
+    sh:targetClass ldto:BeperkingGebruikGegevens ;
+    sh:property [
+        sh:name "beperkingGebruikType" ;
+        a sh:PropertyShape ;
+        sh:path ldto:beperkingGebruikType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI
+    ] .
+
+ldto_sh:BeperkingGebruikConstraint
+    a sh:NodeShape ;
+    sh:targetClass ldto:Informatieobject ;
+    rdfs:comment "Voor archiefstukken apart situatie tav openbaarheid en auteursrecht aangeven." ;
+    sh:property [
+        sh:path ldto:beperkingGebruik ;
+        sh:minCount 0 
+    ] .
+
+# De volgende extensies zijn gebaseerd op schema.org:
+
+ldto_sh:PublicationIssueShape
+    sh:name "PublicationIssue" ;
+    a sh:NodeShape ;
+    sh:targetClass schema:PublicationIssue ;
+    rdfs:comment "In dit model is een archiefstuk zelf geen issue, maar heeft het betrekking op een issue. De relatie wordt gelegd via schema:mainEntity" ;
+    sh:property [
+        sh:name "Publicatiedatum" ;
+        a sh:PropertyShape ;
+        sh:path schema:datePublished ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 
+    ] ;
+    sh:property [
+        sh:name "Naam" ;
+        a sh:PropertyShape ;
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1;
+        sh:maxCount 1 
+    ] ;
+    sh:property [
+        sh:name "Is deel van" ;
+        a sh:PropertyShape ;
+        rdfs:comment "Een publication issue is altijd een deel van een (seriële) publicatie, kan ook een deel van een jaargang zijn." ;
+        sh:path schema:isPartOf ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:minCount 1;
+        sh:maxCount 2 
+    ] ;
+    sh:property [
+        sh:name "Omvang in pagina's" ;
+        a sh:PropertyShape ;
+        sh:path schema:numberOfPages ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1;
+        sh:maxCount 1
+    ] .
+
+ldto_sh:PublicationVolumeShape
+    sh:name "Jaargang" ;
+    a sh:NodeShape ;
+    sh:targetClass schema:PublicationVolume ;
+    rdfs:comment "Een jaargang bevat een aaneengesloten jaar aan issues, doorgaans maar niet per sé binnen één kalenderjaar." ; 
+    sh:property [
+        sh:path schema:isPartOf ;
+        sh:minCount 1;
+        sh:maxCount 1
+    ] ;
+    sh:property [
+        sh:name "Nummer jaargang" ;
+        a sh:PropertyShape ;
+        rdfs:comment "Neem de waarde over die de publicatie zelf aangeeft of tel vanaf 1. In praktijk een weinig betrouwbare waarde. Kan ook niet-getallen bevatten." ; 
+        sh:path schema:volumeNumber;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 
+    ] .

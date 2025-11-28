@@ -1,0 +1,101 @@
+[
+  {
+    "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-11.meta.json",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ]
+  },
+  {
+    "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-11",
+    "@type": [
+      "https://data.razu.nl/def/ldto/Informatieobject"
+    ],
+    "http://purl.org/dc/terms/hasFormat": [
+      {
+        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-11.meta.json"
+      }
+    ],
+    "http://schema.org/mainEntity": [
+      {
+        "@id": "https://data.razu.nl/id/pub/20f3edb47790a8e083c087a9a6d1e460"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/aggregatieniveau": [
+      {
+        "@id": "https://data.razu.nl/id/aggregatieniveau/cd4b9482eadd1fea35dbf01c9a05b093"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/classificatie": [
+      {
+        "@id": "https://data.razu.nl/id/soort/e7f8935f15730273e0b9ab9a0f74b2f8"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInRuimte": [
+      {
+        "@id": "https://data.razu.nl/id/locatie/d5acdcc4f873045aaefd2a31af723153"
+      },
+      {
+        "@id": "https://data.razu.nl/id/locatie/218bbb2e70cfce022ae09d6a4327b899"
+      },
+      {
+        "@id": "https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc"
+      },
+      {
+        "@id": "https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151"
+      },
+      {
+        "@id": "https://data.razu.nl/id/locatie/a56c9792ea7d0614d0770b9bd46e3e56"
+      },
+      {
+        "@id": "https://data.razu.nl/id/locatie/152aa32fa903d3502880686e0d362668"
+      },
+      {
+        "@id": "https://data.razu.nl/id/locatie/a4ed213e4fcc0888b2a88ab1a81847c4"
+      },
+      {
+        "@id": "https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404"
+      },
+      {
+        "@id": "https://data.razu.nl/id/locatie/bf16fd9ceb0435731ea10b6e92c0848b"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijd": [
+      {
+        "@id": "_:b1"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/isOnderdeelVan": [
+      {
+        "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-1"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/naam": [
+      {
+        "@value": "De Amerongsche Courant"
+      }
+    ]
+  },
+  {
+    "@id": "_:b1",
+    "@type": [
+      "https://data.razu.nl/def/ldto/DekkingInTijdGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "1878-04-04"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdEindDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "1929-12-31"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdType": [
+      {
+        "@id": "https://data.razu.nl/id/dekkingintijdtype/a3e30182626730af3b3c2a7071c58038"
+      }
+    ]
+  }
+]

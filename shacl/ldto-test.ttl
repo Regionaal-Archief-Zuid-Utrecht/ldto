@@ -1,0 +1,81 @@
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh:       <http://www.w3.org/ns/shacl#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix ldto:     <https://data.razu.nl/def/ldto/> .
+@prefix ldto_sh:  <https://data.razu.nl/def/ldto-shacl/> .
+@prefix ldto_esh: <https://data.razu.nl/def/ldto-extended-shacl/> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix schema: <http://schema.org/> .
+
+ldto_sh:plus 
+    a owl:Ontology ;
+    rdfs:label "LDTO core SHACL Shapes" ;
+    dcterms:creator <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
+    rdfs:comment "LDTO SHACL shapes, inclusief voor RAZU geldende constraints." .
+
+
+
+# De volgende extensies zijn gebaseerd op schema.org:
+
+ldto_sh:PublicationIssueShape
+    sh:name "PublicationIssue" ;
+    a sh:NodeShape ;
+    sh:targetClass schema:PublicationIssue ;
+    rdfs:comment "In dit model is een archiefstuk zelf geen issue, maar heeft het betrekking op een issue. De relatie wordt gelegd via schema:mainEntity" ;
+    sh:property [
+        sh:name "Publicatiedatum" ;
+        a sh:PropertyShape ;
+        sh:path schema:datePublished ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 
+    ] ;
+    sh:property [
+        sh:name "Naam" ;
+        a sh:PropertyShape ;
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1;
+        sh:maxCount 1 
+    ] ;
+    sh:property [
+        sh:name "Is deel van" ;
+        a sh:PropertyShape ;
+        rdfs:comment "Een publication issue is altijd een deel van een (seriële) publicatie, kan ook een deel van een jaargang zijn." ;
+        sh:path schema:isPartOf ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:minCount 1;
+        sh:maxCount 2 
+    ] ;
+    sh:property [
+        sh:name "Omvang in pagina's" ;
+        a sh:PropertyShape ;
+        sh:path schema:numberOfPages ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1;
+        sh:maxCount 1
+    ] .
+
+ldto_sh:PublicationVolumeShape
+    sh:name "Jaargang" ;
+    a sh:NodeShape ;
+    sh:targetClass schema:PublicationVolume ;
+    rdfs:comment "Een jaargang bevat een aaneengesloten jaar aan issues, doorgaans maar niet per sé binnen één kalenderjaar." ; 
+    sh:property [
+        sh:path schema:isPartOf ;
+        sh:minCount 1;
+        sh:maxCount 1
+    ] ;
+    sh:property [
+        sh:name "Nummer jaargang" ;
+        a sh:PropertyShape ;
+        rdfs:comment "Neem de waarde over die de publicatie zelf aangeeft of tel vanaf 1. In praktijk een weinig betrouwbare waarde. Kan ook niet-getallen bevatten." ; 
+        sh:path schema:volumeNumber;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 
+    ] .

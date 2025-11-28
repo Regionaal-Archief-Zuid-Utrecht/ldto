@@ -7,7 +7,7 @@ from rdflib import Graph
 
 ALLOWED_EXTENSIONS = {".ttl", ".meta.json"}
 
-def validate_rdf(input_file, shapes_type='core'):
+def validate_rdf(input_file, shapes_type='razu'):
     # Load the data graph from the input file
     data_graph = Graph()
     data_graph.parse(input_file)
