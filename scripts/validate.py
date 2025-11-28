@@ -3,9 +3,54 @@
 import sys
 from pathlib import Path
 import pyshacl
-from rdflib import Graph
+from rdflib import Graph, OWL
 
 ALLOWED_EXTENSIONS = {".ttl", ".meta.json"}
+
+IMPORT_MAP = {
+    # Map ontology IRIs used in owl:imports to local SHACL files
+    "https://data.razu.nl/def/ldto-shacl/minimal": "ldto-minimal.ttl",
+    "https://data.razu.nl/def/ldto-shacl/plus": "ldto-plus.ttl",
+}
+
+
+def load_shapes_with_imports(shapes_type: str) -> Graph:
+    """Load the base SHACL file for the given type and resolve known owl:imports
+    to local TTL files in the shacl directory.
+    """
+    base_dir = Path(__file__).parent.parent / "shacl"
+    main_file = base_dir / f"ldto-{shapes_type}.ttl"
+
+    shapes_graph = Graph()
+    shapes_graph.parse(main_file)
+
+    # Collect owl:imports from the graph and resolve them via IMPORT_MAP
+    to_process = [str(iri) for iri in shapes_graph.objects(None, OWL.imports)]
+    seen = set()
+
+    while to_process:
+        iri = to_process.pop()
+        if iri in seen:
+            continue
+        seen.add(iri)
+
+        filename = IMPORT_MAP.get(iri)
+        if not filename:
+            continue
+
+        import_path = base_dir / filename
+        if not import_path.exists():
+            continue
+
+        shapes_graph.parse(import_path)
+
+        # Also process imports that may be introduced by the newly parsed file
+        for imported_iri in shapes_graph.objects(None, OWL.imports):
+            imported_iri_str = str(imported_iri)
+            if imported_iri_str not in seen:
+                to_process.append(imported_iri_str)
+
+    return shapes_graph
 
 def validate_rdf(input_file, shapes_type='razu'):
     # Load the data graph from the input file
@@ -17,8 +62,7 @@ def validate_rdf(input_file, shapes_type='razu'):
     if not shapes_file.exists():
         raise ValueError(f"SHACL shapes file not found for variant '{shapes_type}': {shapes_file}")
 
-    shapes_graph = Graph()
-    shapes_graph.parse(shapes_file)
+    shapes_graph = load_shapes_with_imports(shapes_type)
 
     # Perform the validation
     try:
