@@ -29,16 +29,16 @@ Als voorgaande, maar strenger gedefinieerd door wel gebruik te maken van verwijz
 
 Voorbeelden van `LDTO plus` metadata is vinden in de map `examples`. Al deze voorbeelden zijn valide volgens de meest stricte SHACL shape [(ldto-razu.ttl)](shacl/ldto-razu.ttl).
 
-* [examples\kranten](examples\kranten)
+* [examples/kranten](examples/kranten)
 Verschillende voorbeeldbestanden zoals gebruik bij het beschrijven van de collectie gedigitaliseerde kranten van het RAZU.
-* [examples\bestuursarchief.ttl](examples\bestuursarchief.ttl)
+* [examples/bestuursarchief.ttl](examples/bestuursarchief.ttl)
 Een in de testfase gebruikte (nog experimentele) opzet voor het beschrijven van materiaal uit het RAZU-bestuursarchief.
-* [examples\luchtfotos.ttl](examples\luchtfotos.ttl)
+* [examples/luchtfotos.ttl](examples/luchtfotos.ttl)
 Een in de testfase gebruikte (nog experimentele) opzet voor het beschrijven van gedigitaliseerde luchtfoto’s van gemeente Houten.
 
 ## 3. Gebruik van de tools
 
-De SHACL shapes zijn geschikt voor gangbare SHACL validators maar gebruikt van het meegeleverde python script [scripts\validate.py](scripts\validate.py) wordt aanbevolen.
+De SHACL shapes zijn geschikt voor gangbare SHACL validators maar gebruikt van het meegeleverde python script [scripts/validate.py](scripts/validate.py) wordt aanbevolen.
 
 ### 3.1. Installatie
 
