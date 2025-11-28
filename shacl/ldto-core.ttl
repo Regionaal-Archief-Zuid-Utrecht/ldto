@@ -9,9 +9,9 @@
 @prefix dcterms:  <http://purl.org/dc/terms/> .
 
 
-ldto_sh:minimal 
+ldto_sh:core 
     a owl:Ontology ;
-    rdfs:label "LDTO SHACL shapes, minimal set" ;
+    rdfs:label "LDTO SHACL shapes, core set" ;
     dcterms:creator <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
     rdfs:comment "LDTO SHACL shapes, zonder gebruik van aanvullende vocabulaires. Based on the MDTO shacl." .
 

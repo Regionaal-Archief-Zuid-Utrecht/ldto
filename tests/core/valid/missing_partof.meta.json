@@ -1,0 +1,135 @@
+[
+  {
+    "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-200.meta.json",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ]
+  },
+  {
+    "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-200",
+    "@type": [
+      "https://data.razu.nl/def/ldto/Informatieobject"
+    ],
+    "http://purl.org/dc/terms/hasFormat": [
+      {
+        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-200.meta.json"
+      }
+    ],
+    "http://schema.org/mainEntity": [
+      {
+        "@id": "_:N0e6efee669ad41779e39c966ca463adf"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/aggregatieniveau": [
+      {
+        "@id": "https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/beperkingGebruik": [
+      {
+        "@id": "_:b2"
+      },
+      {
+        "@id": "_:b0"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/classificatie": [
+      {
+        "@id": "https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijd": [
+      {
+        "@id": "_:Nf6cb095204cf4f18ac416421e0180292"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/isOnderdeelVan": [
+      {
+        "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-11"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/naam": [
+      {
+        "@value": "De Amerongsche Courant, 4 mei 1882 (jrg. 8)"
+      }
+    ]
+  },
+  {
+    "@id": "_:Nf6cb095204cf4f18ac416421e0180292",
+    "@type": [
+      "https://data.razu.nl/def/ldto/DekkingInTijdGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "1882-05-04"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdType": [
+      {
+        "@id": "https://data.razu.nl/id/dekkingintijdtype/a3e30182626730af3b3c2a7071c58038"
+      }
+    ]
+  },
+  {
+    "@id": "_:b2",
+    "@type": [
+      "https://data.razu.nl/def/ldto/BeperkingGebruikGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/beperkingGebruikType": [
+      {
+        "@id": "https://data.razu.nl/id/beperkinggebruiktype/2a747f5ab4430d474995c8fcd877c7ef"
+      }
+    ]
+  },
+  {
+    "@id": "_:b0",
+    "@type": [
+      "https://data.razu.nl/def/ldto/BeperkingGebruikGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/beperkingGebruikType": [
+      {
+        "@id": "https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20"
+      }
+    ]
+  },
+  {
+    "@id": "_:N0e6efee669ad41779e39c966ca463adf",
+    "@type": [
+      "http://schema.org/PublicationIssue"
+    ],
+    "http://schema.org/datePublished": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "1882-05-04"
+      }
+    ],
+    "http://schema.org/name": [
+      {
+        "@value": "De Amerongsche Courant, 4 mei 1882 (jrg. 8)"
+      }
+    ],
+    "http://schema.org/numberOfPages": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 4
+      }
+    ]
+  },
+  {
+    "@id": "_:N35d48b214634417eab0987d7debcce96",
+    "@type": [
+      "http://schema.org/PublicationVolume"
+    ],
+    "http://schema.org/isPartOf": [
+      {
+        "@id": "https://data.razu.nl/id/pub/20f3edb47790a8e083c087a9a6d1e460"
+      }
+    ],
+    "http://schema.org/volumeNumber": [
+      {
+        "@value": "8"
+      }
+    ]
+  }
+]

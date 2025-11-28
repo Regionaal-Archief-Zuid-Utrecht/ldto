@@ -9,7 +9,7 @@ ALLOWED_EXTENSIONS = {".ttl", ".meta.json"}
 
 IMPORT_MAP = {
     # Map ontology IRIs used in owl:imports to local SHACL files
-    "https://data.razu.nl/def/ldto-shacl/minimal": "ldto-minimal.ttl",
+    "https://data.razu.nl/def/ldto-shacl/core": "ldto-core.ttl",
     "https://data.razu.nl/def/ldto-shacl/plus": "ldto-plus.ttl",
 }
 

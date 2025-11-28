@@ -13,7 +13,7 @@
 
 ldto_sh:plus 
     a owl:Ontology ;
-    owl:imports ldto_sh:minimal ;
+    owl:imports ldto_sh:core ;
     rdfs:label "LDTO plus SHACL Shapes" ;
     dcterms:creator <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
     rdfs:comment "LDTO plus SHACL shapes, includes additional vocabulares" .

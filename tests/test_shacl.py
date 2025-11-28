@@ -1,60 +1,87 @@
-import pytest
+import sys
 from pathlib import Path
-import pyshacl
-from rdflib import Graph
 
-def validate_rdf(data_file: Path, shapes_file: Path) -> tuple[bool, str]:
-    """Validate an RDF file against SHACL shapes. """
-    data_graph = Graph()
-    data_graph.parse(data_file)
+import pytest
 
-    shapes_graph = Graph()
-    shapes_graph.parse(shapes_file)
+# Ensure project root (containing the 'scripts' module) is on sys.path
+PROJECT_ROOT = Path(__file__).parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-    validation_result = pyshacl.validate(
-        data_graph,
-        shacl_graph=shapes_graph,
-        inference='rdfs',
-        abort_on_first=False,
-        meta_shacl=True if shapes_file.name == "shacl-shacl.ttl" else False,
-        debug=False
-    )
-    
-    conforms, _, results_text = validation_result
-    return conforms, results_text
+from scripts.validate import validate_rdf, ALLOWED_EXTENSIONS
 
-def _test_invalid_files(test_dir: str, shapes_type: str = 'core'):
-    """Helper function to test invalid files in a directory."""
-    invalid_dir = Path(__file__).parent / test_dir / "invalid"
-    shapes_file = Path(__file__).parent.parent / "shacl" / f"ldto-{shapes_type}.ttl"
-    
-    for invalid_file in invalid_dir.glob("*.ttl"):
-        conforms, results = validate_rdf(invalid_file, shapes_file)
-        assert not conforms, f"Expected validation to fail for {invalid_file.name}, but it passed"
 
-def test_invalid_core_files():
-    """Test that all files in the core/invalid directory fail validation."""
-    _test_invalid_files("core")
+TESTS_ROOT = Path(__file__).parent
 
-def test_invalid_extension_files():
-    """Test that all files in the extensions/invalid directory fail validation."""
-    _test_invalid_files("extensions", "extensions")
 
-def test_valid_examples():
-    """Test that all examples validate correctly against both core and extensions SHACL."""
-    examples_dir = Path(__file__).parent.parent / "examples"
-    for example_file in examples_dir.glob("*.ttl"):
-        for shapes_type in ['core', 'extensions']:
-            shapes_file = Path(__file__).parent.parent / "shacl" / f"ldto-{shapes_type}.ttl"
-            conforms, results = validate_rdf(example_file, shapes_file)
-            assert conforms, f"{shapes_type.title()} SHACL validation failed for {example_file.name}:\n{results}"
+def iter_test_cases():
+    """Yield pytest parameters for all test files.
 
-def test_shacl_shapes():
-    """Test that all SHACL shapes validate against meta-SHACL."""
-    meta_shacl = Path(__file__).parent / "shacl" / "shacl-shacl.ttl"
-    shapes_dir = Path(__file__).parent.parent / "shacl"
-    
-    for shape_file in ['ldto-core.ttl', 'ldto-extensions.ttl']:
-        shape_path = shapes_dir / shape_file
-        conforms, results_text = validate_rdf(shape_path, meta_shacl)
-        assert conforms, f"Meta-SHACL validation failed for {shape_file}:\n{results_text}"
+    Directory layout:
+        tests/<shapes_type>/<valid|invalid>/*
+
+    - <shapes_type>  -> name of the SHACL profile (e.g. core, plus, razu)
+    - valid/invalid  -> whether the data file is expected to conform
+    """
+    for shapes_dir in TESTS_ROOT.iterdir():
+        if not shapes_dir.is_dir():
+            continue
+
+        shapes_type = shapes_dir.name
+
+        for expectation in ("valid", "invalid"):
+            data_dir = shapes_dir / expectation
+            if not data_dir.is_dir():
+                continue
+
+            expected_conforms = expectation == "valid"
+
+            for data_file in data_dir.iterdir():
+                if not data_file.is_file():
+                    continue
+                if not any(str(data_file).endswith(ext) for ext in ALLOWED_EXTENSIONS):
+                    continue
+
+                test_id = f"{shapes_type}-{expectation}-{data_file.name}"
+                yield pytest.param(data_file, shapes_type, expected_conforms, id=test_id)
+
+
+@pytest.mark.parametrize("data_file,shapes_type,expected_conforms", list(iter_test_cases()))
+def test_files_against_ldto_profiles(data_file: Path, shapes_type: str, expected_conforms: bool):
+    """Validate all test files using scripts/validate.py according to directory naming.
+
+    - tests/<shapes_type>/valid/*   -> must conform (validate.py exit code 0)
+    - tests/<shapes_type>/invalid/* -> must NOT conform (validate.py exit code != 0)
+    """
+    status = validate_rdf(str(data_file), shapes_type)
+
+    if expected_conforms:
+        assert status == 0, (
+            f"Expected validation to succeed for {data_file} with profile '{shapes_type}', "
+            f"but validate.py returned status {status}."
+        )
+    else:
+        assert status != 0, (
+            f"Expected validation to fail for {data_file} with profile '{shapes_type}', "
+            f"but validate.py returned status {status}."
+        )
+
+
+EXAMPLES_DIR = PROJECT_ROOT / "examples"
+
+
+def test_examples_conform_to_razu_profile():
+    """All example files must conform to the 'razu' profile."""
+    assert EXAMPLES_DIR.is_dir(), f"Examples directory not found: {EXAMPLES_DIR}"
+
+    for example_file in EXAMPLES_DIR.iterdir():
+        if not example_file.is_file():
+            continue
+        if not any(str(example_file).endswith(ext) for ext in ALLOWED_EXTENSIONS):
+            continue
+
+        status = validate_rdf(str(example_file), "razu")
+        assert status == 0, (
+            f"Expected example {example_file} to conform to 'razu' profile, "
+            f"but validate.py returned status {status}."
+        )

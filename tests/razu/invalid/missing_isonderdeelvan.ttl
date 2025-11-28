@@ -1,3 +1,6 @@
+# Onderstaande RDF is het resultaat van een experiment met het beschrijven van luchtfotos. 
+# Niet alle hier toegepaste properties of structuren komen in de SHACL voor maar de RDF valideert wel. 
+
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix ldto: <https://data.razu.nl/def/ldto/> .
@@ -6,45 +9,49 @@
 @prefix schema: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-0> a ldto:Informatieobject ;
+<https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-0> a ldto:Informatieobject ;
     rdfs:label "Luchtfoto's Gemeente Houten" ;
-    dct:hasFormat <https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-0.meta.json> ;
+    dct:hasFormat <https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-0.meta.json> ;
+    ldto:classificatie <https://data.razu.nl/id/soort/TODO> ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> ;
     ldto:archiefvormer <https://data.razu.nl/id/actor/424280985651f416dfb6a68ee8ee6c6a> ;
-    ldto:bevatOnderdeel <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-1> ;
     ldto:dekkingInTijd [ a ldto:DekkingInTijdGegevens ;
         ldto:dekkingInTijdBeginDatum "1984-07-24"^^xsd:date ;
         ldto:dekkingInTijdEindDatum "2000-04-09"^^xsd:date ;
         ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/24f59b9806eb9f5d04e5a2a9ae01955e> ] ;
     ldto:identificatie [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "e-Depot RAZU" ;
-        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-0> ],
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-0> ],
     [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "Toegangen Regionaal Archief Zuid-Utrecht" ;
         ldto:identificatieKenmerk "661" ] ;
     ldto:naam "Luchtfoto's Gemeente Houten" ;
-    ldto:omschrijving "Gedigitaliseerde luchtfoto's Gemeente Houten" ;
-    ldto:waardering <https://data.razu.nl/id/waardering/f41d48ac0e70962eb37cae19e87c577f> .
+    ldto:omschrijving "Gedigitaliseerde luchtfoto's Gemeente Houten"  .
 
-<https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-1> a ldto:Informatieobject ;
+<https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-1> a ldto:Informatieobject ;
     rdfs:label "Luchtfoto's Houten serie 1984" ;
-    dct:hasFormat <https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-1.meta.json> ;
+    dct:hasFormat <https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-1.meta.json> ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/cd4b9482eadd1fea35dbf01c9a05b093> ;
+    ldto:classificatie <https://data.razu.nl/id/soort/TODO> ;
     ldto:archiefvormer <https://data.razu.nl/id/actor/424280985651f416dfb6a68ee8ee6c6a> ;
-    ldto:bevatOnderdeel <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-2> ;
     ldto:identificatie [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "e-Depot RAZU" ;
-        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-1> ],
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-1> ],
     [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "Gemeente Houten" ;
         ldto:identificatieKenmerk "1984" ] ;
-    ldto:isOnderdeelVan <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-0> ;
-    ldto:naam "Luchtfoto's Houten serie 1984" ;
-    ldto:waardering <https://data.razu.nl/id/waardering/f41d48ac0e70962eb37cae19e87c577f> .
+    ldto:dekkingInTijd [ 
+        a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdBeginDatum "1984-01-01"^^xsd:date ;
+        ldto:dekkingInTijdEindDatum "1984-12-31"^^xsd:date ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/21002589a45f08117d01f556b9defa6e> 
+    ] ;
+    ldto:isOnderdeelVan <https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-0> ;
+    ldto:naam "Luchtfoto's Houten serie 1984"  .
 
-<https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-2> a ldto:Informatieobject ;
+<https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-2> a ldto:Informatieobject ;
     rdfs:label "Luchfoto gemeente Houten" ;
-    dct:hasFormat <https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-2.meta.json> ;
+    dct:hasFormat <https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-2.meta.json> ;
     schema:height [ a schema:QuantitativeValue ;
         schema:unitCode "CMT" ;
         schema:value 60 ] ;
@@ -57,10 +64,10 @@
     ldto:archiefvormer <https://data.razu.nl/id/actor/424280985651f416dfb6a68ee8ee6c6a> ;
     ldto:beperkingGebruik  [
        a ldto:BeperkingGebruikGegevens ; 
-       ldto:beperkingGebruik <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20> 
+       ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20> 
     ] , [
         a ldto:BeperkingGebruikGegevens ; 
-        ldto:beperkingGebruik <https://data.razu.nl/id/beperkinggebruiktype/c9ff6ea52d650cc82c5c04dd054aeb1f>
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/c9ff6ea52d650cc82c5c04dd054aeb1f>
     ] ;
     ldto:betrokkene [ a ldto:BetrokkeneGegevens ;
         ldto:betrokkeneActor <https://data.razu.nl/id/actor/ccedcee97bc84c621b2a04f2731bf86c> ;
@@ -73,7 +80,7 @@
     ldto:dekkingInTijd [ a ldto:DekkingInTijdGegevens ;
         ldto:dekkingInTijdBeginDatum "1984-07-24"^^xsd:date ;
         ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/24f59b9806eb9f5d04e5a2a9ae01955e> ] ;
-    ldto:heeftRepresentatie <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-3> ;
+    ldto:heeftRepresentatie <https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-3> ;
     ldto:identificatie [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "Gemeente Houten" ;
         ldto:identificatieKenmerk "doos: 1984-1 volgnummer: 1" ],
@@ -82,22 +89,18 @@
         ldto:identificatieKenmerk "1" ],
     [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "e-Depot RAZU" ;
-        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-2> ] ;
-    ldto:isOnderdeelVan <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-1> ;
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-2> ] ;
+    # ldto:isOnderdeelVan <https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-1> ;
     ldto:naam "Luchfoto gemeente Houten" ;
     ldto:omschrijving "Een overzicht van het oude stadscentrum, met links het marktplein en de smalle steegjes die naar de haven leiden." ;
-    ldto:raadpleeglocatie [ a ldto:RaadpleeglocatieGegevens ;
-        ldto:raadpleeglocatieFysiek [ a ldto:VerwijzingGegevens ;
-        ldto:verwijzingNaam "Regionaal Archief Zuid Utrecht W13.1.1" ] ] ;
-    ldto:waardering <https://data.razu.nl/id/waardering/f41d48ac0e70962eb37cae19e87c577f> ;
     geo:hasBoundingBox [ a geo:Geometry ;
         geo:asWKT "POLYGON((5.119933504231523 52.05595643082183, 5.129899998690997 52.05595643082183, 5.129899998690997 52.062144454039014, 5.119933504231523 52.062144454039014, 5.119933504231523 52.05595643082183))"^^geo:wktLiteral ;
         geo:crs <http://www.opengis.net/def/crs/OGC/1.3/CRS84> ] ;
     geo:scale "1:1000" .
 
-<https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-3> a ldto:Bestand ;
-    dct:hasFormat <https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-3.meta.json> ;
-    ldto:URLBestand <https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-3.jpg> ;
+<https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-3> a ldto:Bestand ;
+    dct:hasFormat <https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-3.meta.json> ;
+    ldto:URLBestand <https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-3.jpg> ;
     ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/159f7f525dd2df49645de2b16beeb731> ;
     ldto:checksum [ a ldto:ChecksumGegevens ;
         ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
@@ -105,16 +108,16 @@
         ldto:checksumWaarde "f92e2a35327a202234bc22b63fc8cc93" ] ;
     ldto:identificatie [ a ldto:IdentificatieGegevens ;
         ldto:identificatieBron "e-Depot RAZU" ;
-        ldto:identificatieKenmerk <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-3> ] ;
-    ldto:isRepresentatieVan <https://data.razu.nl/id/object/NL-WbDRAZU-G0321-661-2> ;
+        ldto:identificatieKenmerk <https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-3> ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-g0321-661-2> ;
     ldto:naam "Luchfoto gemeente Houten 1984-1:1" ;
     ldto:omvang 14509774 .
 
-<https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-0.meta.json> a premis:File .
+<https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-0.meta.json> a premis:File .
 
-<https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-1.meta.json> a premis:File .
+<https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-1.meta.json> a premis:File .
 
-<https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-2.meta.json> a premis:File .
+<https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-2.meta.json> a premis:File .
 
-<https://g0321.opslag.razu.nl/NL-WbDRAZU-G0321-661-3.meta.json> a premis:File ;
+<https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-3.meta.json> a premis:File ;
     premis:originalName "1984_01_001.jpg" .

@@ -19,21 +19,24 @@ ldto_sh:razu
     rdfs:comment "Nadere verfijning van de core shapes voor het RAZU toepassingsprofiel. Bevat verwijzingen naar termen uit thesauri van RAZU." .
 
 ###
-# Enrichments to 'minimal':
+# Enrichments to 'core':
 
-ldto_sh:BeperkingGebruikConstraint
-    sh:message "beperkingGebruik 2x (openbaarheid, auteursrecht) verplicht als aggregatieniveau 'archiefstuk' is." ;
-    sh:rule [
-        sh:condition [
-            sh:property [
-                sh:path ldto:aggregatieniveau ;
-                sh:hasValue <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;
-            ]
-        ] ;
-        sh:property [
-            sh:path ldto:beperkingGebruik ;
-            sh:minCount 2 ;
-        ]
+ldto_sh:InformatieobjectShape
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Voor aggregatieniveau 'archiefstuk' moeten er precies 2 ldto:beperkingGebruik zijn." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+              ?this a <https://data.razu.nl/def/ldto/Informatieobject> ;
+                    <https://data.razu.nl/def/ldto/aggregatieniveau> <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> .
+              OPTIONAL {
+                ?this <https://data.razu.nl/def/ldto/beperkingGebruik> ?bg .
+              }
+            }
+            GROUP BY ?this
+            HAVING (COUNT(?bg) != 2)
+        """ ;
     ] .
 
 ###
@@ -48,7 +51,7 @@ ldto_sh:InformatieobjectShape
             WHERE {
               ?this <https://data.razu.nl/def/ldto/classificatie> ?c .
               FILTER (?c IN (
-                <https://data.razu.nl/id/soort/e7f8935f15730273e0b9ab9a0f74b2f8>
+                <https://data.razu.nl/id/soort/e7f8935f15730273e0b9ab9a0f74b2f8>  # krant / newspaper
               ))
               FILTER NOT EXISTS { ?this <https://data.razu.nl/def/ldto/dekkingInRuimte> ?dr . }
             }
