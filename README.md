@@ -9,7 +9,7 @@ De ruggengraat van het informatiemodel wordt gevormd door **LDTO** (= *Linked Du
 ### 1.1. Formele definities van LDTO
 
 * De definitie van LDTO als RDF-ontologie is te vinden in [def/ldto.ttl](def/ldto.ttl)
-* RDF gebaseerd op LDTO kan gevalideerd worden met de SHACL shape in [shacl/ldto-core.ttl](shacl/ldto-core.ttl])
+* RDF gebaseerd op LDTO kan gevalideerd worden met de SHACL shape in [shacl/ldto-core.ttl](shacl/ldto-core.ttl)
 
 ## 2. De ‘plus’-uitbreidingen op LDTO
 LDTO is als afspiegeling van MDTO op zichzelf niet toegerust voor het voldoende gedetailleerd beschrijven van archiefmateriaal. Binnen het informatiemodel van het RAZU wordt daarom aanvullend gebruik gemaakt van andere RDF-ontologiëen, zoals bijvoorbeeld `schema.org` of `premis`. Het informatiemodel legt daarom ook vast welke uitbreidingen op LDTO toegestaan zijn, én hoe deze toe te passen.
