@@ -1,0 +1,90 @@
+[
+  {
+    "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-32482",
+    "@type": [
+      "https://data.razu.nl/def/ldto/Bestand"
+    ],
+    "http://purl.org/dc/terms/hasFormat": [
+      {
+        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/032/nl-wbdrazu-k50907905-689-32482.meta.json"
+      }
+    ],
+    "http://schema.org/height": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 6510
+      }
+    ],
+    "http://schema.org/position": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 2
+      }
+    ],
+    "http://schema.org/width": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 4703
+      }
+    ],
+    "https://data.razu.nl/def/ldto/URLBestand": [
+      {
+        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/032/nl-wbdrazu-k50907905-689-32482.alto.xml"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/bestandsformaat": [
+      {
+        "@id": "https://data.razu.nl/id/bestandsformaat/63e8775df9a69fa0aadbb461fafe4c1e"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksum": [
+      {
+        "@id": "_:N0d1f7685978c457f93ec39ea588d46fe"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/isRepresentatieVan": [
+      {
+        "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-2509"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/naam": [
+      {
+        "@value": "nl-wbdrazu-k50907905-689-32482.alto.xml"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/omvang": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 266019
+      }
+    ]
+  },
+  {
+    "@id": "_:N0d1f7685978c457f93ec39ea588d46fe",
+    "@type": [
+      "https://data.razu.nl/def/ldto/ChecksumGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/checksumAlgoritme": [
+      {
+        "@id": "https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksumDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2025-05-02T11:09:34"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksumWaarde": [
+      {
+        "@value": "e25314a510f90643d3d7804797794ad5"
+      }
+    ]
+  },
+  {
+    "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/032/nl-wbdrazu-k50907905-689-32482.meta.json",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ]
+  }
+]

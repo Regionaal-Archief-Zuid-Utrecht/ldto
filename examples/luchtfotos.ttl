@@ -119,5 +119,9 @@
 
 <https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-2.meta.json> a premis:File .
 
-<https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-3.meta.json> a premis:File ;
+<https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-3.meta.json> a premis:File .
+
+
+<https://g0321.opslag.razu.nl/nl-wbdrazu-g0321-661-3.jpg> 
+    a premis:File ;
     premis:originalName "1984_01_001.jpg" .

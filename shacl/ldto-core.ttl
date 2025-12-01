@@ -406,6 +406,7 @@ ldto_sh:BestandShape
         )
     ]  .
 
+
 ldto_sh:BeperkingGebruikGegevensShape
     sh:name "BeperkingGebruikGegevens" ;
     a sh:NodeShape ;

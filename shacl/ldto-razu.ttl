@@ -87,3 +87,21 @@ ldto_sh:InformatieobjectShape
             }
         """ ;
     ] .
+
+ldto_sh:BestandShape
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "De resource waar ldto:URLBestand naar verwijst moet een premis:originalName met stringwaarde hebben." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+              ?this a <https://data.razu.nl/def/ldto/Bestand> ;
+                    <https://data.razu.nl/def/ldto/URLBestand> ?file .
+
+              FILTER NOT EXISTS {
+                ?file <http://www.loc.gov/premis/rdf/v3/originalName> ?name .
+                FILTER ( isLiteral(?name) )
+              }
+            }
+        """ ;
+    ] .
