@@ -8,320 +8,295 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 
+## For easy comparison, this file follow the order of mdto-rdf-1.0.ttl (<http://www.nationaalarchief.nl/mdto/0.9> )
+
 ldto:
     rdf:type owl:Ontology ;
     rdfs:comment "De RDF-ontologie van LDTO (Linked-data Duurzaam Toegankelijke Overheidsinformatie)" ;
-    rdfs:label "LDTO" ;
-    owl:versionInfo "0.6.9" ;
-    dcterms:created "2025-01-16"^^xsd:date ;
-    dcterms:modified "2025-03-03"^^xsd:date ;
-    dcterms:creator <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
-    dcterms:isVersionOf <http://www.nationaalarchief.nl/mdto#> ;
-    # sh:suggestedShapesGraph <http://www.nationaalarchief.nl/mdto-shacl#> ;
-    # see https://github.com/Regionaal-Archief-Zuid-Utrecht/ldto/shacl/
-    .
+    rdfs:label "LDTO" .
+    # removed version-info (we'll use github for versioning now)
 
-### Classes ###
+## added cf MDTO - all skos:closeMatch relations
+## removed cf MDTO 
+## - all skos:scopeNotes referring to an external text
+## - all mdto:doel properties
+## - all mdto:regels properties
 
-ldto:Object
+###
+# Classes
+
+# Preferably, RAZU uses the <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> thesaurus
+ldto:Actor
   rdf:type owl:Class ;
-  rdfs:label "Object"@nl ;
-  rdfs:subClassOf owl:Thing ;
-  skos:definition "Een fysiek, digitaal of conceptueel ding in de werkelijkheid dat van belang is voor een organisatie."@nl ;
-  skos:example "Een locatie, een applicatie, een tekstdocument, een bedrijfsactiviteit, een brug, een auto."@nl ;
-  skos:closeMatch mdto:Object ;
-  .
+  rdfs:label "Actor"@nl ;
+  rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Agent> ;
+  rdfs:subClassOf ldto:Object ;
+  skos:definition "Persoon, groep, organisatie of functionaris."@nl ;
+  skos:example "Een overheidsorganisatie, een natuurlijk persoon, een bedrijf."@nl ;
+  # mdto: removed overly specific mdto scopeNote
+  skos:closeMatch mdto:Actor ; # added 
+.
 
-ldto:Informatieobject
-    rdf:type owl:Class ;
-    rdfs:label "Informatieobject"@nl ;
-    rdfs:subClassOf ldto:Object ;
-    rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Record> ;
-    skos:definition "Een op zichzelf staand geheel van gegevens met een eigen identiteit."@nl ;
-    skos:scopeNote "Informatieobjecten in de context van LDTO zijn informatieobjecten die voortkomen uit de taken van de overheid."@nl ;
-    skos:closeMatch mdto:Informatieobject ;
-    .
-
-ldto:Bestand
-    rdf:type owl:Class ;
-    rdfs:label "Bestand"@nl ;
-    rdfs:subClassOf ldto:Object ;
-    rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Instantiation> ;
-    skos:definition "Een geordende verzameling van gegevens in elektronische vorm, die door een elektronisch apparaat onder één naam kan worden behandeld en aangesproken."@nl ;
-    skos:closeMatch mdto:Bestand ;
-    .
-
-ldto:Gegevensgroep
-    rdf:type owl:Class ;
-    rdfs:label "Gegevensgroep"@nl ;
-    rdfs:subClassOf ldto:Object ;
-    skos:definition "Een logisch samenhangend geheel van gegevens."@nl ;
-    skos:closeMatch mdto:Gegevensgroep ;
-    .
+# Not used in ldto.
+# When needed bedrijfsactiviteiten should become a thesaurus.
+# mdto:Bedrijfsactiviteit
+#   rdf:type owl:Class ;
+#   dcterms:source "NEN-ISO 30300:2020" ;
+#   rdfs:label "Bedrijfsactiviteit"@nl ;
+#   rdfs:subClassOf mdto:Object ;
+#   skos:definition "Een taak die wordt uitgevoerd door een organisatie. (Bron: NEN-ISO 30300:2020)"@nl ;
+#   skos:example "Het verlenen van een vergunning, het uitgeven van rijbewijzen, het maken van beleid."@nl ;
+#   skos:scopeNote "Binnen de context van MDTO wordt met een organisatie een overheidsorganisatie bedoeld."@nl ;
+# .
 
 ldto:BegripGegevens
     rdf:type owl:Class ;
     rdfs:label "Begripgegevens"@nl ;
     rdfs:subClassOf ldto:Gegevensgroep ;
     skos:closeMatch mdto:BegripGegevens ;
-    .
+.
+ldto:BeperkingGebruikGegevens
+  rdf:type owl:Class ;
+  rdfs:label "Beperking gebruik gegevens"@nl ;
+  rdfs:subClassOf ldto:Gegevensgroep ;
+  skos:closeMatch mdto:BeperkingGebruikGegevens ;
+.
+ldto:Bestand
+    rdf:type owl:Class ;
+    rdfs:label "Bestand"@nl ;
+    rdfs:subClassOf ldto:Object ;
+    rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Instantiation> ;
+    skos:definition "Een geordende verzameling van gegevens in elektronische vorm, die door een elektronisch apparaat onder één naam kan worden behandeld en aangesproken."@nl ;
+    skos:example "Een audiobestand, een tekstbestand."@nl ;
+    skos:closeMatch mdto:Bestand ;
+.
+ldto:BetrokkeneGegevens
+    rdf:type owl:Class ;
+    rdfs:label "Betrokkene-gegevens"@nl ;
+    rdfs:subClassOf ldto:Gegevensgroep ;
+    skos:closeMatch mdto:BetrokkeneGegevens ;
+.
+ldto:ChecksumGegevens
+    rdf:type owl:Class ;
+    rdfs:label "Checksum-gegevens"@nl ;
+    rdfs:subClassOf ldto:Gegevensgroep ;
+    skos:closeMatch mdto:ChecksumGegevens ;
+.
+ldto:DekkingInTijdGegevens
+    rdf:type owl:Class ;
+    rdfs:label "Dekking in tijd-gegevens"@nl ;
+    rdfs:subClassOf ldto:Gegevensgroep ;
+    skos:closeMatch mdto:DekkingInTijdGegevens ;
+.
+ldto:EventGegevens
+    rdf:type owl:Class ;
+    rdfs:label "Eventgegevens"@nl ;
+    rdfs:subClassOf ldto:Gegevensgroep ;
+    skos:closeMatch mdto:EventGegevens ;
+.
+ldto:Gegevensgroep
+    rdf:type owl:Class ;
+    rdfs:label "Gegevensgroep"@nl ;
+    rdfs:subClassOf owl:Thing ;
+    skos:closeMatch mdto:Gegevensgroep ;
+.
+
+# Not used in ldto. 
+# mdto:GerelateerdInformatieobjectGegevens
+#   rdf:type owl:Class ;
+#   rdfs:label "Gerelateerd informatieobject gegevens"@nl ;
+#   rdfs:subClassOf mdto:Gegevensgroep ;
+# .
 
 ldto:IdentificatieGegevens
     rdf:type owl:Class ;
     rdfs:label "Identificatiegegevens"@nl ;
     rdfs:subClassOf ldto:Gegevensgroep ;
     skos:closeMatch mdto:IdentificatieGegevens ;
-    .
-
-ldto:DekkingInTijdGegevens
+.
+ldto:Informatieobject
     rdf:type owl:Class ;
-    rdfs:label "Dekking in tijd-gegevens"@nl ;
-    rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:DekkingInTijdGegevens ;
-    .
+    #  dcterms:source "https://www.nationaalarchief.nl/archiveren/kennisbank/informatieobject"^^xsd:anyURI ; # from MDTO
+    rdfs:label "Informatieobject"@nl ;
+    rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Record> ;
+    rdfs:subClassOf ldto:Object ;
+    skos:definition "Een op zichzelf staand geheel van gegevens met een eigen identiteit."@nl ;
+    skos:scopeNote "Informatieobjecten in de context van LDTO zijn informatieobjecten die voortkomen uit de taken van de overheid."@nl ;
+    skos:closeMatch mdto:Informatieobject ;
+.
 
-ldto:EventGegevens
+# Not used in ldto.
+# RAZU uses the <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> thesaurus
+# mdto:Locatie
+#     rdf:type owl:Class ;
+#     rdfs:label "Locatie"@nl ;
+#     rdfs:seeAlso <http://bag.basisregistraties.overheid.nl/id/begrip/Object> ;
+#     rdfs:seeAlso <http://definities.geostandaarden.nl/def/nen3610#GeoObject> ;
+#     rdfs:subClassOf mdto:Object ;
+#     skos:definition "Fysieke plaats in de ruimte."@nl ;
+#     skos:example "Een BAG-locatie, een provincie, een weg."@nl ;
+#     skos:scopeNote "MDTO stelt geen nadere eisen aan de manier waarop een locatie is vastgelegd. Idealiter wordt verwezen naar een begrip in een bestaande registratie, zoals de BAG. Of naar begrip in een bestaande begrippenlijst zoals die bijvoorbeeld gebruikt wordt door OWMS."@nl ;
+# .
+
+ldto:Object
     rdf:type owl:Class ;
-    rdfs:label "Eventgegevens"@nl ;
-    rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:EventGegevens ;
-    .
+    rdfs:label "Object"@nl ;
+    rdfs:subClassOf owl:Thing ;
+    skos:definition "Een fysiek, digitaal of conceptueel ding in de werkelijkheid dat van belang is voor een organisatie."@nl ;
+    skos:example "Een locatie, een applicatie, een tekstdocument, een bedrijfsactiviteit, een brug, een auto."@nl ;
+    skos:closeMatch mdto:Object ;
+.
 
-ldto:BetrokkeneGegevens
+# Currently, not yet (?) used in ldto.
+# mdto:RaadpleeglocatieGegevens
+#   rdf:type owl:Class ;
+#   rdfs:label "Raadpleeglocatie gegevens"@nl ;
+#   rdfs:subClassOf mdto:Gegevensgroep ;
+# .
+
+ldto:TermijnGegevens
     rdf:type owl:Class ;
-    rdfs:label "Betrokkene-gegevens"@nl ;
+    rdfs:label "Termijngegevens"@nl ;
     rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:BetrokkeneGegevens ;
-    .
+    skos:closeMatch mdto:TermijnGegevens 
+.
 
-ldto:ChecksumGegevens
-    rdf:type owl:Class ;
-    rdfs:label "Checksum-gegevens"@nl ;
-    rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:ChecksumGegevens ;
-    .
+###
+# Properties 
 
-### Properties ###
-
-ldto:identificatie
+# This links to an file as an URI (in MDTO it links to a literal URI)
+ldto:URLBestand
     rdf:type owl:ObjectProperty ;
-    rdfs:label "Identificatie"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:IdentificatieGegevens ;
-    skos:definition "Gegevens waarmee het object geïdentificeerd kan worden."@nl ;
-    skos:closeMatch mdto:identificatie ;
-    .
+    rdfs:domain ldto:Bestand ;
+    rdfs:label "URL Bestand"@nl ;
+    rdfs:range rdfs:Resource ;
+    skos:definition "Actuele verwijzing naar het bestand."@nl ;
+    skos:closeMatch mdto:URLBestand ;
+.
 
-ldto:identificatieKenmerk
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Identificatiekenmerk"@nl ;
-    rdfs:domain ldto:IdentificatieGegevens ;
-    rdfs:range xsd:string ;
-    skos:definition "Een kenmerk waarmee een object geïdentificeerd kan worden."@nl ;
-    skos:closeMatch mdto:identificatieKenmerk ;
-    .
+# Not used in ldto, this is RDF, we use URIs.
+# mdto:VerwijzingGegevens
+#   rdf:type owl:Class ;
+#   rdfs:label "Verwijzing gegevens"@nl ;
+#   rdfs:subClassOf mdto:Gegevensgroep ;
+# .
 
-ldto:identificatieBron
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Identificatiebron"@nl ;
-    rdfs:domain ldto:IdentificatieGegevens ;
-    rdfs:range xsd:string ;
-    skos:definition "Herkomst van het kenmerk."@nl ;
-    skos:closeMatch mdto:identificatieBron ;
-    .
+# Not used in ldto. We follow the open world principle in RDF. Just add properties from other vocabularies.
+# mdto:aanvullendeMetagegevens
+#   rdf:type owl:ObjectProperty ;
+#   mdto:doel "Interpreteerbaarheid: Aanvullende metagegevens maken het mogelijk om meer (domeinspecifieke) contextinformatie op te nemen bij een informatieobject."@nl ;
+#   mdto:regels "In het bestandsformaat van het bestand moet opgenomen zijn wat de structuur en betekenis van de extra metagegevens zijn."@nl ;
+#   rdfs:domain mdto:Informatieobject ;
+#   rdfs:label "Aanvullende metagegevens"@nl ;
+#   rdfs:range mdto:Bestand ;
+#   skos:definition "Verwijzing naar een bestand dat aanvullende (domeinspecifieke) metagegevens over het  informatieobject bevat."@nl ;
+#   skos:scopeNote "Dit attribuut maakt het mogelijk om aanvullende metagegevens, die niet in MDTO worden gespecificeerd, bij het informatieobject op te nemen. Hiermee wordt het ook mogelijk om de originele metagegevens te behouden nadat deze zijn geconverteerd naar MDTO."@nl ;
+# .
 
-ldto:naam
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Naam"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range xsd:string ;
-    skos:definition "Een betekenisvolle aanduiding waaronder het object bekend is."@nl ;
-    skos:closeMatch mdto:naam ;
-    .
+# Not (yet?) used in ldto. If needed, should be in an RDF thesaurus and link to that
+# mdto:activiteit
+#   rdf:type owl:ObjectProperty ;
+#   mdto:doel "Interpreteerbaarheid: De bedrijfsactiviteit geeft invulling aan de context waarin een informatieobject gecreëerd of ontvangen is."@nl ;
+#   rdfs:domain mdto:Informatieobject ;
+#   rdfs:label "Activiteit"@nl ;
+#   rdfs:range [
+#       rdf:type owl:Class ;
+#       owl:unionOf (
+#           mdto:Bedrijfsactiviteit
+#           mdto:VerwijzingGegevens
+#         ) ;
+#     ] ;
+#   skos:definition "De bedrijfsactiviteit waarbij het informatieobject door de archiefvormer is ontvangen of gemaakt."@nl ;
+#   skos:scopeNote """De bedrijfsactiviteit kan bijvoorbeeld het proces zijn dat, of het zaaktype die aan het informatieobject ten grondslag ligt. 
+# Deze informatie zou ook kunnen worden afgeleid van het classificatieschema (zie classificatie), mits dit aansluit op de taken / processen van de organisatie."""@nl ;
+# .
 
 ldto:aggregatieniveau
     rdf:type owl:ObjectProperty ;
     rdfs:label "Aggregatieniveau"@nl ;
     rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:BegripGegevens ;
+    rdfs:range rdfs:Resource ;   # Range changed from mdto:BegripGegevens 
+    skos:scopeNote "For RAZU, this should link to a term in the <https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee> thesaurus"@en ;
     skos:definition "Het aggregatieniveau van het informatieobject."@nl ;
     skos:closeMatch mdto:aggregatieniveau ;
-    .
-
-ldto:classificatie
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Classificatie"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:BegripGegevens ;
-    skos:definition "Ordening van informatieobjecten in een logisch verband, zoals vastgelegd in een classificatieschema."@nl ;
-    skos:closeMatch mdto:classificatie ;
-    .
-
-ldto:trefwoord
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Trefwoord"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range xsd:string ;
-    skos:definition "Trefwoord dat aan het informatieobject is toegekend."@nl ;
-    skos:closeMatch mdto:trefwoord ;
-    .
-
-ldto:omschrijving
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Omschrijving"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range xsd:string ;
-    skos:definition "Omschrijving van de inhoud van het informatieobject."@nl ;
-    rdfs:seeAlso dcterms:description ;
-    skos:closeMatch mdto:omschrijving ;
-    .
-
-ldto:raadpleeglocatie
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Raadpleeglocatie"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    skos:definition "Actuele verwijzing naar de locatie waar het informatieobject ter inzage ligt."@nl ;
-    skos:closeMatch mdto:raadpleeglocatie ;
-    .
-
-ldto:dekkingInTijd
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Dekking in tijd"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:DekkingInTijdGegevens ;
-    skos:definition "Een tijdstip of de periode waarop de inhoud van het informatieobject betrekking heeft."@nl ;
-    skos:closeMatch mdto:dekkingInTijd ;
-    .
-
-ldto:dekkingInTijdType
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Dekking in tijd type"@nl ;
-    rdfs:domain ldto:DekkingInTijdGegevens ;
-    skos:closeMatch mdto:dekkingInTijdType ;
-    .
-
-ldto:dekkingInTijdBeginDatum
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Dekking in tijd begindatum"@nl ;
-    rdfs:domain ldto:DekkingInTijdGegevens ;
-    skos:definition "Datum waar de inhoud van het informatieobject betrekking op heeft. Bij een periode is dit de begindatum."@nl ;
-    skos:closeMatch mdto:dekkingInTijdBeginDatum ;
-    .
-
-ldto:dekkingInTijdEindDatum
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Dekking in tijd einddatum"@nl ;
-    rdfs:domain ldto:DekkingInTijdGegevens ;
-    skos:definition "Einddatum van de periode waar de inhoud van het informatieobject betrekking op heeft."@nl ;
-    skos:closeMatch mdto:dekkingInTijdEindDatum ;
-    .
-
-ldto:dekkingInRuimte
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Dekking in ruimte"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    skos:scopeNote "Doel: Vindbaarheid: Het informatieobject kunnen vinden op basis van een plaats of locatie."@nl ;
-    skos:closeMatch mdto:dekkingInRuimte ;
-    .
-
-ldto:event
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Event"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:EventGegevens ;
-    skos:definition "Gebeurtenis die heeft plaatsgevonden met betrekking tot het ontstaan, wijzigen, vernietigen en beheer van het informatieobject en de bijbehorende metagegevens."@nl ;
-    skos:closeMatch mdto:event ;
-    .
-
-ldto:eventType
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Type"@nl ;
-    rdfs:domain ldto:EventGegevens ;
-    rdfs:range ldto:BegripGegevens ;
-    skos:definition "Aanduiding van het type event."@nl ;
-    skos:closeMatch mdto:eventType ;
-    .
-
-ldto:eventTijd
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Tijd"@nl ;
-    rdfs:domain ldto:EventGegevens ;
-    rdfs:range xsd:dateTime ;
-    skos:definition "Het tijdstip waarop het event heeft plaatsgevonden."@nl ;
-    skos:closeMatch mdto:eventTijd ;
-    .
-
-ldto:eventVerantwoordelijkeActor
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Verantwoordelijke actor"@nl ;
-    rdfs:domain ldto:EventGegevens ;
-    rdfs:range ldto:Actor ;
-    skos:definition "De actor die verantwoordelijk was voor de gebeurtenis."@nl ;
-    skos:closeMatch mdto:eventVerantwoordelijkeActor ;
-    .
-
-ldto:eventResultaat
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Resultaat"@nl ;
-    rdfs:domain ldto:EventGegevens ;
-    rdfs:range xsd:string ;
-    skos:definition "Beschrijving van het resultaat van het event voor zover relevant voor de duurzame toegankelijkheid van het informatieobject."@nl ;
-    skos:closeMatch mdto:eventResultaat ;
-    .
-
-ldto:waardering
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Waardering"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    skos:scopeNote "Doel: Beschikbaarheid: geeft een indicatie of het informatieobject tijdelijk of blijvend beschikbaar dient te zijn."@nl ;
-    skos:closeMatch mdto:waardering ;
-    .
-
-ldto:isOnderdeelVan
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Is onderdeel van"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:Informatieobject ;
-    skos:scopeNote "Doel: Vindbaarheid: Op basis van dit attribuut kan vanuit een informatieobject gezocht worden naar de bovenliggende aggregaties."@nl ;
-    skos:closeMatch mdto:isOnderdeelVan ;
-    .
-
-ldto:bevatOnderdeel
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Bevat onderdeel"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:Informatieobject ;
-    skos:closeMatch mdto:bevatOnderdeel ;
-    .
-
-ldto:heeftRepresentatie
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Heeft representatie"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:Bestand ;
-    owl:inverseOf mdto:isRepresentatieVan ;
-    skos:definition "Verwijzing naar het bestand dat een (deel van een)  representatie van het informatieobject is."@nl ;
-    skos:closeMatch mdto:heeftRepresentatie ;
-    .
-
-ldto:isRepresentatieVan
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain mdto:Bestand ;
-  rdfs:label "Is representatie van"@nl ;
-  rdfs:range ldto:Informatieobject ;
-  owl:inverseOf mdto:heeftRepresentatie ;
-  skos:definition "Verwijzing naar het informatieobject waarvan het bestand een (deel van de) fysieke representatie van is."@nl ;
-  skos:closeMatch mdto:isRepresentatieVan ;
 .
-
-
 ldto:archiefvormer
     rdf:type owl:ObjectProperty ;
     rdfs:label "Archiefvormer"@nl ;
     rdfs:domain ldto:Informatieobject ;
-    skos:scopeNote "Doel: Vindbaarheid: Het kunnen vinden van een informatieobject aan de hand van de verantwoordelijke organisatie."@nl ;
+    rdfs:range rdfs:Resource ;   # Range changed from mdto:BegripGegevens 
+    skos:scopeNote "For RAZU, this should refer to a term in the <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> thesaurus"@en;
+    skos:definition "De organisatie die verantwoordelijk is voor het opmaken en/of ontvangen van het informatieobject."@nl ;
     skos:closeMatch mdto:archiefvormer ;
-    .
+.
+
+# Not used in ldto. We use RDF thesauri.
+# mdto:begripBegrippenlijst
+#   rdf:type owl:ObjectProperty ;
+#   mdto:regels """1)	De begrippenlijst bevat minimaal de volgende onderdelen:
+# •	Naam van de begrippenlijst.
+# •	Versie (datum en, indien van toepassing, het versienummer).
+# •	Beheerder van de begrippenlijst.
+# •	Toepassingsgebied waar de begrippenlijst voor bedoeld is.
+# •	Opsomming van alle toegestane begrippen binnen de begrippenlijst. 
+# •	Per begrip (indien van toepassing):
+# o	Code: De code die aan het begrip is toegekend. Moet uniek zijn binnen de begrippenlijst.
+# o	Label: De tekstweergave van het begrip. Moet uniek zijn binnen de begrippenlijst.
+# o	Definitie: Betekenis van het begrip
+# o	Generiekere begrippen: Opsomming van de meer algemene (bovenliggende) begrippen binnen dezelfde begrippenlijst (‘broader term’). 
+# o	Specifiekere begrippen: Opsomming van de minder algemene (onderliggende) begrippen in dezelfde begrippenlijst (‘narrower term’).
+# 2)	Als de begrippenlijst een voorgaande versie heeft, dan geldt:
+# •	Alle begrippen uit de voorgaande versie komen in de nieuwe versie voor. Met dezelfde code, label, betekenis en minimaal dezelfde generiekere en specifiekere begrippen. De definitie mag anders geformuleerd zijn, als de betekenis maar hetzelfde is.
+# •	Als een begrip uit de voorgaande versie in de nieuwe versie niet meer gebruikt wordt, dan wordt deze gemarkeerd als niet meer gebruikt (‘deprecated’). Hij blijft wel in de begrippenlijst staan zodat duidelijk is dat deze begrippen voor kunnen komen in eerder vastgelegde metagegevens.
+# •	Als een begrip uit de voorgaande versie in de nieuwe versie vervangen is door een ander begrip, dan is deze van-naar-relatie beschreven en heeft het vervangende begrip dezelfde of een algemenere betekenis (‘mapping’)."""@nl ;
+#   rdfs:domain mdto:BegripGegevens ;
+#   rdfs:label "Begrippenlijst"@nl ;
+#   rdfs:range [
+#       rdf:type owl:Class ;
+#       owl:unionOf (
+#           mdto:Informatieobject
+#           mdto:VerwijzingGegevens
+#         ) ;
+#     ] ;
+#   rdfs:seeAlso skos:ConceptScheme ;
+#   skos:definition "Een beschrijving van de begrippen die voor een bepaald toepassingsgebied gebruikt worden is opgesomd. Samen met hun betekenis en hun onderlinge relaties."@nl ;
+#   skos:scopeNote """MDTO maakt gebruik van begrippenlijsten bij attributen waarvan de waarde uit een lijst gekozen moet worden. De begrippenlijst geeft dan aan welke waarden zijn toegestaan (de begrippen) en wat te betekenis van die begrippen is. Een begrippenlijst wordt ook wel aangeduid als een (gecontroleerde) woordenlijst of vocabulaire. 
+# De informatie in een begrippenlijst kan voor verschillende toepassingen gebruikt worden:
+# •	Validatie of een gebruikt begrip inderdaad in de begrippenlijst voorkomt.
+# •	Opzoeken van de betekenis van een begrip
+# •	Het samenstellen van een keuzelijst met toegestane waarden bij het invullen van metagegevens. De relaties met generiekere en specifiekere begrippen kunnen daarbij gebruikt worden voor een hiërarchische presentatie van de keuzelijst.
+# •	Bepalen van de mogelijke waarden in de keuzenlijst van een zoekfunctie. 
+# Deels zijn de toegestane begrippenlijsten in MDTO vastgelegd en deels kan de beheerder van de metagegevens zijn eigen begrippenlijsten bepalen. Als de beheerder eigen begrippenlijsten gebruikt is het van belang dat de begrippen duidelijk gedefileerd zijn in de begrippenlijst. Anders is het voor de gebruiker of toekomstige beheerder van de metagegevens niet duidelijk wat ze betekenen.
+# MDTO stelt, vooralsnog, geen vormvoorschriften aan een begrippenlijst. Bijvoorbeeld een tekstdocument of een tabel kan voldoen. Mits aan de bovenstaande regels is voldaan. In principe wordt een begrippenlijst echter vastgelegd in SKOS (Simple Knowledge Organization System). Omdat SKOS geldt als de pas-toe-of-leg-uit standaard voor begrippenlijsten (zie https://www.forumstandaardisatie.nl/standaard/skos). In SKOS wordt een ‘begrip’ aangeduid als een ‘concept’. Een verwijzing naar een begrippenlijst kan ook een verwijzing naar een verzameling van (verder ongerelateerde) begrippenlijsten zijn.  
+
+# Het is niet noodzakelijk dat in een begrippenlijsten over ‘begrip’ gesproken wordt. Deze kunnen bijvoorbeeld ook aangeduid zijn als ‘categorie’ of  ‘type’. 
+
+# Bij voorkeur is de begrippenlijst zelf ook een open standaard. Open standaarden zijn door consensus tot stand gekomen. Hierdoor is de kans groter dat de begrippenlijst goed gedocumenteerd is en door meerdere archiefvormers wordt toegepast. Wat het voor de beheerder en gebruikers van het doelsysteem gemakkelijker maakt om de begrippenlijst te gebruiken.
+
+# Bij het overdragen van informatieobjecten met MDTO-metagegevens naar een andere beheerder, is het mogelijk dat de ontvangende beheerder eisen stelt aan de gebruikte begrippenlijsten. Zodat hij in staat is de informatieobjecten en bestanden (geautomatiseerd) te valideren, te beheren, doorzoekbaar te maken en te presenteren op basis van de gebruikte begrippen. Aanbevolen wordt om hier tijdig afspraken over te maken."""@nl ;
+# .
+
+
+# Not used in ldto. This is RDF. We prefer entities with URIs.
+# mdto:begripCode
+#   rdf:type owl:DatatypeProperty ;
+#   rdfs:domain mdto:BegripGegevens ;
+#   rdfs:label "Code"@nl ;
+#   rdfs:range xsd:string ;
+#   skos:definition "De code die aan het begrip is toegekend in de begrippenlijst."@nl ;
+#   skos:scopeNote "In sommige begrippenlijsten hebben de begrippen een code om ze aan te duiden. De code is dan één van de manieren om een begrip aan te kunnen duiden, naast het label."@nl ;
+# .
+
+# Not used in ldto. This is RDF.  We prefer entities with URIs.
+# mdto:begripLabel
+#   rdf:type owl:DatatypeProperty ;
+#   rdfs:domain mdto:BegripGegevens ;
+#   rdfs:label "Label"@nl ;
+#   rdfs:range xsd:string ;
+#   skos:definition "De tekstweergave van het begrip dat is toegekend in de begrippenlijst."@nl ;
+#   skos:scopeNote """menselijke lezing. Het label is één van de manieren om een begrip aan te kunnen duiden, naast de code. Indien er meerdere labels zijn vastgelegd, wordt hier het voorkeurslabel vermeld.
+# Het verschil tussen label en code is niet altijd evident. Label is bedoeld om een duidelijke beschrijving te geven voor menselijke lezing."""@nl ;
+# .
 
 ldto:beperkingGebruik
     rdf:type owl:ObjectProperty ;
@@ -329,118 +304,38 @@ ldto:beperkingGebruik
     rdfs:domain ldto:Informatieobject ;
     rdfs:range ldto:BeperkingGebruikGegevens ;
     skos:closeMatch mdto:beperkingGebruik ;
+    skos:definition "Een beperking die gesteld is aan het gebruik van het informatieobject."@nl ;
+    skos:scopeNote "RAZU uses the <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> here."@en;
     .
 
-ldto:betrokkene
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Betrokkene"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:BetrokkeneGegevens ;
-    skos:definition "Persoon of organisatie die relevant is binnen de context van het ontstaan en gebruik van dit informatieobject, anders dan de archiefvormer."@nl ;
-    skos:closeMatch mdto:betrokkene ;
-    .
+# Not (yet?) used in mdto. Best approach is the document types in the  <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> thesaurus
+# mdto:beperkingGebruikDocumentatie
+#   rdf:type owl:ObjectProperty ;
+#   rdfs:domain mdto:BeperkingGebruikGegevens ;
+#   rdfs:label "Documentatie"@nl ;
+#   rdfs:range [
+#       rdf:type owl:Class ;
+#       owl:unionOf (
+#           mdto:Informatieobject
+#           mdto:VerwijzingGegevens
+#         ) ;
+#     ] ;
+#   skos:definition "Verwijzing naar een tekstdocument waarin een nadere beschrijving van de beperking is opgenomen."@nl ;
+#   skos:scopeNote "Soms zijn afspraken over een beperking in een afzonderlijk tekstdocument opgenomen. Dan verwijst dit attribuut daar naar."@nl ;
+# .
 
-ldto:betrokkeneTypeRelatie
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Betrokkene type relatie"@nl ;
-    rdfs:domain ldto:BetrokkeneGegevens ;
-    skos:closeMatch mdto:betrokkeneTypeRelatie ;
-    .
+# Not (yet?) used in mdto. See mdto:beperkingGebruikDocumentatie
+# mdto:beperkingGebruikNadereBeschrijving
+#   rdf:type owl:DatatypeProperty ;
+#   mdto:regels "Heeft in ieder geval een waarde als beperkingGebruikType = “Overig”."@nl ;
+#   rdfs:domain mdto:BeperkingGebruikGegevens ;
+#   rdfs:label "Nadere beschrijving"@nl ;
+#   rdfs:range xsd:string ;
+#   skos:definition "Nadere beschrijving van de beperking op het gebruik. Als aanvulling op beperkingGebruikType."@nl ;
+#   skos:scopeNote """Het is niet mogelijk om elk type beperking en de nuances daarop vast te leggen in beperkingGebruikType. In dat geval wordt de beperking nader beschreven in beperkingGebruikNadereBeschrijving. 
 
-ldto:betrokkeneActor
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Betrokkene actor"@nl ;
-    rdfs:domain ldto:BetrokkeneGegevens ;
-    skos:closeMatch mdto:betrokkeneActor ;
-    .
-
-ldto:omvang
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Omvang"@nl ;
-    rdfs:domain ldto:Bestand ;
-    rdfs:range xsd:nonNegativeInteger ;
-    skos:definition "De grootte van het bestand uitgedrukt in bytes."@nl ;
-    skos:closeMatch mdto:omvang ;
-    .
-
-ldto:bestandsformaat
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Bestandsformaat"@nl ;
-    rdfs:domain ldto:Bestand ;
-    rdfs:range ldto:BegripGegevens ;
-    skos:definition "De manier waarop de informatie in een computerbestand binair gecodeerd is."@nl ;
-    skos:closeMatch mdto:bestandsformaat ;
-    .
-
-ldto:checksum
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Checksum"@nl ;
-    rdfs:domain ldto:Bestand ;
-    rdfs:range ldto:ChecksumGegevens ;
-    skos:definition "Gegevens om te bepalen of het bestand beschadigd of gewijzigd is."@nl ;
-    skos:closeMatch mdto:checksum ;
-    .
-
-ldto:checksumAlgoritme
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Algoritme"@nl ;
-    rdfs:domain ldto:ChecksumGegevens ;
-    rdfs:range ldto:BegripGegevens ;
-    skos:definition "Naam van het algoritme dat is gebruikt om de checksum te maken."@nl ;
-    skos:closeMatch mdto:checksumAlgoritme ;
-    .
-
-ldto:checksumWaarde
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Waarde"@nl ;
-    rdfs:domain ldto:ChecksumGegevens ;
-    rdfs:range xsd:string ;
-    skos:definition "De waarde van de checksum."@nl ;
-    skos:closeMatch mdto:checksumWaarde ;
-    .
-
-ldto:checksumDatum
-    rdf:type owl:DatatypeProperty ;
-    rdfs:label "Datum checksum"@nl ;
-    rdfs:domain ldto:ChecksumGegevens ;
-    rdfs:range xsd:dateTime ;
-    skos:definition "Datum waarop de checksum is gemaakt."@nl ;
-    skos:closeMatch mdto:checksumDatum ;
-    .
-
-
-ldto:identificatie
-    rdf:type owl:ObjectProperty ;
-    rdfs:label "Identificatie"@nl ;
-    rdfs:domain ldto:Informatieobject ;
-    rdfs:range ldto:IdentificatieGegevens ;
-    skos:definition "Gegevens waarmee het object geïdentificeerd kan worden."@nl ;
-    skos:closeMatch mdto:identificatie ;
-    .
-
-
-ldto:URLBestand
-  rdf:type owl:ObjectProperty ;
-  rdfs:domain ldto:Bestand ;
-  rdfs:label "URL Bestand"@nl ;
-  rdfs:range rdfs:Resource ;
-  skos:definition "Actuele verwijzing naar het bestand."@nl ;
-  skos:closeMatch mdto:URLBestand ;
-  .
-
-ldto:BeperkingGebruikGegevens
-  rdf:type owl:Class ;
-  rdfs:label "Beperking gebruik gegevens"@nl ;
-  rdfs:subClassOf ldto:Gegevensgroep ;
-  skos:closeMatch mdto:BeperkingGebruikGegevens .
-
-ldto:beperkingGebruikType
-  rdf:type owl:ObjectProperty ;
-  rdfs:label "Beperking gebruik type"@nl ;
-  rdfs:domain ldto:BeperkingGebruikGegevens ;
-  rdfs:range ldto:BegripGegevens ;
-  skos:definition "Typering van de beperking. Op grond waarvan bepaald kan worden wie toegang heeft tot het informatieobject en welke voorwaarden op het gebruik van toepassing zijn."@nl ;
-  skos:closeMatch mdto:beperkingGebruikType .
+# Als dit attribuut een waarde heeft, dan is volledige automatische afhandeling van de beperking niet mogelijk. Vul dit attribuut daarom alleen in als beperkingGebruikType onvoldoende informatie geeft."""@nl ;
+# .
 
 ldto:beperkingGebruikTermijn
     rdf:type owl:ObjectProperty ;
@@ -449,43 +344,495 @@ ldto:beperkingGebruikTermijn
     rdfs:range ldto:TermijnGegevens ;
     skos:definition "De termijn waarbinnen de beperking op het gebruik van toepassing is."@nl ;
     skos:scopeNote "Een beperking kan tijdelijk van aard zijn. In dat geval geeft dit attribuut aan wanneer de beperking eindigt. Na afloop van deze termijn hoeft niet meer aan de beperking voldaan te worden.  Als dit attribuut geen waarde heeft, dan blijft de beperking van toepassing."@nl ;
-    skos:closeMatch mdto:beperkingGebruikTermijn .
+    skos:closeMatch mdto:beperkingGebruikTermijn 
+.
+ldto:beperkingGebruikType
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Beperking gebruik type"@nl ;
+    rdfs:domain ldto:BeperkingGebruikGegevens ;
+    rdfs:range ldto:BegripGegevens ;
+    skos:definition "Typering van de beperking. Op grond waarvan bepaald kan worden wie toegang heeft tot het informatieobject en welke voorwaarden op het gebruik van toepassing zijn."@nl ;
+    skos:closeMatch mdto:beperkingGebruikType 
+.
+ldto:bestandsformaat
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Bestandsformaat"@nl ;
+    rdfs:domain ldto:Bestand ;
+    rdfs:range rdfs:Resource ; # Changed
+    skos:definition "De manier waarop de informatie in een computerbestand binair gecodeerd is."@nl ;
+    skos:scopeNote "RAZU uses the PRONOM based <https://data.razu.nl/id/bestandsformaat/21b73c5c25b191625d98b2b9bd5826ba> thesaurus."@en;
+    skos:closeMatch mdto:bestandsformaat ;
+.
+ldto:betrokkene
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Betrokkene"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:BetrokkeneGegevens ;
+    skos:definition "Persoon of organisatie die relevant is binnen de context van het ontstaan en gebruik van dit informatieobject, anders dan de archiefvormer."@nl ;
+    skos:closeMatch mdto:betrokkene ;
+.
+ldto:betrokkeneActor
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Betrokkene actor"@nl ;
+    rdfs:domain ldto:BetrokkeneGegevens ;
+    rdfs:range rdfs:resource ; # changed
+    skos:scopeNote "RAZU uses the <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> thesaurus."@en;
+    skos:closeMatch mdto:betrokkeneActor ;
+.
+ldto:betrokkeneTypeRelatie
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Betrokkene type relatie"@nl ;
+    rdfs:domain ldto:BetrokkeneGegevens ;
+    rdfs:range rdfs:resource ; # changed
+    skos:scopeNote "RAZU uses the <https://data.razu.nl/id/betrokkenheid/8e5fc8818e2acb55185b9330d81a3b53> thesaurus."@en; 
+    skos:closeMatch mdto:betrokkeneTypeRelatie ;
+.
+ldto:bevatOnderdeel
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Bevat onderdeel"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:Informatieobject ;
+    owl:inverseOf ldto:isOnderdeelVan ;
+    skos:definition "Een informatieobject dat direct onderliggend onderdeel is van deze aggregatie."@nl ;
+    skos:scopeNote "RAZU uses the inverse propery only, to keep things manageable."@en ;
+    skos:closeMatch mdto:bevatOnderdeel ;
+.
 
-ldto:TermijnGegevens
-  rdf:type owl:Class ;
-  rdfs:label "Termijn gegevens"@nl ;
-  rdfs:subClassOf ldto:Gegevensgroep ;
-  skos:closeMatch mdto:TermijnGegevens .
+# Not used in ldto. We use ldto for long term preservation only.
+# mdto:bewaartermijn
+#   rdf:type owl:ObjectProperty ;
+#   mdto:doel "Beschikbaarheid: geeft aan hoe lang een informatieobject beschikbaar dient te zijn."@nl ;
+#   mdto:regels "De termijn dient alleen vastgelegd te worden als waardering de waarde “V” heeft."@nl ;
+#   rdfs:domain mdto:Informatieobject ;
+#   rdfs:label "Bewaartermijn"@nl ;
+#   rdfs:range mdto:TermijnGegevens ;
+#   skos:definition "Termijn waarin het informatieobject bewaard dient te worden, zoals gespecificeerd in de van toepassing zijnde en vastgestelde selectielijst."@nl ;
+#   skos:scopeNote "Informatieobjecten kunnen een bewaartermijn hebben, op basis van een waardering uit een selectielijst. Ook een informatieobject dat een aggregatie is van andere, kleinere informatieobjecten kan een bewaartermijn hebben. Deze Termijn kan dan overerven op informatieobjecten die onderdeel zijn van die aggregatie. Het vastleggen van bewaartermijnen kan op termijn de aanleiding vormen voor andere beheeracties, zoals vernietiging of overbrenging van informatieobjecten naar een archiefbewaarplaats."@nl ;
+# .
+
+ldto:checksum
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Checksum"@nl ;
+    rdfs:domain ldto:Bestand ;
+    rdfs:range ldto:ChecksumGegevens ;
+    skos:definition "Gegevens om te bepalen of het bestand beschadigd of gewijzigd is."@nl ;
+    skos:closeMatch mdto:checksum ;
+.
+ldto:checksumAlgoritme
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Algoritme"@nl ;
+    rdfs:domain ldto:ChecksumGegevens ;
+    rdfs:range rdfs:resource ; # changed
+    skos:definition "Het algoritme dat is gebruikt om de checksum te maken."@nl ;
+    skos:scopeNote "RAZU uses the <https://data.razu.nl/id/algoritme/15eda032483eb222b6992b55bc0e50ea> thesaurus."@en; 
+    skos:closeMatch mdto:checksumAlgoritme ;
+.
+ldto:checksumDatum
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Datum checksum"@nl ;
+    rdfs:domain ldto:ChecksumGegevens ;
+    rdfs:range xsd:dateTime ;
+    skos:definition "Datum waarop de checksum is gemaakt."@nl ;
+    skos:closeMatch mdto:checksumDatum ;
+.
+ldto:checksumWaarde
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Waarde"@nl ;
+    rdfs:domain ldto:ChecksumGegevens ;
+    rdfs:range xsd:string ;
+    skos:definition "De waarde van de checksum."@nl ;
+    skos:closeMatch mdto:checksumWaarde ;
+.
+ldto:classificatie
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Classificatie"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range rdfs:resource ; # changed
+    skos:definition "Ordening van informatieobjecten in een logisch verband, zoals vastgelegd in een classificatieschema."@nl ;
+    skos:scopeNote "RAZU uses the <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> thesaurus."@en ;
+    skos:closeMatch mdto:classificatie ;
+.
+ldto:dekkingInRuimte
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Dekking in ruimte"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range rdfs:resource ; # changed
+    skos:scopeNote "RAZU prefers the use of the <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> thesaurus."@nl ;
+    skos:closeMatch mdto:dekkingInRuimte ;
+.
+ldto:dekkingInTijd
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Dekking in tijd"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:DekkingInTijdGegevens ;
+    skos:definition "Een tijdstip of de periode waarop de inhoud van het informatieobject betrekking heeft."@nl ;
+    skos:closeMatch mdto:dekkingInTijd ;
+.
+ldto:dekkingInTijdBeginDatum
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Dekking in tijd begindatum"@nl ;
+    rdfs:domain ldto:DekkingInTijdGegevens ;
+    # rdfs:range -> need to set the datatypes
+    skos:definition "Datum waar de inhoud van het informatieobject betrekking op heeft. Bij een periode is dit de begindatum."@nl ;
+    skos:closeMatch mdto:dekkingInTijdBeginDatum ;
+.
+ldto:dekkingInTijdEindDatum
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Dekking in tijd einddatum"@nl ;
+    rdfs:domain ldto:DekkingInTijdGegevens ;
+    # rdfs:range -> need to set the datatypes
+    skos:definition "Einddatum van de periode waar de inhoud van het informatieobject betrekking op heeft."@nl ;
+    skos:closeMatch mdto:dekkingInTijdEindDatum ;
+.
+ldto:dekkingInTijdType
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Dekking in tijd type"@nl ;
+    rdfs:domain ldto:DekkingInTijdGegevens ;
+    rdfs:range rdfs:resource ; # changed
+    skos:scopeNote "RAZU uses the <https://data.razu.nl/id/dekkingintijdtype/21002589a45f08117d01f556b9defa6e> thesaurus."@en ;
+    skos:closeMatch mdto:dekkingInTijdType ;
+.
+
+# Not (yet?) used in ldto.
+# mdto:doel
+#   rdf:type owl:AnnotationProperty ;
+#   rdfs:label "Doel"@nl ;
+#   skos:scopeNote "Waarom het van belang is om dit attribuut op te nemen in metagegevens. Vanuit het perspectief van duurzame toegankelijkheid. Bij de attributen van een gegevensgroep wordt geen doel vermeld."@nl ;
+#   .
+
+ldto:event
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Event"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:EventGegevens ;
+    skos:definition "Gebeurtenis die heeft plaatsgevonden met betrekking tot het ontstaan, wijzigen, vernietigen en beheer van het informatieobject en de bijbehorende metagegevens."@nl ;
+    skos:scopeNote "RAZU intends to store events after submission in a separate event log."@en ; 
+    skos:closeMatch mdto:event ;
+.
+ldto:eventResultaat
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Resultaat"@nl ;
+    rdfs:domain ldto:EventGegevens ;
+    rdfs:range xsd:string ;
+    skos:definition "Beschrijving van het resultaat van het event voor zover relevant voor de duurzame toegankelijkheid van het informatieobject."@nl ;
+    skos:closeMatch mdto:eventResultaat ;
+.
+ldto:eventTijd
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Tijd"@nl ;
+    rdfs:domain ldto:EventGegevens ;
+    rdfs:range xsd:dateTime ; # changed 
+    skos:definition "Het tijdstip waarop het event heeft plaatsgevonden."@nl ;
+    skos:closeMatch mdto:eventTijd ;
+.
+ldto:eventType
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Type"@nl ;
+    rdfs:domain ldto:EventGegevens ;
+    rdfs:range ldto:BegripGegevens ; # If used, RAZU will probably create a thesaurus for events.
+    skos:definition "Aanduiding van het type event."@nl ;
+    skos:closeMatch mdto:eventType ;
+.
+# Not (yet?) used by ldto.
+# mdto:eventVerantwoordelijkeActor
+#   rdf:type owl:ObjectProperty ;
+#   rdfs:domain mdto:EventGegevens ;
+#   rdfs:label "Verantwoordelijke actor"@nl ;
+#   rdfs:range [
+#       rdf:type owl:Class ;
+#       owl:unionOf (
+#           mdto:Actor
+#           mdto:VerwijzingGegevens
+#         ) ;
+#     ] ;
+#   skos:definition "De actor die verantwoordelijk was voor de gebeurtenis."@nl ;
+#   skos:scopeNote """Het gaat in dit geval om de functionaris of organisatie die verantwoordelijk is voor het event, niet zozeer om personen.
+
+# Merk op dat bij het vastleggen en verstrekken van persoonsgegevens over een actor beperkingen van toepassing zijn op grond van de Algemene verordening gegevensbescherming (AVG). MDTO doet geen uitspraken over welke persoonsgegevens mogen worden vastgelegd en beschikbaar gesteld op grond van de AVG."""@nl ;
+# .
+
+# Not (yet?) used by ldto. Probably to be replaced by more specific properties from other vocabularies, like schema:about. 
+# mdto:gerelateerdInformatieobject
+#   rdf:type owl:ObjectProperty ;
+#   mdto:doel """Vindbaarheid: Het gerelateerde informatieobject kan via deze relatie gevonden worden. 
+# Interpreteerbaarheid: Het gerelateerde informatieobject geeft vaak belangrijke contextinformatie voor de interpretatie van dit informatieobject."""@nl ;
+#   rdfs:domain mdto:Informatieobject ;
+#   rdfs:label "Gerelateerd informatieobject"@nl ;
+#   rdfs:range mdto:GerelateerdInformatieobjectGegevens ;
+#   rdfs:seeAlso dcterms:relation ;
+#   skos:definition "Relatie met een ander informatieobject dat relevant is binnen de context van het ontstaan, gebruik en/of beheer van dit informatieobject."@nl ;
+#   skos:scopeNote """Dit attribuut kan gebruikt worden voor het vastleggen van willekeurige relaties tussen informatieobjecten (behalve de aggregatierelaties). Welke relaties relevant zijn is afhankelijk van de context waarbinnen het informatieobject is ontstaan en gebruikt. 
+# Merk op dat dit attribuut niet gebruikt wordt voor het vastleggen van de aggregatierelaties tussen informatieobjecten. Daar is het attribuut isOnderdeelVan voor bedoeld."""@nl ;
+# .
+
+
+# Not used in ldto. See previous.
+# mdto:gerelateerdInformatieobjectTypeRelatie
+#   rdf:type owl:ObjectProperty ;
+#   rdfs:domain mdto:GerelateerdInformatieobjectGegevens ;
+#   rdfs:label "Type relatie"@nl ;
+#   rdfs:range mdto:BegripGegevens ;
+#   skos:definition "Typering van de relatie met het andere informatieobject."@nl ;
+#   skos:scopeNote "Met dit attribuut kunnen verschillende type relaties worden vastgelegd, zoals een volgtijdelijke of functionele relatie."@nl ;
+# .
+
+# Not used in ldto. See previous.
+# mdto:gerelateerdInformatieobjectVerwijzing
+#   rdf:type owl:ObjectProperty ;
+#   rdfs:domain mdto:GerelateerdInformatieobjectGegevens ;
+#   rdfs:label "Verwijzing"@nl ;
+#   rdfs:range [
+#       rdf:type owl:Class ;
+#       owl:unionOf (
+#           mdto:Informatieobject
+#           mdto:VerwijzingGegevens
+#         ) ;
+#     ] ;
+#   skos:definition "Verwijzing naar het gerelateerde informatieobject."@nl ;
+# .
+
+ldto:heeftRepresentatie
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Heeft representatie"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:Bestand ;
+    owl:inverseOf mdto:isRepresentatieVan ;
+    skos:definition "Verwijzing naar het bestand dat een (deel van een)  representatie van het informatieobject is."@nl ;
+    skos:scopeNote "RAZU will use the inverse, ldto:isRepresentatieVan "@en ;
+    skos:closeMatch mdto:heeftRepresentatie ;
+.
+ldto:identificatie
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Identificatie"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:IdentificatieGegevens ;
+    skos:definition "Gegevens waarmee het object geïdentificeerd kan worden."@nl ;
+    skos:closeMatch mdto:identificatie ;
+.
+ldto:identificatieBron
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Identificatiebron"@nl ;
+    rdfs:domain ldto:IdentificatieGegevens ;
+    # rdfs:range xsd:string ; # changed, do we prefer / demand URIs? 
+    skos:definition "Herkomst van het kenmerk."@nl ;
+    skos:closeMatch mdto:identificatieBron ;
+.
+ldto:identificatieKenmerk
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Identificatiekenmerk"@nl ;
+    rdfs:domain ldto:IdentificatieGegevens ;
+    rdfs:range xsd:string ;
+    skos:definition "Een kenmerk waarmee een object geïdentificeerd kan worden."@nl ;
+    skos:scopeNote "For a given 'identificatieBron', 'identificatieKenmerk' should be unique."@en ;
+    skos:closeMatch mdto:identificatieKenmerk ;
+.
+
+# Not used in ldto, since bewaartermijn is not relevant for RAZU.
+# mdto:informatiecategorie
+#   rdf:type owl:ObjectProperty ;
+#   mdto:doel "Interpreteerbaarheid: Het kunnen vaststellen van de informatiecategorie waarop de bewaartermijn gebaseerd is."@nl ;
+#   rdfs:domain mdto:Informatieobject ;
+#   rdfs:label "Informatiecategorie"@nl ;
+#   rdfs:range mdto:BegripGegevens ;
+#   skos:definition "De informatiecategorie uit een vastgestelde selectielijst of hotspotlijst waar de bewaartermijn op gebaseerd is."@nl ;
+#   skos:scopeNote """Een selectielijst vermeldt de bewaartermijn per categorie informatieobjecten. Door middel van dit attribuut wordt de betreffende informatiecategorie uit de selectielijst aangegeven.
+
+# MDTO beschouwd de informatiecategorieën als begrippen. Waarbij een selectielijst een begrippenlijst is die de begrippen definieert. Waarbij de code van het Begrip de codering in de selectielijst is en het label de titel in de selectielijst (zie voorbeelden hieronder). De beschrijvingen van de informatiecategorieën in de selectielijst zijn de definities van de betreffende begrippen. Het is niet nodig om een selectielijst naar een andere vorm om te zetten om deze als begrippenlijst te gebruiken. Mits de selectielijst duidelijk aangeeft hoe de categorieën heten en hoe ze gedefinieerd zijn."""@nl ;
+#.
+
+ldto:isOnderdeelVan
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Is onderdeel van"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:Informatieobject ;
+    owl:inverseOf ldto:bevatOnderdeel ;
+    skos:scopeNote "RAZU uses this property, not the inverse."@en ;
+    skos:closeMatch mdto:isOnderdeelVan ;
+.
+ldto:isRepresentatieVan
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain mdto:Bestand ;
+  rdfs:label "Is representatie van"@nl ;
+  rdfs:range ldto:Informatieobject ;
+  owl:inverseOf ldto:heeftRepresentatie ;
+  skos:definition "Verwijzing naar het informatieobject waarvan het bestand een (deel van de) fysieke representatie van is."@nl ;
+  skos:scopeNote "RAZU uses this property, not the inverse."@en ;
+  skos:closeMatch mdto:isRepresentatieVan ;
+.
+ldto:naam
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Naam"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range xsd:string ;
+    skos:definition "Een betekenisvolle aanduiding waaronder het object bekend is."@nl ;
+    skos:closeMatch mdto:naam ;
+.
+ldto:omschrijving
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Omschrijving"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range xsd:string ;
+    skos:definition "Omschrijving van de inhoud van het informatieobject."@nl ;
+    skos:closeMatch mdto:omschrijving ;
+.
+ldto:omvang
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Omvang"@nl ;
+    rdfs:domain ldto:Bestand ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "De grootte van het bestand uitgedrukt in bytes."@nl ;
+    skos:closeMatch mdto:omvang ;
+.
+
+# Not yet used in ldto. Might need to rethink the mdto:raadpleeglocatieFysiek and mdto:raadpleeglocatieOnline structure.
+# ldto:raadpleeglocatie
+#     rdf:type owl:ObjectProperty ;
+#     rdfs:label "Raadpleeglocatie"@nl ;
+#     rdfs:domain ldto:Informatieobject ;
+#     skos:definition "Actuele verwijzing naar de locatie waar het informatieobject ter inzage ligt."@nl ;
+#     skos:closeMatch mdto:raadpleeglocatie ;
+#     .
+# mdto:raadpleeglocatieFysiek
+#   rdf:type owl:ObjectProperty ;
+#   rdfs:domain mdto:RaadpleeglocatieGegevens ;
+#   rdfs:label "Fysieke raadpleeglocatie"@nl ;
+#   rdfs:range [
+#       rdf:type owl:Class ;
+#       owl:unionOf (
+#           mdto:Locatie
+#           mdto:VerwijzingGegevens
+#         ) ;
+#     ] ;
+#   skos:definition "Actuele fysieke locatie waar het informatieobject ter inzage ligt."@nl ;
+#   skos:scopeNote """Een raadpleeglocatie kan aangeduid worden met een organisatie, als daarmee duidelijk is welke fysieke locatie daarmee bedoeld wordt.
+
+# Merk op dat voor online raadpleeglocatie het attribuut Online raadpleeglocatie wordt gebruikt."""@nl ;
+# .
+# mdto:raadpleeglocatieOnline
+#   rdf:type owl:DatatypeProperty ;
+#   mdto:regels "De verwijzing naar de online raadpleeglocatie is een URL conform RFC 3986."@nl ;
+#   rdfs:domain mdto:RaadpleeglocatieGegevens ;
+#   rdfs:label "Online raadpleeglocatie"@nl ;
+#   rdfs:range xsd:anyURI ;
+#   skos:definition "Actuele verwijzing naar een online raadpleeglocatie die het informatieobject en de bijbehorende metagegevens weergeeft."@nl ;
+#   skos:scopeNote """MDTO schrijft niet voor hoe het informatieobject op de online raadpleeglocatie wordt weergegeven. De weergave kan uit meerdere webpagina’s bestaan. De online raadpleeglocatie is dan de startpagina vanaf waar de andere pagina’s bereikbaar zijn. Bijvoorbeeld een startpagina met verwijzingen naar een losse pagina met de metagegevens en naar de onderdelen waar het informatieobject uit bestaat.
+
+# Online kan zowel op het internet als op een besloten netwerk zijn."""@nl ;
+# .
+
+# Not (yet?) used in ldto.
+# mdto:regels
+#   rdf:type owl:AnnotationProperty ;
+#   rdfs:label "Regels"@nl ;
+#   skos:scopeNote "Nadere eisen waar de waarden van dit attribuut aan moeten voldoen. Hierin kan verwezen worden naar waarden van andere attributen."@nl ;
+# .
+
+# TODO. Default is Dutch. We need this when materials in other languages are added. Rethink how to encode the language. ISO-strings, URIs?
+# ldto:taal
+#   rdf:type owl:DatatypeProperty ;
+#   mdto:doel """Vindbaarheid: het kunnen vinden van een informatieobject in de gewenste taal.
+# Interpreteerbaarheid: weten in welke taal of talen een informatieobject gesteld is. 
+# Beschikbaarheid: het vermelden van de taal of talen waarin het informatieobject gesteld is draagt bij aan digitoegankelijkheid en komt tegemoet aan WCAG 2.1."""@nl ;
+#   rdfs:domain mdto:Informatieobject ;
+#   rdfs:label "Taal"@nl ;
+#   rdfs:range xsd:language ;
+#   rdfs:seeAlso dcterms:language ;
+#   skos:definition "De taal waarin het informatieobject gesteld is."@nl ;
+#   skos:scopeNote "De eisen die worden gesteld aan toegankelijkheid van digitale informatie zijn voor de overheid uitgewerkt in het Tijdelijk besluit digitale toegankelijkheid overheid. In het besluit wordt gerefereerd aan de Web Content Accessibility Guidelines (WCAG), versie 2.1."@nl ;
+# .
+
 
 ldto:termijnEinddatum
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain ldto:TermijnGegevens ;
-  rdfs:label "Einddatum"@nl ;
-  rdfs:range [
-      rdf:type owl:Class ;
-      owl:unionOf (
-          xsd:date
-          xsd:gYear
-          xsd:gYearMonth
-        ) ;
-    ] ;
-  skos:definition "Datum waarop de termijn eindigt."@nl ;
-  skos:closeMatch mdto:termijnEinddatum .
+    rdf:type owl:DatatypeProperty ;
+    rdfs:domain ldto:TermijnGegevens ;
+    rdfs:label "Einddatum"@nl ;
+    rdfs:range [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            xsd:date
+            xsd:gYear
+            xsd:gYearMonth
+            ) ;
+        ] ;
+    skos:definition "Datum waarop de termijn eindigt."@nl ;
+    skos:closeMatch mdto:termijnEinddatum 
+.
 
 ldto:termijnLooptijd
-  rdf:type owl:DatatypeProperty ;
-  rdfs:domain ldto:TermijnGegevens ;
-  rdfs:label "Looptijd"@nl ;
-  rdfs:range xsd:duration ;
-  skos:definition "De hoeveelheid tijd waarin de termijnEinddatum bereikt wordt, nadat de trigger heeft plaatsgevonden."@nl ;
-  skos:closeMatch mdto:termijnLooptijd .
-
-ldto:Actor
-  rdf:type owl:Class ;
-  rdfs:label "Actor"@nl ;
-  rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Agent> ;
-  rdfs:subClassOf ldto:Object ;
-  skos:definition "Persoon, groep, organisatie of functionaris."@nl ;
-  skos:example "Een overheidsorganisatie, een natuurlijk persoon, een bedrijf."@nl ;
-  skos:closeMatch mdto:Actor ;
+    rdf:type owl:DatatypeProperty ;
+    rdfs:domain ldto:TermijnGegevens ;
+    rdfs:label "Looptijd"@nl ;
+    rdfs:range xsd:duration ;
+    skos:definition "De hoeveelheid tijd waarin de termijnEinddatum bereikt wordt, nadat de trigger heeft plaatsgevonden."@nl ;
+    skos:closeMatch mdto:termijnLooptijd 
 .
+
+# Not yet added to ldto:
+# mdto:termijnStartdatumLooptijd
+#   rdf:type owl:DatatypeProperty ;
+#   mdto:regels "Zie regels bij termijnEinddatum."@nl ;
+#   rdfs:domain mdto:TermijnGegevens ;
+#   rdfs:label "Startdatum looptijd"@nl ;
+#   rdfs:range xsd:date ;
+#   skos:definition "De datum waarop de trigger heeft plaatsgevonden en de looptijd is gestart."@nl ;
+#   skos:scopeNote """Als de trigger nog niet heeft plaatsgevonden, dan heeft termijnStartdatumLooptijd geen waarde.
+
+# Zie ook de toelichting op termijnTriggerStartLooptijd."""@nl ;
+# .
+
+# Not yet added to ldto:
+# mdto:termijnTriggerStartLooptijd
+#   rdf:type owl:ObjectProperty ;
+#   mdto:regels "Zie regels bij termijnEinddatum."@nl ;
+#   rdfs:domain mdto:TermijnGegevens ;
+#   rdfs:label "Trigger start looptijd"@nl ;
+#   rdfs:range mdto:BegripGegevens ;
+#   skos:definition "Gebeurtenis waarna de looptijd van de termijn start."@nl ;
+#   skos:scopeNote """Soms is de einddatum van de termijn afhankelijk van een gebeurtenis. Vanaf die gebeurtenis (de trigger) start dan een bepaalde periode (de looptijd) voordat het einde van de termijn is bereikt.
+
+# Een trigger kan verwijzen naar de context van het informatieobject. Zoals de auteur of genoemde personen. Deze contextgegevens kunnen opgenomen worden in de betreffende attributen. Zoals bij Betrokkene. Waar dat niet mogelijk is, kan beperkingGebruikNadereBeschrijving gebruikt worden."""@nl ;
+# .
+
+
+ldto:trefwoord
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Trefwoord"@nl ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range xsd:string ;
+    skos:definition "Trefwoord dat aan het informatieobject is toegekend."@nl ;
+    rdfs:comment "We prefer to use thesauri, but this can be used for all terms that can't simply be structured into a thesarus."@en ;
+    skos:closeMatch mdto:trefwoord ;
+.
+
+# # Not added to ldto. Not the RDF way of doing things.
+# mdto:verwijzingIdentificatie
+#   rdf:type owl:ObjectProperty ;
+#   rdfs:domain mdto:VerwijzingGegevens ;
+#   rdfs:label "Naam"@nl ;
+#   rdfs:range mdto:IdentificatieGegevens ;
+#   skos:definition "De identificatie van het object waarnaar verwezen wordt."@nl ;
+#   skos:scopeNote "Zie het attribuut identificatie bij Object."@nl ;
+# .
+
+# Not added to ldto. Not the RDF way of doing things.
+# mdto:verwijzingNaam
+#   rdf:type owl:DatatypeProperty ;
+#   rdfs:domain mdto:VerwijzingGegevens ;
+#   rdfs:label "Naam"@nl ;
+#   rdfs:range xsd:string ;
+#   skos:definition "De naam van het object waarnaar verwezen wordt."@nl ;
+#   skos:scopeNote "Zie het attribuut naam bij Object."@nl ;
+# .
+
+# Not added to ldto. In ldto / the RAZU e-depot, everything is for permanent storage.
+# mdto:waardering
+#   rdf:type owl:ObjectProperty ;
+#   mdto:doel "Beschikbaarheid: geeft een indicatie of het informatieobject tijdelijk of blijvend beschikbaar dient te zijn."@nl ;
+#   rdfs:domain mdto:Informatieobject ;
+#   rdfs:label "Waardering"@nl ;
+#   rdfs:range mdto:BegripGegevens ;
+#   skos:definition "De waardering van het informatieobject volgens de van toepassing zijnde en vastgestelde selectielijst."@nl ;
+#   skos:scopeNote """De waardering biedt de mogelijkheid om onderscheid te maken tussen blijvend te bewaren en tijdelijk te bewaren (oftewel op termijn te vernietigen) informatieobjecten. Daar waar bij een tijdelijk te bewaren informatieobject de periode, begin- en of einddatum en trigger van belang (kunnen) zijn, geldt dat niet voor blijvend te bewaren informatieobjecten.
+
+# Als onbekend is of er een waardering is of wat de aard van de waardering is, dan wordt de waarde ‘Nader te bepalen’ gebruikt."""@nl ;
+# .
