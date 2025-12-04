@@ -426,5 +426,6 @@ ldto_sh:BeperkingGebruikConstraint
     rdfs:comment "Voor archiefstukken apart situatie tav openbaarheid en auteursrecht aangeven." ;
     sh:property [
         sh:path ldto:beperkingGebruik ;
-        sh:minCount 0 
+        sh:minCount 0 ;
+        sh:class ldto:BeperkingGebruikGegevens 
     ] .
