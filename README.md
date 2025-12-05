@@ -12,7 +12,7 @@ De ruggengraat van het informatiemodel wordt gevormd door **LDTO** (= *Linked Du
 * RDF gebaseerd op LDTO kan gevalideerd worden met de SHACL shape in [shacl/ldto-core.ttl](shacl/ldto-core.ttl)
 
 ## 2. De ‘plus’-uitbreidingen op LDTO
-LDTO is als afspiegeling van MDTO op zichzelf niet toegerust voor het voldoende gedetailleerd beschrijven van archiefmateriaal. Binnen het informatiemodel van het RAZU wordt daarom aanvullend gebruik gemaakt van andere RDF-ontologiëen, zoals bijvoorbeeld `schema.org` of `premis`. Het informatiemodel legt daarom ook vast welke uitbreidingen op LDTO toegestaan zijn, én hoe deze toe te passen.
+LDTO is als afspiegeling van MDTO op zichzelf niet toegerust voor het voldoende gedetailleerd beschrijven van archiefmateriaal. Binnen het informatiemodel van het RAZU wordt daarom aanvullend gebruik gemaakt van andere RDF-ontologiëen, zoals bijvoorbeeld schema.org of premis. Het informatiemodel legt daarom ook vast welke uitbreidingen op LDTO toegestaan zijn, én hoe deze toe te passen.
 
 Hoewel het streven is te komen tot een stabiel model, zullen de shapes komende jaren, naar gelang er meer materiaalsoorten in het e-depot geladen gaan worden, verder uitgebreid worden om aan te sluiten bij de informatiebehoeften. In de huidige stand van zaken is het model vooral gebaseerd op experimenten met publicatie van het RAZU-bestuursarchief en van door gemeente Houten gedigitaliseerde luchtfoto’s. Het [RAZU-krantenarchief](https://viewer.razu.nl/)  is de eerste collectie die met LDTO plus gepubliceerd is.
 

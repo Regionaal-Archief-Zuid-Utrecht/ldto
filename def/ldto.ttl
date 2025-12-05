@@ -308,7 +308,7 @@ ldto:beperkingGebruik
     skos:scopeNote "RAZU uses the <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> here."@en;
     .
 
-# Not (yet?) used in mdto. Best approach is the document types in the  <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> thesaurus
+# Not (yet?) used in ldto. Best approach is the document types in the  <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> thesaurus
 # mdto:beperkingGebruikDocumentatie
 #   rdf:type owl:ObjectProperty ;
 #   rdfs:domain mdto:BeperkingGebruikGegevens ;
@@ -324,7 +324,7 @@ ldto:beperkingGebruik
 #   skos:scopeNote "Soms zijn afspraken over een beperking in een afzonderlijk tekstdocument opgenomen. Dan verwijst dit attribuut daar naar."@nl ;
 # .
 
-# Not (yet?) used in mdto. See mdto:beperkingGebruikDocumentatie
+# Not (yet?) used in ldto. See mdto:beperkingGebruikDocumentatie
 # mdto:beperkingGebruikNadereBeschrijving
 #   rdf:type owl:DatatypeProperty ;
 #   mdto:regels "Heeft in ieder geval een waarde als beperkingGebruikType = “Overig”."@nl ;
