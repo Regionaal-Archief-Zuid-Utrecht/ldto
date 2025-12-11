@@ -67,3 +67,15 @@ python scripts/validate.py path/to/file.ttl_or_directory [core|plus|razu]
 Het tweede argument is optioneel en bepaalt welke SHACL shapes gebruikt worden (standaard: core).
 
 Als het eerste argument een directory is, dan zullen recursief alle onderliggende RDF-bestanden gevalideerd worden.
+
+Optioneel kunnen externe URIs gecontroleerd worden op beschikbaarheid:
+
+```bash
+python scripts/validate.py path/to/file.ttl --check-resolvable
+```
+
+Met `--ignore-pattern` kunnen specifieke URIs (bijvoorbeeld die een bepaalde substring bevatten) worden overgeslagen bij deze check. Dit argument kan meerdere keren worden opgegeven:
+
+```bash
+python scripts/validate.py path/to/file.ttl --check-resolvable --ignore-pattern "example.com" --ignore-pattern "localhost"
+```
