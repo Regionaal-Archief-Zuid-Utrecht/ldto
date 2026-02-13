@@ -1,10 +1,23 @@
-# LDTO plus: Het informatiemodel van het RAZU e-depot
+# LDTO: The information model of the RAZU e-depot
 
-Deze repository definieert **LDTO plus**, het informatiemodel dat gehanteerd wordt in het [op RDF gebaseerde e-depot](https://viewer.razu.nl/) van het [RAZU](https://www.razu.nl/). Bovendien biedt het hulpmiddelen om te controleren of RDF-bestanden aan het model voldoen.
+This repository documents **LDTO**, the information model used in the [RDF-based e-depot](https://viewer.razu.nl/) of the [RAZU](https://www.razu.nl/). In addition, it provides shacl shapes to check whether RDF files are up to the model.
 
-## 1. De LDTO-ontologie
+**LDTO** (= *Linked Sustainably Accessible Government Information*), is an [RDF](https://www.w3.org/RDF/) ontology directly derived from [MDTO](https://www.nationaalarchief.nl/archiveren/mdto), the National Archives'standard for recording and exchanging unambiguous metadata. LDTO follows MDTO closely, but is designed to be more in line with principles from the world of [linked data](https://www.w3.org/wiki/LinkedData), such as working with resolvable URIs. Moreover LDTO domain and scope extend beyond MDTO -used mainly as an exchange standard- and defines metadata to describe long term preservation and access of digital archival records. Accordingly, additional use is made of other RDF ontologies and vocabularies, such as [schema.org](https://schema.org/) or [PREMIS](https://id.loc.gov/ontologies/premis-3-0-0.html).
 
-De ruggengraat van het informatiemodel wordt gevormd door **LDTO** (= *Linked Duurzaam Toegankelijke Overheidsinformatie*), een RDF-ontologie die direct afgeleid is van [MDTO](https://www.nationaalarchief.nl/archiveren/mdto) , de archief-uitwisselingsstandaard van het Nationaal Archief. LDTO is opgezet met de wens MDTO nauw te volgen maar wel meer aan te sluiten bij principes uit de wereld van linked data, zoals bijvoorbeeld het werken met URIs. Bovendien is LDTO, anders dan MDTO, vooral gericht op duurzame opslag, en niet als data-uitwisselingsstandaard. De afsplitsing van MDTO biedt RAZU de mogelijkheid om de standaard zelf te beheren en het optimaal aan te laten sluiten bij de doorontwikkeling van het door RAZU opgezette e-depot.
+The separation from MDTO offers RAZU the flexibility to manage the standard itself, adapting it to further developments of the e-depot, all while ensuring MDTO compatibility for government institutions whishing to preserve their archives at RAZU.
+
+This document is structured as follows:
+
+1. further comparison between MDTO and LDTO + example of using uris thesauri > the rdf version of mdto, derived from xml, still uses string to define concepts related to data (ex. to express that a certain term is defined in a glossary:IO > retenion period > TermijnData (bn, they call it a data group) > startterm > begripGegevens > label > string from a glossary and the same long path to define what is the reference glossary). From a linked data point of view, this is extremely inpractical and nests information using blank nodes, which are not resolvable. Razu uses rdf thesauri to define terms, hence mints resolvable uris for defined concepts. we can then write the same information simply in 1 triple: IO > retention period > thesaury uri.
+2. repository index (ttls + examples + shacl + html view) + scope comparison (check main MDTO page). 
+3. how to use locally this repository to vcalidate your data 
+
+- def / turtles / 
+- def / models (ER + ontology)
+- examples /
+- shacl / 
+- scripts /
+- docs /
 
 ### 1.1. Formele definities van LDTO
 
