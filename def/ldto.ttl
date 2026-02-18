@@ -16,7 +16,7 @@
     rdf:type owl:Ontology ;
     owl:imports <https://schema.org/> ,
                 <http://www.loc.gov/premis/rdf/v3/> ,
-                <http://www.w3.org/2004/02/skos/core#> .
+                <http://www.w3.org/2004/02/skos/core#> ;
     rdfs:comment "De RDF-ontologie van LDTO (Linked-data Duurzaam Toegankelijke Overheidsinformatie)"@nl ;
     rdfs:comment "The RDF ontology of LDTO (Linked Data Sustainable Accessible Government Information). This Ontology is used by RAZU describe digital archival records long term preservation and access. Its core is based on MDTO, the National Archives'standard for recording and exchanging metadata, referenced here via skos:closeMatch property. Other ontologies and vocabularies, such as schema and premis, are reused to describe domain-specific content related information. Note that LDTO will be extended progressively to describe new types of records ingested."@en ;
     rdfs:label "LDTO" ;
@@ -49,9 +49,10 @@
 ldto:BeperkingGebruikGegevens
   rdf:type owl:Class ;
   rdfs:label "Beperking gebruik gegevens"@nl ;
-  rdfs:label "Usage restriction data. Instances of this class usually consist of a blank node with properties ldto:beperkingGebruikTermijn and ldto:beperkingGebruikType."@en ;
+  rdfs:label "Usage restriction data. "@en ;
   rdfs:subClassOf ldto:Gegevensgroep ;
-  skos:closeMatch mdto:BeperkingGebruikGegevens .
+  skos:closeMatch mdto:BeperkingGebruikGegevens ;
+  skos:scopeNote "Instances of this class usually consist of a blank node with properties ldto:beperkingGebruikTermijn and ldto:beperkingGebruikType."@en .
 
 ldto:Bestand
     rdf:type owl:Class ;
@@ -68,30 +69,34 @@ ldto:Bestand
 ldto:BetrokkeneGegevens
     rdf:type owl:Class ;
     rdfs:label "Betrokkene-gegevens"@nl ;
-    rdfs:label "Concerned person data. (Person or organization that is relevant within the context of the creation and use of this information object).Instances of this class usually consist of a blank node with properties ldto:betrokkeneActor and ldto:betrokkeneTypeRelatie."@en ;
+    rdfs:label "Concerned person data. "@en ;
     rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:BetrokkeneGegevens .
+    skos:closeMatch mdto:BetrokkeneGegevens ;
+    skos:scopeNote "Person or organization that is relevant within the context of the creation and use of this information object. Instances of this class usually consist of a blank node with properties ldto:betrokkeneActor and ldto:betrokkeneTypeRelatie."@en .
 
 ldto:ChecksumGegevens
     rdf:type owl:Class ;
     rdfs:label "Checksum-gegevens"@nl ;
-    rdfs:label "Checksum data. Instances of this class usually consist of a blank node with properties ldto:checksumAlgoritme, ldto:checksumWaarde and ldto:checksumType."@en ;
+    rdfs:label "Checksum data."@en ;
     rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:ChecksumGegevens .
+    skos:closeMatch mdto:ChecksumGegevens ;
+    skos:scopeNote "Instances of this class usually consist of a blank node with properties ldto:checksumAlgoritme, ldto:checksumWaarde and ldto:checksumType."@en .
 
 ldto:DekkingInTijdGegevens
     rdf:type owl:Class ;
     rdfs:label "Dekking in tijd-gegevens"@nl ;
-    rdfs:label "Time coverage data. Instances of this class usually consist of a blank node with properties ldto:dekkingInTijdBeginDatum, ldto:dekkingInTijdEindDatum and ldto:dekkingInTijdType."@en ;
+    rdfs:label "Time coverage data."@en ;
     rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:DekkingInTijdGegevens .
+    skos:closeMatch mdto:DekkingInTijdGegevens ;
+    skos:scopeNote "Instances of this class usually consist of a blank node with properties ldto:dekkingInTijdBeginDatum, ldto:dekkingInTijdEindDatum and ldto:dekkingInTijdType."@en .
 
 ldto:EventGegevens
     rdf:type owl:Class ;
     rdfs:label "Eventgegevens"@nl ;
-    rdfs:label "Event data. Instances of this class usually consist of a blank node with properties ldto:eventResultaat, ldto:eventDatum and ldto:eventType."@en ;
+    rdfs:label "Event data."@en ;
     rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:EventGegevens .
+    skos:closeMatch mdto:EventGegevens ;
+    skos:scopeNote "Instances of this class usually consist of a blank node with properties ldto:eventResultaat, ldto:eventDatum and ldto:eventType."@en .
 
 ldto:Gegevensgroep
     rdf:type owl:Class ;
@@ -103,9 +108,10 @@ ldto:Gegevensgroep
 ldto:IdentificatieGegevens
     rdf:type owl:Class ;
     rdfs:label "Identificatiegegevens"@nl ;
-    rdfs:label "Identifier data. Instances of this class usually consist of a blank node with properties ldto:identificatieBron, ldto:identificatieKennmerk."@en ;
+    rdfs:label "Identifier data."@en ;
     rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:IdentificatieGegevens .
+    skos:closeMatch mdto:IdentificatieGegevens ;
+    skos:scopeNote "Instances of this class usually consist of a blank node with properties ldto:identificatieBron, ldto:identificatieKennmerk."@en .
 
 ldto:Informatieobject
     rdf:type owl:Class ;
@@ -134,9 +140,10 @@ ldto:Object
 ldto:TermijnGegevens
     rdf:type owl:Class ;
     rdfs:label "Termijngegevens"@nl ;
-    rdfs:label "Retention end data. Data about the period for which a retention object should be retained. This class usually consists of a blank node with properties ldto:termijnEinddatum and ldto:termijnLooptijd."@en ;
+    rdfs:label "Retention end data."@en ;
     rdfs:subClassOf ldto:Gegevensgroep ;
-    skos:closeMatch mdto:TermijnGegevens .
+    skos:closeMatch mdto:TermijnGegevens ;
+    skos:scopeNote "Data about the period for which a retention object should be retained. This class usually consists of a blank node with properties ldto:termijnEinddatum and ldto:termijnLooptijd."@en .
 
 ### Properties
 # MDTO derived properties: for easy comparison, they follow the same order used in mdto-rdf-1.0.ttl https://www.nationaalarchief.nl/archiveren/mdto/rdf-ontologie
