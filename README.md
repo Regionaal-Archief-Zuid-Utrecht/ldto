@@ -26,7 +26,7 @@ The separation from MDTO offers RAZU the flexibility to manage the standard itse
 
 Files related to LDTO you can find in this repository:
 
-- [def/ldto.ttl](def/ldto.ttl): The RDF formal declaration of LDTO.
+- [def/ldto.ttl](def/ldto.ttl): The RDF formal declaration of LDTO. Click [here](https://regionaal-archief-zuid-utrecht.github.io/ldto/index.html) for an HTML view of the ontology mad using [pyLODE](https://github.com/rdflib/pyLODE)
 - [shacl/ldto-core.ttl](shacl/ldto-core.ttl): The SHACL shapes to validate LDTO RDF files.
 - [def/MDTO-LDTO-Mapping.md](MDTO-LDTO-Mapping.md): Further documentation comparing LDTO to MDTO, outlining the main differences and the rationale behind them.
 
