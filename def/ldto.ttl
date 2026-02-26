@@ -1,22 +1,15 @@
 @prefix ldto: <https://data.razu.nl/def/ldto/> .
 @prefix mdto: <http://www.nationaalarchief.nl/mdto#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
-@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
-@prefix iiif: <https://iiif.io/api/presentation/3.0/#> .
-@prefix schema: <http://schema.org/> .
 # prefixes in triply are not defined  (ns1, ns3)
 
 <https://data.razu.nl/def/ldto> 
     rdf:type owl:Ontology ;
-    owl:imports <https://schema.org/> ,
-                <http://www.loc.gov/premis/rdf/v3/> ,
-                <http://www.w3.org/2004/02/skos/core#> ;
     rdfs:comment "De RDF-ontologie van LDTO (Linked-data Duurzaam Toegankelijke Overheidsinformatie)"@nl ;
     rdfs:comment "The RDF ontology of LDTO (Linked Data Sustainable Accessible Government Information). This Ontology is used by RAZU describe digital archival records long term preservation and access. Its core is based on MDTO, the National Archives'standard for recording and exchanging metadata, referenced here via skos:closeMatch property. Other ontologies and vocabularies, such as schema and premis, are reused to describe domain-specific content related information. Note that LDTO will be extended progressively to describe new types of records ingested."@en ;
     rdfs:label "LDTO" ;
@@ -145,7 +138,7 @@ ldto:URLBestand
     rdf:type owl:ObjectProperty ;
     rdfs:domain ldto:Bestand ;
     rdfs:label "URL Bestand"@nl ;
-    rdfs:range rdfs:Resource ; # premis:File  
+    rdfs:range rdfs:Resource ;   
     skos:definition "De toegangs-ID van het bestand. RAZU is van plan deze ID permanent op te slaan."@nl ;
     skos:definition "The Access identifier of the file. RAZU plans this to be persistent."@en ;
     skos:closeMatch mdto:URLBestand .
@@ -155,7 +148,7 @@ ldto:aggregatieniveau
     rdfs:label "Aggregatieniveau"@nl ;
     rdfs:label "Aggregation level."@en ;
     rdfs:domain ldto:Informatieobject ;
-    rdfs:range rdfs:Resource ; # skos:Concept 
+    rdfs:range rdfs:Resource ; 
     skos:definition "Het aggregatieniveau van het informatieobject."@nl ;
     skos:definition "The aggregation level of the information object. Provides information about the nature of the information object."@en ;
     skos:scopeNote "For RAZU, this should link to a term in the Aggregatieniveaus thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee thesaurus"@en ;
@@ -167,7 +160,7 @@ ldto:archiefvormer
     rdfs:label "Archiefvormer"@nl ;
     rdfs:label "Archive creator."@en ;
     rdfs:domain ldto:Informatieobject ;
-    rdfs:range rdfs:Resource ; # skos:Concept and ldto:Actor ?
+    rdfs:range rdfs:Resource ; # can possibly become ldto:Actor in the future ?
     skos:definition "De organisatie die verantwoordelijk is voor het opmaken en/of ontvangen van het informatieobject."@nl ;
     skos:definition "The organization responsible for  for creating and/or receiving the information object."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Actoren thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e"@en ;
@@ -201,7 +194,7 @@ ldto:beperkingGebruikType
     rdfs:label "Beperking gebruik type"@nl ;
     rdfs:label "Use restriction type."@en ;
     rdfs:domain ldto:BeperkingGebruikGegevens ;
-    rdfs:range rdfs:Resource ; # skos:Concept
+    rdfs:range rdfs:Resource ; 
     skos:definition "Typering van de beperking. Op grond waarvan bepaald kan worden wie toegang heeft tot het informatieobject en welke voorwaarden op het gebruik van toepassing zijn."@nl ;
     skos:definition "The type of restriction placed on the use of the information object."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Typering mogelijke beperkingen gebruik thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1."@en ;
@@ -213,7 +206,7 @@ ldto:bestandsformaat
     rdfs:label "Bestandsformaat"@nl ;
     rdfs:label "File format."@en ;
     rdfs:domain ldto:Bestand ;
-    rdfs:range rdfs:Resource ; # skos:Concept
+    rdfs:range rdfs:Resource ; 
     skos:definition "De manier waarop de informatie in een computerbestand binair gecodeerd is."@nl ;
     skos:definition "The format of the information in a computer file."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Bestandsformaten PRONOM-based thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/bestandsformaat/21b73c5c25b191625d98b2b9bd5826ba."@en;
@@ -236,7 +229,7 @@ ldto:betrokkeneActor
     rdfs:label "Betrokkene actor"@nl ;
     rdfs:label "Data subject Actor"@en ;
     rdfs:domain ldto:BetrokkeneGegevens ;
-    rdfs:range rdfs:Resource ; # skos:Concept and ldto:Actor
+    rdfs:range rdfs:Resource ; # possibly in the future ldto:Actor
     skos:definition "De persoon of organisatie die betrokken is bij het informatieobject."@nl ;
     skos:definition "The person or organization involved in the information object."@en ; 
     skos:scopeNote "For RAZU, this should refer to a term in the Actoren thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e"@en ;
@@ -247,7 +240,7 @@ ldto:betrokkeneTypeRelatie
     rdfs:label "Betrokkene type relatie"@nl ;
     rdfs:label "Data subject type of relationship"@en ;
     rdfs:domain ldto:BetrokkeneGegevens ;
-    rdfs:range rdfs:Resource ; # skos:Concept 
+    rdfs:range rdfs:Resource ; 
     skos:definition "Typering van de betrokkenheid van de actor bij het informatieobject."@nl  ;
     skos:definition "Characterization of the actor's involvement in the information object."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Aard betrokkenheid thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/betrokkenheid/8e5fc8818e2acb55185b9330d81a3b53"@en ;
@@ -269,7 +262,7 @@ ldto:checksumAlgoritme
     rdfs:label "Algoritme"@nl ;
     rdfs:label "Algorithm"@en ;
     rdfs:domain ldto:ChecksumGegevens ;
-    rdfs:range rdfs:Resource ; # skos:Concept
+    rdfs:range rdfs:Resource ; 
     skos:definition "Het algoritme dat is gebruikt om de checksum te maken."@nl ;
     skos:definition "The algorithm used to create the checksum."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Begrijppenlijst amgoritmes thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/algoritme/15eda032483eb222b6992b55bc0e50ea"@en ;
@@ -301,7 +294,7 @@ ldto:classificatie
     rdfs:label "Classificatie"@nl ;
     rdfs:label "Classification."@en ;
     rdfs:domain ldto:Informatieobject ;
-    rdfs:range rdfs:Resource ; # skos:Concept
+    rdfs:range rdfs:Resource ; 
     skos:definition "Ordening van informatieobjecten in een logisch verband, zoals vastgelegd in een classificatieschema."@nl ;
     skos:definition "Classification of information objects in a logical context, as defined in a classification schema."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Type of soort informatieobject thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a"@en ;
@@ -313,7 +306,7 @@ ldto:dekkingInRuimte
     rdfs:label "Dekking in ruimte"@nl ;
     rdfs:label "Coverage in space."@en ;
     rdfs:domain ldto:Informatieobject ;
-    rdfs:range rdfs:Resource ; # skos:Concept and schema:Place
+    rdfs:range rdfs:Resource ; 
     skos:definition "Plaats of locatie waar de inhoud van het informatieobject betrekking op heeft."@nl ;
     skos:definition "Place or location to which the content of the information object relates."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Locatie thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43"@nl ;
@@ -357,12 +350,12 @@ ldto:dekkingInTijdType
     rdfs:label "Dekking in tijd type"@nl ;
     rdfs:label "Coverage in time type."@en ;
     rdfs:domain ldto:DekkingInTijdGegevens ;
-    rdfs:range rdfs:Resource ; # skos:Concept
+    rdfs:range rdfs:Resource ; 
     skos:scopeNote "For RAZU, this should refer to a term in the Type dekking in tijd thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/dekkingintijdtype/21002589a45f08117d01f556b9defa6e"@nl ;
     skos:example "Geldend, Looptijd, Opname"@nl ;
     skos:closeMatch mdto:dekkingInTijdType .
 
-## event metadata not used at the moment
+# event metadata in this structure are not used for in-house archival records (we log events in a separate files and define a thesaurus for event types) but might be present in metadata submitted by municipalities. 
 ldto:event
     rdf:type owl:ObjectProperty ;
     rdfs:label "Event"@nl ;
@@ -399,13 +392,13 @@ ldto:eventType
     rdfs:label "Type"@nl ;
     rdfs:label "Type."@en ;
     rdfs:domain ldto:EventGegevens ;
-    rdfs:range rdfs:Resource ; # When used RAZU will create a thesaurus for these event types (skos:Concept)
+    rdfs:range rdfs:Resource ; # When used RAZU will create a thesaurus for these event types 
     skos:definition "Aanduiding van het type event."@nl ;
     skos:definition "Denotation of the type of event."@en ;
     skos:example "Fixity, Ingestion, Virus check"@nl ;
     skos:closeMatch mdto:eventType .
 
-## identificatie metadata not used for our internal archived metadata but might be used by municipalities 
+# identificatie metadata are not used for in-house archival records (we use URI as identifiers) but might be present in metadata submitted by municipalities.
 ldto:identificatie
     rdf:type owl:ObjectProperty ;
     rdfs:label "Identificatie"@nl ;
