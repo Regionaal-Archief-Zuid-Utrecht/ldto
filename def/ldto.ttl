@@ -26,25 +26,17 @@
 #### Classes
 # MDTO derived classes: for easy comparison, they follow the same order used in mdto-rdf-1.0.ttl https://www.nationaalarchief.nl/archiveren/mdto/rdf-ontologie
 
-# ldto:Actor
-#   rdf:type owl:Class ;
-#   rdfs:label "Actor"@nl ;
-#   rdfs:label "Actor"@en ;
-#   rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Agent> ;
-#   rdfs:subClassOf ldto:Object ;
-#   skos:definition "Persoon, groep, organisatie of functionaris."@nl ;
-#   skos:definition "Person, group, organization or functionary."@en ;
-#   skos:example "Een overheidsorganisatie, een natuurlijk persoon, een bedrijf."@nl ;
-#   skos:example "A government organization, a natural person, a company."@en ;
-#   skos:closeMatch mdto:Actor 
-
-# ldto:BegripGegevens
-#     rdf:type owl:Class ;
-#     rdfs:label "Begripgegevens"@nl ;
-#     rdfs:label "Begripgegevens"@en ;
-#     rdfs:subClassOf ldto:Gegevensgroep ;
-#     skos:closeMatch mdto:BegripGegevens ;
-# .
+ldto:Actor
+  rdf:type owl:Class ;
+  rdfs:label "Actor"@nl ;
+  rdfs:label "Actor"@en ;
+  rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Agent> ;
+  rdfs:subClassOf ldto:Object ;
+  skos:definition "Persoon, groep, organisatie of functionaris."@nl ;
+  skos:definition "Person, group, organization or functionary."@en ;
+  skos:example "Een overheidsorganisatie, een natuurlijk persoon, een bedrijf."@nl ;
+  skos:example "A government organization, a natural person, a company."@en ;
+  skos:closeMatch mdto:Actor .
 
 ldto:BeperkingGebruikGegevens
   rdf:type owl:Class ;
@@ -370,82 +362,82 @@ ldto:dekkingInTijdType
     skos:example "Geldend, Looptijd, Opname"@nl ;
     skos:closeMatch mdto:dekkingInTijdType .
 
-# ldto:event
-#     rdf:type owl:ObjectProperty ;
-#     rdfs:label "Event"@nl ;
-#     rdfs:label "Event."@en ;
-#     rdfs:domain ldto:Informatieobject ;
-#     rdfs:range ldto:EventGegevens ;
-#     skos:definition "Gebeurtenis die heeft plaatsgevonden met betrekking tot het ontstaan, wijzigen, vernietigen en beheer van het informatieobject en de bijbehorende metagegevens."@nl ;
-#     skos:definition "Event that occurred related to the creation, modification, destruction, and management of the information object and its associated metadata."@en ;
-#     skos:scopeNote "Events described using these metadata should be those happened to an IO before its ingestion at RAZU, hence,these information should be submitted, if known, by archive creators. Events happening to IO during transfer and ingestion at RAZU will be recorded in a separate event log."@en ; # because we store metadata as primary objects, and events happen progressively, we want to minimize metadata modification post ingestion.
-#     skos:closeMatch mdto:event .
+## event metadata not used at the moment
+ldto:event
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Event"@nl ;
+    rdfs:label "Event."@en ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:EventGegevens ;
+    skos:definition "Gebeurtenis die heeft plaatsgevonden met betrekking tot het ontstaan, wijzigen, vernietigen en beheer van het informatieobject en de bijbehorende metagegevens."@nl ;
+    skos:definition "Event that occurred related to the creation, modification, destruction, and management of the information object and its associated metadata."@en ;
+    skos:scopeNote "Events described using these metadata should be those happened to an IO before its ingestion at RAZU, hence,these information should be submitted, if known, by archive creators. Events happening to IO during transfer and ingestion at RAZU will be recorded in a separate event log."@en ; # because we store metadata as primary objects, and events happen progressively, we want to minimize metadata modification post ingestion.
+    skos:closeMatch mdto:event .
 
-# ldto:eventResultaat
-#     rdf:type owl:DatatypeProperty ;
-#     rdfs:label "Resultaat"@nl ;
-#     rdfs:label "Result."@en ;
-#     rdfs:domain ldto:EventGegevens ;
-#     rdfs:range xsd:string ;
-#     skos:definition "Beschrijving van het resultaat van het event voor zover relevant voor de duurzame toegankelijkheid van het informatieobject."@nl ;
-#     skos:definition "Description of the outcome of the event insofar as relevant to the sustainable accessibility of the information object."@en ;
-#     skos:closeMatch mdto:eventResultaat .
+ldto:eventResultaat
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Resultaat"@nl ;
+    rdfs:label "Result."@en ;
+    rdfs:domain ldto:EventGegevens ;
+    rdfs:range xsd:string ;
+    skos:definition "Beschrijving van het resultaat van het event voor zover relevant voor de duurzame toegankelijkheid van het informatieobject."@nl ;
+    skos:definition "Description of the outcome of the event insofar as relevant to the sustainable accessibility of the information object."@en ;
+    skos:closeMatch mdto:eventResultaat .
 
-# ldto:eventTijd
-#     rdf:type owl:DatatypeProperty ;
-#     rdfs:label "Tijd"@nl ;
-#     rdfs:label "Time."@en ;
-#     rdfs:domain ldto:EventGegevens ;
-#     rdfs:range xsd:dateTime ;  
-#     skos:definition "Het tijdstip waarop het event heeft plaatsgevonden."@nl ;
-#     skos:definition "The timestamp at which the event occurred."@en ;
-#     skos:closeMatch mdto:eventTijd .
+ldto:eventTijd
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Tijd"@nl ;
+    rdfs:label "Time."@en ;
+    rdfs:domain ldto:EventGegevens ;
+    rdfs:range xsd:dateTime ;  
+    skos:definition "Het tijdstip waarop het event heeft plaatsgevonden."@nl ;
+    skos:definition "The timestamp at which the event occurred."@en ;
+    skos:closeMatch mdto:eventTijd .
 
-# # not used
-# ldto:eventType
-#     rdf:type owl:ObjectProperty ;
-#     rdfs:label "Type"@nl ;
-#     rdfs:label "Type."@en ;
-#     rdfs:domain ldto:EventGegevens ;
-#     rdfs:range ldto:BegripGegevens ; # When used RAZU will create a thesaurus for these event types (skos:Concept)
-#     skos:definition "Aanduiding van het type event."@nl ;
-#     skos:definition "Denotation of the type of event."@en ;
-#     skos:example "Fixity, Ingestion, Virus check"@nl ;
-#     skos:closeMatch mdto:eventType .
+ldto:eventType
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Type"@nl ;
+    rdfs:label "Type."@en ;
+    rdfs:domain ldto:EventGegevens ;
+    rdfs:range rdfs:Resource ; # When used RAZU will create a thesaurus for these event types (skos:Concept)
+    skos:definition "Aanduiding van het type event."@nl ;
+    skos:definition "Denotation of the type of event."@en ;
+    skos:example "Fixity, Ingestion, Virus check"@nl ;
+    skos:closeMatch mdto:eventType .
 
-# not used atm
-# ldto:identificatie
-#     rdf:type owl:ObjectProperty ;
-#     rdfs:label "Identificatie"@nl ;
-#     rdfs:label "Identification."@en ;
-#     rdfs:domain ldto:Informatieobject ;
-#     rdfs:range ldto:IdentificatieGegevens ;
-#     skos:definition "Gegevens waarmee het object geïdentificeerd kan worden."@nl ;
-#     skos:definition "Data used to identify the object."@en ;
-#     skos:closeMatch mdto:identificatie .
+## identificatie metadata not used for our internal archived metadata but might be used by municipalities 
+ldto:identificatie
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Identificatie"@nl ;
+    rdfs:label "Identification."@en ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range ldto:IdentificatieGegevens ;
+    skos:definition "Gegevens waarmee het object geïdentificeerd kan worden."@nl ;
+    skos:definition "Data used to identify the object."@en ;
+    skos:closeMatch mdto:identificatie .
 
-# ldto:identificatieBron
-#     rdf:type owl:ObjectProperty ;
-#     rdfs:label "Bron"@nl ;
-#     rdfs:label "Source"@en ;
-#     rdfs:domain ldto:IdentificatieGegevens ;
-#     rdfs:range xsd:string ; # we might want to change range to be a URI of a namespace or a thesaurus (?)
-#     skos:definition "Herkomst van het kenmerk."@nl ;
-#     skos:definition "Origin of the attribute. The source system used to assign identification."@en ;
-#     skos:example "ISBN, BAG, Internal Actorenregister."@en ;
-#     skos:closeMatch mdto:identificatieBron .
+ldto:identificatieBron
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "Bron"@nl ;
+    rdfs:label "Source"@en ;
+    rdfs:domain ldto:IdentificatieGegevens ;
+    rdfs:range rdfs:Resource ; # we might want to change range to be a URI of a namespace or a thesaurus (?)
+    skos:definition "Herkomst van het kenmerk."@nl ;
+    skos:definition "Origin of the attribute. The source system used to assign identification."@en ;
+    skos:example "ISBN, BAG, Internal Actorenregister."@en ;
+    skos:closeMatch mdto:identificatieBron .
 
-# ldto:identificatieKenmerk
-#     rdf:type owl:DatatypeProperty ;
-#     rdfs:label "Kenmerk" @nl ;
-#     rdfs:label "Attribute." @en ;
-#     rdfs:domain ldto:IdentificatieGegevens ;
-#     rdfs:range xsd:string ; # we might want to change range to be a URI of a namespace or a thesaurus (?)
-#     skos:definition "Een kenmerk waarmee een object geïdentificeerd kan worden."@nl ;
-#     skos:definition "An attribute used to identify an object."@en ;
-#     skos:scopeNote "For a given 'identificatieBron', 'identificatieKenmerk' should be unique."@en ;
-#     skos:example "123e4567-e89b-12d3-a456-426614174000 (UUID), 789047706205 (ISBN), 0518100000320637 (BAG ID)"
-#     skos:closeMatch mdto:identificatieKenmerk .
+ldto:identificatieKenmerk
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Kenmerk" @nl ;
+    rdfs:label "Attribute." @en ;
+    rdfs:domain ldto:IdentificatieGegevens ;
+    rdfs:range xsd:string ; # we might want to change range to be a URI of a namespace or a thesaurus (?)
+    skos:definition "Een kenmerk waarmee een object geïdentificeerd kan worden."@nl ;
+    skos:definition "An attribute used to identify an object."@en ;
+    skos:scopeNote "For a given 'identificatieBron', 'identificatieKenmerk' should be unique."@en ;
+    skos:example "123e4567-e89b-12d3-a456-426614174000 (UUID), 789047706205 (ISBN), 0518100000320637 (BAG ID)" ;
+    skos:closeMatch mdto:identificatieKenmerk .
 
 ldto:isOnderdeelVan
     rdf:type owl:ObjectProperty ;
@@ -482,15 +474,15 @@ ldto:naam
     skos:closeMatch mdto:naam .
 
 # not used atm
-# ldto:omschrijving
-#     rdf:type owl:DatatypeProperty ;
-#     rdfs:label "Omschrijving"@nl ;
-#     rdfs:label "Description."@en ;
-#     rdfs:domain ldto:Informatieobject ;
-#     rdfs:range xsd:string ;
-#     skos:definition "Omschrijving van de inhoud van het informatieobject."@nl ;
-#     skos:definition "Description of the content of the IO."@en ;
-#     skos:closeMatch mdto:omschrijving .
+ldto:omschrijving
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Omschrijving"@nl ;
+    rdfs:label "Description."@en ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range xsd:string ;
+    skos:definition "Omschrijving van de inhoud van het informatieobject."@nl ;
+    skos:definition "Description of the content of the IO."@en ;
+    skos:closeMatch mdto:omschrijving .
 
 ldto:omvang
     rdf:type owl:DatatypeProperty ;
@@ -524,16 +516,16 @@ ldto:termijnLooptijd
     skos:closeMatch mdto:termijnLooptijd .
 
 # not used atm
-# ldto:trefwoord
-#     rdf:type owl:DatatypeProperty ;
-#     rdfs:label "Trefwoord"@nl ;
-#     rdfs:label "Keyword."@en ;
-#     rdfs:domain ldto:Informatieobject ;
-#     rdfs:range xsd:string ;
-#     skos:definition "Trefwoord dat aan het informatieobject is toegekend."@nl ;
-#     skos:definition "A keyword assigned to the IO."@en ;
-#     rdfs:comment "We prefer to use thesauri, but this can be used for all terms that can't simply be structured into a thesarus. And to possibly implement keyword search in the future."@en ;
-#     skos:closeMatch mdto:trefwoord .
+ldto:trefwoord
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "Trefwoord"@nl ;
+    rdfs:label "Keyword."@en ;
+    rdfs:domain ldto:Informatieobject ;
+    rdfs:range xsd:string ;
+    skos:definition "Trefwoord dat aan het informatieobject is toegekend."@nl ;
+    skos:definition "A keyword assigned to the IO."@en ;
+    rdfs:comment "We prefer to use thesauri, but this can be used for all terms that can't simply be structured into a thesarus. And to possibly implement keyword search in the future."@en ;
+    skos:closeMatch mdto:trefwoord .
 
 
 

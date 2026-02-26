@@ -1,13 +1,13 @@
 # LDTO: The information model of the RAZU e-depot
 
-This repository documents the [RAZU](https://www.razu.nl/) (linked data) e-depot Information Model. This includes the **LDTO** (= *Linked Sustainably Accessible Government Information*) core ontology, semantically describing the sctructure of digital archive records metadata; and **LDTO Plus**, the current *data application profile* extension, defining how data should be modeled to conform to LDTO and making explicit how RAZU reuses other existing RDF ontologies and vocabularies, such as [schema.org](https://schema.org/) or [PREMIS](https://id.loc.gov/ontologies/premis-3-0-0.html) to further describe the records on a content level. 
+This repository documents the [RAZU](https://www.razu.nl/) (linked data) e-depot Information Model. This includes the **LDTO** (= *Linked Sustainably Accessible Government Information*) core ontology, semantically describing the sctructure of digital archive records metadata; and **LDTO plus**, the current *data application profile* extension, defining how data should be modeled to conform to LDTO and making explicit how RAZU reuses other existing RDF ontologies and vocabularies, such as [schema.org](https://schema.org/) or [PREMIS](https://id.loc.gov/ontologies/premis-3-0-0.html) to further describe the records on a content level. 
 
 In addition, this repository provides a script and shacl shapes to check whether RDF files are up to the model.
 
 ## Index:
 
 1. [LDTO ontology](#1-ldto-ontology)
-2. [LDTO Plus](#2-ldto-plus)
+2. [LDTO plus](#2-ldto-plus)
 3. [Examples](#3-examples)
 4. [Validation tools](#4-tools)
 
@@ -24,19 +24,21 @@ In addition, this repository provides a script and shacl shapes to check whether
 
 The separation from MDTO offers RAZU the flexibility to manage the standard itself, adapting it to further developments of the e-depot, all while ensuring MDTO compatibility for government institutions whishing to preserve their archives at RAZU.
 
-Files related to LDTO you can find in this repository:
+For a detailed overview of the differences between MDTO and LDTO, see [def/R.md](def/MDTO-LDTO-Mapping.md).
 
-- [def/ldto.ttl](def/ldto.ttl): The RDF formal declaration of LDTO. Click [here](https://regionaal-archief-zuid-utrecht.github.io/ldto/def/ldto.html) for an HTML view of the ontology.
-- [def/MDTO-LDTO-Mapping.md](MDTO-LDTO-Mapping.md): Further documentation comparing LDTO to MDTO, outlining the main differences and the rationale behind them.
+#### 1.1. Formal definition of LDTO
+
+- [def/ldto.ttl](def/ldto.ttl): the definition of LDTO as RDF ontology.Click [here](https://regionaal-archief-zuid-utrecht.github.io/ldto/def/ldto.html) for an HTML view of the ontology.
+- [shacl/ldto-core.ttl](shacl/ldto-core.ttl): SHACL shapes to validate RDF files that use LDTO.
 
 
-### 2. LDTO Plus
+### 2. LDTO plus
 
-MDTO specifies data that is generic for the Dutch government. So that they occur in (almost) all government organizations, work processes and types of information. LDTO reflects this and does not contain domain-specific metadata. Within the information model of the RAZU, **LDTO Plus** is used to describe how we use other RDF ontologies and vocabularies to describe the content of archived material. This can be considered RAZU's [application profile](https://op.europa.eu/en/web/eu-vocabularies/application-profiles) and it is formally defined in shacle shapes files determining which extensions to LDTO are permitted, and how they can be applied.
+As a reflection of MDTO, LDTO is not itself equipped to describe domain-specific metadata for archival material in sufficient detail. Within the information model of the RAZU, **LDTO plus** is used to describe how we use other RDF ontologies and vocabularies to describe the content of archived material. This can be considered RAZU's [application profile](https://op.europa.eu/en/web/eu-vocabularies/application-profiles) and it is formally defined in shacle shapes files determining which extensions to LDTO are permitted, and how they can be applied.
 
 Additionally, RAZU manages its own [thesauri](https://github.com/Regionaal-Archief-Zuid-Utrecht/thesauri), minting URIs for the main entities described in the archive (ex. Places, People, Organizations, etc.). 
 
-Files related to LDTO Plus you can find in this repository:
+#### 2.1. Formal definition of LDTO plus
 
 - [shacl/ldto-plus.ttl](shacl/ldto-plus.ttl): The LDTO Plus application profile in shacle shapes without references to RAZU thesauri.
 - [shacl/ldto-plus-razu.ttl](shacl/ldto-plus-razu.ttl): The LDTO Plus application profile in shacle shapes with references to RAZU thesauri.
