@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--N.B. code of pyLODE modified in utils.py line 858 to 864 in order to filter literals with dutch tag @nl (the software did not support multilinguality)-->
 <html>
   <head>
     <title>LDTO</title>
@@ -348,6 +347,65 @@ td {
       </div>
       <div class="section" id="classes">
         <h2>Classes</h2>
+        <div class="property entity" id="Actor">
+          <h3>Actor
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/Actor</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Person, group, organization or functionary.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#example" title="An example of the use of a concept. Defined in SKOS Vocabulary">Example</a>
+              </th>
+              <td>
+                <pre>A government organization, a natural person, a company. https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9.</pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Object">Object</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inRangeOf" title="Inverse of rdfs:range. Defined in Ontology Documentation Profile">In Range Of</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <span>
+                      <a href="#archiefvormer">Archiefvormer</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#betrokkeneActor">Betrokkene actor</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
         <div class="property entity" id="Usagerestrictiondata.">
           <h3>Usage restriction data. 
             <sup class="sup-c" title="OWL/RDFS Class">c</sup>
@@ -707,6 +765,44 @@ td {
                 </span>
               </td>
             </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inDomainOf" title="Inverse of rdfs:domain. Defined in Ontology Documentation Profile">In Domain Of</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <span>
+                      <a href="#eventResultaat">Resultaat</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#eventTijd">Tijd</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#eventType">Type</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inRangeOf" title="Inverse of rdfs:range. Defined in Ontology Documentation Profile">In Range Of</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#event">Event</a>
+                  <sup class="sup-op" title="OWL Object Property">op</sup>
+                </span>
+              </td>
+            </tr>
           </table>
         </div>
         <div class="property entity" id="Gegevensgroep">
@@ -812,6 +908,38 @@ td {
                 </span>
               </td>
             </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inDomainOf" title="Inverse of rdfs:domain. Defined in Ontology Documentation Profile">In Domain Of</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <span>
+                      <a href="#identificatieBron">Bron</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#identificatieKenmerk">Kenmerk</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inRangeOf" title="Inverse of rdfs:range. Defined in Ontology Documentation Profile">In Range Of</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#identificatie">Identificatie</a>
+                  <sup class="sup-op" title="OWL Object Property">op</sup>
+                </span>
+              </td>
+            </tr>
           </table>
         </div>
         <div class="property entity" id="Informationobject.">
@@ -906,6 +1034,18 @@ td {
                   </li>
                   <li>
                     <span>
+                      <a href="#event">Event</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#identificatie">Identificatie</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
                       <a href="#isOnderdeelVan">Is onderdeel van</a>
                       <sup class="sup-op" title="OWL Object Property">op</sup>
                     </span>
@@ -913,6 +1053,18 @@ td {
                   <li>
                     <span>
                       <a href="#naam">Naam</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#omschrijving">Omschrijving</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#trefwoord">Trefwoord</a>
                       <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
                     </span>
                   </li>
@@ -938,6 +1090,58 @@ td {
                     </span>
                   </li>
                 </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="Locatie">
+          <h3>Locatie
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/Locatie</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Physical or online place in space.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#scopeNote" title="A note that helps to clarify the meaning and/or the use of a concept. Defined in SKOS Vocabulary">Scope Note</a>
+              </th>
+              <td><p>MDTO doesn't impose any additional requirements on how a location is recorded. Ideally, reference should be made to a term in an existing registry, such as the BAG (Road Registration and Allocation of Buildings), or to a term in an existing glossary, such as that used by OWMS.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#example" title="An example of the use of a concept. Defined in SKOS Vocabulary">Example</a>
+              </th>
+              <td>
+                <pre>A BAG location, a province, a road.</pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="http://www.nationaalarchief.nl/mdto#Object">mdto:Object</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inRangeOf" title="Inverse of rdfs:range. Defined in Ontology Documentation Profile">In Range Of</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#dekkingInRuimte">Dekking in ruimte</a>
+                  <sup class="sup-op" title="OWL Object Property">op</sup>
+                </span>
               </td>
             </tr>
           </table>
@@ -984,6 +1188,12 @@ td {
               </th>
               <td>
                 <ul>
+                  <li>
+                    <span>
+                      <a href="#Actor">Actor</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
                   <li>
                     <span>
                       <a href="#File">Bestand</a>
@@ -1195,7 +1405,10 @@ td {
                 <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
               </th>
               <td>
-                <a href="http://www.w3.org/2000/01/rdf-schema#Resource">Resource</a>
+                <span>
+                  <a href="#Actor">Actor</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
               </td>
             </tr>
           </table>
@@ -1478,7 +1691,10 @@ td {
                 <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
               </th>
               <td>
-                <a href="http://www.w3.org/2000/01/rdf-schema#Resource">Resource</a>
+                <span>
+                  <a href="#Actor">Actor</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
               </td>
             </tr>
           </table>
@@ -1705,7 +1921,10 @@ td {
                 <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
               </th>
               <td>
-                <a href="http://www.w3.org/2000/01/rdf-schema#Resource">Resource</a>
+                <span>
+                  <a href="#Locatie">Locatie</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
               </td>
             </tr>
           </table>
@@ -1775,6 +1994,178 @@ td {
               <td>
                 <span>
                   <a href="#Timecoveragedata.">Dekking in tijd-gegevens</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2000/01/rdf-schema#Resource">Resource</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="event">
+          <h3>Event.
+            <sup class="sup-op" title="OWL Object Property">op</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/event</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Event that occurred related to the creation, modification, destruction, and management of the information object and its associated metadata.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#scopeNote" title="A note that helps to clarify the meaning and/or the use of a concept. Defined in SKOS Vocabulary">Scope Note</a>
+              </th>
+              <td><p>Events described using these metadata should be those happened to an IO before its ingestion at RAZU, hence,these information should be submitted, if known, by archive creators. Events happening to IO during transfer and ingestion at RAZU will be recorded in a separate event log.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Informationobject.">Informatieobject</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Eventdata.">Eventgegevens</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="eventType">
+          <h3>Type.
+            <sup class="sup-op" title="OWL Object Property">op</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/eventType</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Denotation of the type of event.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Eventdata.">Eventgegevens</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2000/01/rdf-schema#Resource">Resource</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="identificatie">
+          <h3>Identification.
+            <sup class="sup-op" title="OWL Object Property">op</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/identificatie</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Data used to identify the object.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Informationobject.">Informatieobject</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#IdentificatieGegevens">Identificatiegegevens</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="identificatieBron">
+          <h3>Source
+            <sup class="sup-op" title="OWL Object Property">op</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/identificatieBron</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Origin of the attribute. The source system used to assign identification.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#example" title="An example of the use of a concept. Defined in SKOS Vocabulary">Example</a>
+              </th>
+              <td>
+                <pre>ISBN, BAG, Internal Actorenregister.</pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#IdentificatieGegevens">Identificatiegegevens</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -2055,6 +2446,134 @@ td {
             </tr>
           </table>
         </div>
+        <div class="property entity" id="eventResultaat">
+          <h3>Result.
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/eventResultaat</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Description of the outcome of the event insofar as relevant to the sustainable accessibility of the information object.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Eventdata.">Eventgegevens</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="eventTijd">
+          <h3>Time.
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/eventTijd</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>The timestamp at which the event occurred.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Eventdata.">Eventgegevens</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#dateTime">xsd:dateTime</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="identificatieKenmerk">
+          <h3>Attribute.
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/identificatieKenmerk</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>An attribute used to identify an object.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#scopeNote" title="A note that helps to clarify the meaning and/or the use of a concept. Defined in SKOS Vocabulary">Scope Note</a>
+              </th>
+              <td><p>For a given 'identificatieBron', 'identificatieKenmerk' should be unique.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#example" title="An example of the use of a concept. Defined in SKOS Vocabulary">Example</a>
+              </th>
+              <td>
+                <pre>123e4567-e89b-12d3-a456-426614174000 (UUID), 789047706205 (ISBN), 0518100000320637 (BAG ID)</pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#IdentificatieGegevens">Identificatiegegevens</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+              </td>
+            </tr>
+          </table>
+        </div>
         <div class="property entity" id="naam">
           <h3>Name.
             <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
@@ -2071,6 +2590,44 @@ td {
                 <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
               </th>
               <td><p>A meaningful name under which the object is known.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Informationobject.">Informatieobject</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="omschrijving">
+          <h3>Description.
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/omschrijving</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Description of the content of the IO.</p></td>
             </tr>
             <tr>
               <th>
@@ -2213,14 +2770,53 @@ td {
             </tr>
           </table>
         </div>
+        <div class="property entity" id="trefwoord">
+          <h3>Keyword.
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>https://data.razu.nl/def/ldto/trefwoord</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td>
+                <ul>
+                  <li><p>We prefer to use thesauri, but this can be used for all terms that can't simply be structured into a thesarus. And to possibly implement keyword search in the future.</p></li>
+                  <li><p>A keyword assigned to the IO.</p></li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="#Informationobject.">Informatieobject</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <div id="namespaces">
         <h2>Namespaces</h2>
         <dl>
-          <dt id="dcterms">dcterms</dt>
-          <dd>
-            <code>http://purl.org/dc/terms/</code>
-          </dd>
           <dt id="ldto">ldto</dt>
           <dd>
             <code>https://data.razu.nl/def/ldto/</code>
@@ -2236,10 +2832,6 @@ td {
           <dt id="owl">owl</dt>
           <dd>
             <code>http://www.w3.org/2002/07/owl#</code>
-          </dd>
-          <dt id="premis">premis</dt>
-          <dd>
-            <code>http://www.loc.gov/premis/rdf/v3/</code>
           </dd>
           <dt id="rdf">rdf</dt>
           <dd>
@@ -2314,6 +2906,9 @@ td {
           </h4>
           <ul class="second">
             <li>
+              <a href="#Actor">Actor</a>
+            </li>
+            <li>
               <a href="#Usagerestrictiondata.">Usage restriction data. </a>
             </li>
             <li>
@@ -2339,6 +2934,9 @@ td {
             </li>
             <li>
               <a href="#Informationobject.">Information object.</a>
+            </li>
+            <li>
+              <a href="#Locatie">Locatie</a>
             </li>
             <li>
               <a href="#Object">Object</a>
@@ -2402,6 +3000,18 @@ td {
               <a href="#dekkingInTijdType">Coverage in time type.</a>
             </li>
             <li>
+              <a href="#event">Event.</a>
+            </li>
+            <li>
+              <a href="#eventType">Type.</a>
+            </li>
+            <li>
+              <a href="#identificatie">Identification.</a>
+            </li>
+            <li>
+              <a href="#identificatieBron">Source</a>
+            </li>
+            <li>
               <a href="#isOnderdeelVan">Is part of.</a>
             </li>
             <li>
@@ -2427,7 +3037,19 @@ td {
               <a href="#dekkingInTijdEindDatum">Coverage in time end date.</a>
             </li>
             <li>
+              <a href="#eventResultaat">Result.</a>
+            </li>
+            <li>
+              <a href="#eventTijd">Time.</a>
+            </li>
+            <li>
+              <a href="#identificatieKenmerk">Attribute.</a>
+            </li>
+            <li>
               <a href="#naam">Name.</a>
+            </li>
+            <li>
+              <a href="#omschrijving">Description.</a>
             </li>
             <li>
               <a href="#omvang">Size.</a>
@@ -2438,6 +3060,9 @@ td {
             <li>
               <a href="#termijnLooptijd">Duration.</a>
             </li>
+            <li>
+              <a href="#trefwoord">Keyword.</a>
+            </li>
           </ul>
         </li>
         <li>
@@ -2445,9 +3070,6 @@ td {
             <a href="#namespaces">Namespaces</a>
           </h4>
           <ul class="second">
-            <li>
-              <a href="#dcterms">dcterms</a>
-            </li>
             <li>
               <a href="#ldto">ldto</a>
             </li>
@@ -2459,9 +3081,6 @@ td {
             </li>
             <li>
               <a href="#owl">owl</a>
-            </li>
-            <li>
-              <a href="#premis">premis</a>
             </li>
             <li>
               <a href="#rdf">rdf</a>

@@ -19,6 +19,7 @@
 #### Classes
 # MDTO derived classes: for easy comparison, they follow the same order used in mdto-rdf-1.0.ttl https://www.nationaalarchief.nl/archiveren/mdto/rdf-ontologie
 
+# RAZU defines entities of this class in the Actor thesaurus https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e
 ldto:Actor
   rdf:type owl:Class ;
   rdfs:label "Actor"@nl ;
@@ -27,8 +28,8 @@ ldto:Actor
   rdfs:subClassOf ldto:Object ;
   skos:definition "Persoon, groep, organisatie of functionaris."@nl ;
   skos:definition "Person, group, organization or functionary."@en ;
-  skos:example "Een overheidsorganisatie, een natuurlijk persoon, een bedrijf."@nl ;
-  skos:example "A government organization, a natural person, a company."@en ;
+  skos:example "Een overheidsorganisatie, een natuurlijk persoon, een bedrijf. https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9."@nl ;
+  skos:example "A government organization, a natural person, a company. https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9."@en ;
   skos:closeMatch mdto:Actor .
 
 ldto:BeperkingGebruikGegevens
@@ -112,6 +113,21 @@ ldto:Informatieobject
     skos:scopeNote "Information objects in the context of LDTO are information objects that arise from government tasks."@en ; # is this 100% true? in the case of newspapers, an issue or a krant come from government tasks? proposal: objects managed, preserved, or contextualized within government archival processes
     skos:closeMatch mdto:Informatieobject .
 
+# RAZU defines entities of this class in the Locatie thesaurus https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43
+ldto:Locatie
+    rdf:type owl:Class ;
+    rdfs:label "Locatie"@nl ;
+    rdfs:seeAlso <http://bag.basisregistraties.overheid.nl/id/begrip/Object> ;
+    rdfs:seeAlso <http://definities.geostandaarden.nl/def/nen3610#GeoObject> ;
+    rdfs:subClassOf mdto:Object ;
+    skos:definition "Fysieke of online plaats in de ruimte."@nl ;
+    skos:definition "Physical or online place in space."@en ;
+    skos:example "Een BAG-locatie, een provincie, een weg."@nl ;
+    skos:example "A BAG location, a province, a road."@en ;
+    skos:scopeNote "MDTO stelt geen nadere eisen aan de manier waarop een locatie is vastgelegd. Idealiter wordt verwezen naar een begrip in een bestaande registratie, zoals de BAG. Of naar begrip in een bestaande begrippenlijst zoals die bijvoorbeeld gebruikt wordt door OWMS."@nl ;
+    skos:scopeNote "MDTO doesn't impose any additional requirements on how a location is recorded. Ideally, reference should be made to a term in an existing registry, such as the BAG (Road Registration and Allocation of Buildings), or to a term in an existing glossary, such as that used by OWMS."@en ;
+    skos:closeMatch mdto:Locatie .
+
 ldto:Object
     rdf:type owl:Class ;
     rdfs:label "Object"@nl ;
@@ -160,7 +176,7 @@ ldto:archiefvormer
     rdfs:label "Archiefvormer"@nl ;
     rdfs:label "Archive creator."@en ;
     rdfs:domain ldto:Informatieobject ;
-    rdfs:range rdfs:Resource ; # can possibly become ldto:Actor in the future ?
+    rdfs:range ldto:Actor ;
     skos:definition "De organisatie die verantwoordelijk is voor het opmaken en/of ontvangen van het informatieobject."@nl ;
     skos:definition "The organization responsible for  for creating and/or receiving the information object."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Actoren thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e"@en ;
@@ -229,7 +245,7 @@ ldto:betrokkeneActor
     rdfs:label "Betrokkene actor"@nl ;
     rdfs:label "Data subject Actor"@en ;
     rdfs:domain ldto:BetrokkeneGegevens ;
-    rdfs:range rdfs:Resource ; # possibly in the future ldto:Actor
+    rdfs:range ldto:Actor ;
     skos:definition "De persoon of organisatie die betrokken is bij het informatieobject."@nl ;
     skos:definition "The person or organization involved in the information object."@en ; 
     skos:scopeNote "For RAZU, this should refer to a term in the Actoren thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e"@en ;
@@ -306,7 +322,7 @@ ldto:dekkingInRuimte
     rdfs:label "Dekking in ruimte"@nl ;
     rdfs:label "Coverage in space."@en ;
     rdfs:domain ldto:Informatieobject ;
-    rdfs:range rdfs:Resource ; 
+    rdfs:range ldto:Locatie ; 
     skos:definition "Plaats of locatie waar de inhoud van het informatieobject betrekking op heeft."@nl ;
     skos:definition "Place or location to which the content of the information object relates."@en ;
     skos:scopeNote "For RAZU, this should refer to a term in the Locatie thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43"@nl ;
@@ -422,8 +438,8 @@ ldto:identificatieBron
 
 ldto:identificatieKenmerk
     rdf:type owl:DatatypeProperty ;
-    rdfs:label "Kenmerk" @nl ;
-    rdfs:label "Attribute." @en ;
+    rdfs:label "Kenmerk"@nl ;
+    rdfs:label "Attribute."@en ;
     rdfs:domain ldto:IdentificatieGegevens ;
     rdfs:range xsd:string ; # we might want to change range to be a URI of a namespace or a thesaurus (?)
     skos:definition "Een kenmerk waarmee een object geïdentificeerd kan worden."@nl ;
