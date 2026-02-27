@@ -25,7 +25,6 @@ ldto:Actor
   rdfs:label "Actor"@nl ;
   rdfs:label "Actor"@en ;
   rdfs:seeAlso <https://www.ica.org/standards/RiC/ontology#Agent> ;
-  rdfs:subClassOf ldto:Object ;
   skos:definition "Persoon, groep, organisatie of functionaris."@nl ;
   skos:definition "Person, group, organization or functionary."@en ;
   skos:example "Een overheidsorganisatie, een natuurlijk persoon, een bedrijf. https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9."@nl ;
@@ -119,7 +118,6 @@ ldto:Locatie
     rdfs:label "Locatie"@nl ;
     rdfs:seeAlso <http://bag.basisregistraties.overheid.nl/id/begrip/Object> ;
     rdfs:seeAlso <http://definities.geostandaarden.nl/def/nen3610#GeoObject> ;
-    rdfs:subClassOf mdto:Object ;
     skos:definition "Fysieke of online plaats in de ruimte."@nl ;
     skos:definition "Physical or online place in space."@en ;
     skos:example "Een BAG-locatie, een provincie, een weg."@nl ;
@@ -128,7 +126,7 @@ ldto:Locatie
     skos:scopeNote "MDTO doesn't impose any additional requirements on how a location is recorded. Ideally, reference should be made to a term in an existing registry, such as the BAG (Road Registration and Allocation of Buildings), or to a term in an existing glossary, such as that used by OWMS."@en ;
     skos:closeMatch mdto:Locatie .
 
-ldto:Object
+ldto:Object # abstract class
     rdf:type owl:Class ;
     rdfs:label "Object"@nl ;
     rdfs:subClassOf owl:Thing ;
