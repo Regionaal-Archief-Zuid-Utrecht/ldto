@@ -1040,20 +1040,8 @@ td {
                   </li>
                   <li>
                     <span>
-                      <a href="#identificatie">Identificatie</a>
-                      <sup class="sup-op" title="OWL Object Property">op</sup>
-                    </span>
-                  </li>
-                  <li>
-                    <span>
                       <a href="#isOnderdeelVan">Is onderdeel van</a>
                       <sup class="sup-op" title="OWL Object Property">op</sup>
-                    </span>
-                  </li>
-                  <li>
-                    <span>
-                      <a href="#naam">Naam</a>
-                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
                     </span>
                   </li>
                   <li>
@@ -1180,6 +1168,27 @@ td {
                   <a href="http://www.w3.org/2002/07/owl#Thing">Thing</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inDomainOf" title="Inverse of rdfs:domain. Defined in Ontology Documentation Profile">In Domain Of</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <span>
+                      <a href="#identificatie">Identificatie</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="#naam">Naam</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                </ul>
               </td>
             </tr>
             <tr>
@@ -1414,7 +1423,7 @@ td {
           </table>
         </div>
         <div class="property entity" id="beperkingGebruik">
-          <h3>Use restriction.
+          <h3>Use limitation.
             <sup class="sup-op" title="OWL Object Property">op</sup>
           </h3>
           <table>
@@ -1479,12 +1488,6 @@ td {
             </tr>
             <tr>
               <th>
-                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#scopeNote" title="A note that helps to clarify the meaning and/or the use of a concept. Defined in SKOS Vocabulary">Scope Note</a>
-              </th>
-              <td><p>A restriction can be temporary in nature. In that case, this attribute indicates when the restriction ends. After this period has expired, the restriction no longer has to be complied with. If this attribute has no value, the restriction will apply forever. Or until the moment of destruction.</p></td>
-            </tr>
-            <tr>
-              <th>
                 <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
               </th>
               <td>
@@ -1508,7 +1511,7 @@ td {
           </table>
         </div>
         <div class="property entity" id="beperkingGebruikType">
-          <h3>Use restriction type.
+          <h3>Use limitation type.
             <sup class="sup-op" title="OWL Object Property">op</sup>
           </h3>
           <table>
@@ -2116,7 +2119,7 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="#Informationobject.">Informatieobject</a>
+                  <a href="#Object">Object</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -2282,6 +2285,41 @@ td {
       </div>
       <div class="section" id="datatypeproperties">
         <h2>Datatype Properties</h2>
+        <div class="property entity" id="Additionaldescription.">
+          <h3>Additional description.
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://www.nationaalarchief.nl/mdto#beperkingGebruikNadereBeschrijving</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Additional description of use limitation. As an addition to use limitation type.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <a href="http://www.nationaalarchief.nl/mdto#BeperkingGebruikGegevens">mdto:BeperkingGebruikGegevens</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+              </td>
+            </tr>
+          </table>
+        </div>
         <div class="property entity" id="checksumDatum">
           <h3>Checksum date.
             <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
@@ -2597,7 +2635,7 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="#Informationobject.">Informatieobject</a>
+                  <a href="#Object">Object</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -2961,13 +2999,13 @@ td {
               <a href="#archiefvormer">Archive creator.</a>
             </li>
             <li>
-              <a href="#beperkingGebruik">Use restriction.</a>
+              <a href="#beperkingGebruik">Use limitation.</a>
             </li>
             <li>
               <a href="#beperkingGebruikTermijn">Termination.</a>
             </li>
             <li>
-              <a href="#beperkingGebruikType">Use restriction type.</a>
+              <a href="#beperkingGebruikType">Use limitation type.</a>
             </li>
             <li>
               <a href="#bestandsformaat">File format.</a>
@@ -3024,6 +3062,9 @@ td {
             <a href="#datatypeproperties">Datatype Properties</a>
           </h4>
           <ul class="second">
+            <li>
+              <a href="#Additionaldescription.">Additional description.</a>
+            </li>
             <li>
               <a href="#checksumDatum">Checksum date.</a>
             </li>

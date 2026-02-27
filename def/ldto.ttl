@@ -185,13 +185,23 @@ ldto:archiefvormer
 ldto:beperkingGebruik
     rdf:type owl:ObjectProperty ;
     rdfs:label "Beperking gebruik"@nl ;
-    rdfs:label "Use restriction."@en ;
+    rdfs:label "Use limitation."@en ;
     rdfs:domain ldto:Informatieobject ;
     rdfs:range ldto:BeperkingGebruikGegevens ;
     skos:closeMatch mdto:beperkingGebruik ;
     skos:definition "Een beperking die gesteld is aan het gebruik van het informatieobject."@nl ;
     skos:definition "A restriction placed on the use of the information object."@en ;
     skos:scopeNote "For RAZU, the ldto:BeperkingGebruikGegevens entity should link - via ldto:beperkingGebruikType - to a term in Typering mogelijke beperkingen gebruik thesaurus (a skos:ConceptScheme) https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1."@en .
+
+mdto:beperkingGebruikNadereBeschrijving
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain mdto:BeperkingGebruikGegevens ;
+  rdfs:label "Nadere beschrijving"@nl ;
+  rdfs:label "Additional description."@en ;
+  rdfs:range xsd:string ;
+  skos:definition "Nadere beschrijving van de beperking op het gebruik. Als aanvulling op beperkingGebruikType."@nl ;
+  skos:definition "Additional description of use limitation. As an addition to use limitation type."@en ;
+  skos:scopeNote "Het is niet mogelijk om elk type beperking en de nuances daarop vast te leggen in beperkingGebruikType. In dat geval wordt de beperking nader beschreven in beperkingGebruikNadereBeschrijving. Als dit attribuut een waarde heeft, dan is volledige automatische afhandeling van de beperking niet mogelijk. Vul dit attribuut daarom alleen in als beperkingGebruikType onvoldoende informatie geeft."@nl .
 
 ldto:beperkingGebruikTermijn
     rdf:type owl:ObjectProperty ;
@@ -201,14 +211,12 @@ ldto:beperkingGebruikTermijn
     rdfs:range ldto:TermijnGegevens ;
     skos:definition "De termijn waarbinnen de beperking op het gebruik van toepassing is."@nl ;
     skos:definition "The period within which the restriction on use applies."@en ;
-    skos:scopeNote "Een beperking kan tijdelijk van aard zijn. In dat geval geeft dit attribuut aan wanneer de beperking eindigt. Na afloop van deze termijn hoeft niet meer aan de beperking voldaan te worden.  Als dit attribuut geen waarde heeft, dan blijft de beperking van toepassing."@nl ;
-    skos:scopeNote "A restriction can be temporary in nature. In that case, this attribute indicates when the restriction ends. After this period has expired, the restriction no longer has to be complied with. If this attribute has no value, the restriction will apply forever. Or until the moment of destruction."@en ;
     skos:closeMatch mdto:beperkingGebruikTermijn .
 
 ldto:beperkingGebruikType
     rdf:type owl:ObjectProperty ;
     rdfs:label "Beperking gebruik type"@nl ;
-    rdfs:label "Use restriction type."@en ;
+    rdfs:label "Use limitation type."@en ;
     rdfs:domain ldto:BeperkingGebruikGegevens ;
     rdfs:range rdfs:Resource ; 
     skos:definition "Typering van de beperking. Op grond waarvan bepaald kan worden wie toegang heeft tot het informatieobject en welke voorwaarden op het gebruik van toepassing zijn."@nl ;
@@ -419,7 +427,7 @@ ldto:identificatie
     rdf:type owl:ObjectProperty ;
     rdfs:label "Identificatie"@nl ;
     rdfs:label "Identification."@en ;
-    rdfs:domain ldto:Informatieobject ;
+    rdfs:domain ldto:Object ;
     rdfs:range ldto:IdentificatieGegevens ;
     skos:definition "Gegevens waarmee het object geïdentificeerd kan worden."@nl ;
     skos:definition "Data used to identify the object."@en ;
@@ -476,7 +484,7 @@ ldto:naam
     rdf:type owl:DatatypeProperty ;
     rdfs:label "Naam"@nl ;
     rdfs:label "Name."@en ;
-    rdfs:domain ldto:Informatieobject ;
+    rdfs:domain ldto:Object ;
     rdfs:range xsd:string ;
     skos:definition "Een betekenisvolle aanduiding waaronder het object bekend is."@nl ;
     skos:definition "A meaningful name under which the object is known."@en ;
