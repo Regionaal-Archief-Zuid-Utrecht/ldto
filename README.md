@@ -1,4 +1,4 @@
-(! [English version below](LDTO:-the-information-model-of-the-RAZU-e-depot))
+(! [English version below](#ldto-the-information-model-of-the-razu-e-depot))
 
 # LDTO plus: Het informatiemodel van het RAZU e-depot
 
