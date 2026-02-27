@@ -8,6 +8,7 @@ from functools import lru_cache
 from pathlib import Path
 import pyshacl
 from rdflib import Graph, OWL, URIRef
+import time
 
 ALLOWED_EXTENSIONS = {".ttl", ".meta.json"}
 
@@ -18,7 +19,7 @@ IMPORT_MAP = {
 }
 
 
-import time
+
 
 @lru_cache(maxsize=2048)
 def check_resolvability(uri: str) -> tuple:
