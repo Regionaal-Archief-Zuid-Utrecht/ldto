@@ -1,4 +1,4 @@
-(! English version below)
+(! [English version below](LDTO:-the-information-model-of-the-RAZU-e-depot))
 
 # LDTO plus: Het informatiemodel van het RAZU e-depot
 
@@ -83,7 +83,7 @@ python scripts/validate.py path/to/file.ttl --check-resolvable --ignore-pattern 
 ```
 
 
-#####################################################################################################
+-----------------------------------------------------------------------------------------
 
 # LDTO: The information model of the RAZU e-depot
 
