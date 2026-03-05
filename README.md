@@ -111,7 +111,7 @@ In addition, this repository provides a script and shacl shapes to check whether
 
 The separation from MDTO offers RAZU the flexibility to manage the standard itself, adapting it to further developments of the e-depot, all while ensuring MDTO compatibility for government institutions whishing to preserve their archives at RAZU.
 
-For a detailed overview of the differences between MDTO and LDTO, see [def/Mapping_MDTO_LDTO.md](def/Mapping_MDTO_LDTO.md).
+For a detailed overview of the differences between MDTO and LDTO, see [def/Mapping_MDTO_LDTO.xlsx](def/Mapping_MDTO_LDTO.xlsx).
 
 #### 1.1. Formal definition of LDTO
 
