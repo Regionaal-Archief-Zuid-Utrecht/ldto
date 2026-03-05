@@ -23,8 +23,4 @@ whereas in LDTO, we can link to a URI in a RAZU thesauri and formalize it like t
 2. If you are using language tags, you need to modify the code to take that into account since pylode does not support multilinguality.
 2. in this directory, run: `python3 -m pylode.cli ldto.ttl -o ldto.html`
 
-## to do:
 
-[x] IO ldto:dekkingInRuimte ldto:Locatie (now a schema:Place) 
-[ ] IO ldto:radpleegLocatie ldto:Locatie (we don't use this property now but if we will, we might want to use a URI pointoing to Valeros)
-[x] Add to excel mapping properties of mdto:InformatieObject and mdto:Bestand, mdot:Actor and mdto:Locatie
