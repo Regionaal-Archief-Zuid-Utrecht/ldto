@@ -16,7 +16,7 @@ De ruggengraat van het informatiemodel wordt gevormd door **LDTO** (= *Linked Du
 ## 2. De ‘plus’-uitbreidingen op LDTO
 LDTO is als afspiegeling van MDTO op zichzelf niet toegerust voor het voldoende gedetailleerd beschrijven van archiefmateriaal. Binnen het informatiemodel van het RAZU wordt daarom aanvullend gebruik gemaakt van andere RDF-ontologiëen, zoals bijvoorbeeld schema.org of premis. Het informatiemodel legt daarom ook vast welke uitbreidingen op LDTO toegestaan zijn, én hoe deze toe te passen.
 
-Hoewel het streven is te komen tot een stabiel model, zullen de shapes komende jaren, naar gelang er meer materiaalsoorten in het e-depot geladen gaan worden, verder uitgebreid worden om aan te sluiten bij de informatiebehoeften. In de huidige stand van zaken is het model vooral gebaseerd op experimenten met publicatie van het RAZU-bestuursarchief en van door gemeente Houten gedigitaliseerde luchtfoto’s. Het [RAZU-krantenarchief](https://viewer.razu.nl/)  is de eerste collectie die met LDTO plus gepubliceerd is.
+Hoewel het streven is te komen tot een stabiel model, zullen de shapes komende jaren, naar gelang er meer materiaalsoorten in het e-depot geladen gaan worden, verder uitgebreid worden om aan te sluiten bij de informatiebehoeften. In de huidige stand van zaken is het model vooral gebaseerd op experimenten met publicatie van het RAZU-bestuursarchief en van door gemeente Houten gedigitaliseerde luchtfoto’s. Het [RAZU-krantenarchief](https://viewer.razu.nl/search?q=&filters=%7B%22base%22:%7B%22archief%22:%7B%22type%22:2,%22fieldIds%22:%5B%22archief%22%5D,%22valueIds%22:%5B%22Collectie%20kranten%20RAZU%22%5D%7D%7D%7D)  is de eerste collectie die met LDTO plus gepubliceerd is.
 
 ### 2.2. Formele definities van LDTO plus
 
@@ -29,18 +29,18 @@ Als voorgaande, maar strenger gedefinieerd door wel gebruik te maken van verwijz
 
 ### 2.3. Voorbeeldbestanden
 
-Voorbeelden van `LDTO plus` metadata is vinden in de map `examples`. Al deze voorbeelden zijn valide volgens de meest stricte SHACL shape [(ldto-razu.ttl)](shacl/ldto-razu.ttl).
+Voorbeelden van `LDTO plus` metadata zijn te vinden in de map `examples`. Al deze voorbeelden zijn valide volgens de meest stricte SHACL shape [(ldto-razu.ttl)](shacl/ldto-razu.ttl).
 
 * [examples/kranten](examples/kranten)
 Verschillende voorbeeldbestanden zoals gebruik bij het beschrijven van de collectie gedigitaliseerde kranten van het RAZU.
 * [examples/bestuursarchief.ttl](examples/bestuursarchief.ttl)
 Een in de testfase gebruikte (nog experimentele) opzet voor het beschrijven van materiaal uit het RAZU-bestuursarchief.
 * [examples/luchtfotos.ttl](examples/luchtfotos.ttl)
-Een in de testfase gebruikte (nog experimentele) opzet voor het beschrijven van gedigitaliseerde luchtfoto’s van gemeente Houten.
+Een in de testfase gebruikte (nog experimentele) opzet voor het beschrijven van gedigitaliseerde luchtfoto’s van de gemeente Houten.
 
 ## 3. Gebruik van de tools
 
-De SHACL shapes zijn geschikt voor gangbare SHACL validators maar gebruikt van het meegeleverde python script [scripts/validate.py](scripts/validate.py) wordt aanbevolen.
+De SHACL shapes zijn geschikt voor gangbare SHACL validators maar gebruik van het meegeleverde python script [scripts/validate.py](scripts/validate.py) wordt aanbevolen.
 
 ### 3.1. Installatie
 
@@ -127,10 +127,10 @@ Additionally, RAZU manages its own [thesauri](https://github.com/Regionaal-Archi
 
 #### 2.1. Formal definition of LDTO plus
 
-- [shacl/ldto-plus.ttl](shacl/ldto-plus.ttl): The LDTO Plus application profile in shacle shapes without references to RAZU thesauri.
-- [shacl/ldto-plus-razu.ttl](shacl/ldto-plus-razu.ttl): The LDTO Plus application profile in shacle shapes with references to RAZU thesauri.
+- [shacl/ldto-plus.ttl](shacl/ldto-plus.ttl): The LDTO Plus application profile in SHACL shapes without references to RAZU thesauri.
+- [shacl/ldto-plus-razu.ttl](shacl/ldto-plus-razu.ttl): The LDTO Plus application profile in SHACL shapes with references to RAZU thesauri.
 
-Although the aim is to arrive at a stable model, the shapes will be further expanded in the coming years as more types of material are loaded into the e-depot to meet the information needs. In the current state of affairs, the model is mainly based on experiments with the publication of the RAZU board archive and of aerial photographs digitized by the municipality of Houten. The [RAZU newspaper archive](https://viewer.razu.nl/) is the first collection published with LDTO plus.
+Although the aim is to arrive at a stable model, the shapes will be further expanded in the coming years as more types of material are loaded into the e-depot to meet the information needs. In the current state of affairs, the model is mainly based on experiments with the publication of the RAZU board archive and of aerial photographs digitized by the municipality of Houten. The [RAZU newspaper archive](https://viewer.razu.nl/search?q=&filters=%7B%22base%22:%7B%22archief%22:%7B%22type%22:2,%22fieldIds%22:%5B%22archief%22%5D,%22valueIds%22:%5B%22Collectie%20kranten%20RAZU%22%5D%7D%7D%7D) is the first collection published with LDTO plus.
 
 
 ### 3. Examples
