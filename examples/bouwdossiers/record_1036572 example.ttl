@@ -15,7 +15,7 @@
 @prefix razu:   <https://data.example.org/id/> .             
 @prefix po: <https://data.razu.nl/id/persoonsvermelding/> . # Thesaurus for person observations (pico)
 @prefix pn: <https://data.razu.nl/id/persoonsnaam/> .       # Thesaurus for person names
-@prefix dct: <http://purl.org/dc/terms/hasFormat> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
 
 
@@ -185,11 +185,6 @@ razu:nl-wbdrazu-g0352-403-4
     ]
     .
 
-<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.pdf>
-    a premis:File ;
-    premis:originalName "./403 - Cothen tot 1996/403-325/403-325_1-AANVRAAG-EN-VERGUNNING.pdf" . # relative to the data folder in the bag
-
-
 
 razu:nl-wbdrazu-g0352-403-5    #
     a ldto:Informatieobject ;
@@ -221,6 +216,32 @@ razu:nl-wbdrazu-g0352-403-6
         ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime; # obtainable from bag manifest
     ]
     .
+
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-1.meta.json>
+    a premis:File .
+
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-2.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-3.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-5.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-6.meta.json>
+    a premis:File .
+
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.pdf>
+    a premis:File ;
+    premis:originalName "./403 - Cothen tot 1996/403-325/403-325_1-AANVRAAG-EN-VERGUNNING.pdf" . # relative to the data folder in the bag
+
 
 <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-6.pdf> 
     a premis:File ;
