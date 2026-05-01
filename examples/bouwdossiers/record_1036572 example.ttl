@@ -111,7 +111,7 @@ razu:nl-wbdrazu-g0352-403-2    #
                 a bag:OpenbareRuimte ; # always, also when we can't find the OpenbareRuimte in the BAG
                 bag:naam "Caspargauw" ; # only required field here, we get it from the source metadata
                 bag:identificatie "0352300000000247" ; # sqlite3 bag.sqlite "select o.bagID from OpenbareRuimte o JOIN WPL w ON o.ligtIn = w.identificatie WHERE o.naam='Caspargauw' AND w.naam='Cothen'"
-                owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/{bag:identicatie}> ;
+                owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/0352300000000247>
             ] ;
             # Official bag data shows that ligtIn is used a a property of OpenbareRuimte, not of Nummeraanduiding. However, it is allowed to use it on Nummeraanduiding as well.
             # Less nesting improves the readability of the data. 
@@ -120,7 +120,7 @@ razu:nl-wbdrazu-g0352-403-2    #
                 a bag:Woonplaats ; # likely, all places are in the bag?
                 bag:identificatie "1304"; # sqlite3 bag.sqlite "select w.identificatie from OpenbareRuimte o JOIN WPL w ON o.ligtIn = w.identificatie WHERE o.naam='Caspargauw' AND w.naam='Cothen'"
                 bag:naam "Cothen" ;
-                owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/{bag:identificatie}>
+                owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/1304>
             ] ;
 
             # When the metadata provides a bag:Pand identification, we'll include like it is done here.

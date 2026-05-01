@@ -135,6 +135,7 @@ ldto_sh:BouwdossierShape
             ) ;
             sh:property [
                 sh:path schema:address ;
+                rdfs:comment "Adres moet in ieder geval een plaats (ligtIn) en straat (ligtAan) hebben." ;
                 sh:minCount 1 ;
                 sh:nodeKind sh:BlankNodeOrIRI ;
                 sh:node [
@@ -188,6 +189,168 @@ ldto_sh:BouwdossierShape
                         sh:nodeKind sh:IRI ;
                         sh:minCount 0 ;
                         sh:maxCount 1 ;
+                    ] ;
+                    sh:property [
+                        sh:path bag:ligtAan ;
+                        rdfs:comment "Verplichte eigenschap die de straat waarop het adres ligt linkt." ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                        sh:nodeKind sh:BlankNodeOrIRI ;
+                        sh:node [
+                            a sh:NodeShape ;
+                            sh:class bag:OpenbareRuimte ;
+                            sh:property [
+                                sh:path bag:naam ;
+                                sh:datatype xsd:string ;
+                                sh:minCount 1 ;
+                                sh:maxCount 1 ;
+                                sh:pattern "\\S" ;
+                            ] ;
+                            sh:property [
+                                sh:path bag:identificatie ;
+                                sh:datatype xsd:string ;
+                                sh:minCount 0 ;
+                                sh:maxCount 1 ;
+                                sh:pattern "\\S" ;
+                            ] ;
+                            sh:property [
+                                sh:path owl:sameAs ;
+                                sh:nodeKind sh:IRI ;
+                                sh:minCount 0 ;
+                                sh:maxCount 1 ;
+                            ] ;
+                            sh:sparql [
+                                a sh:SPARQLConstraint ;
+                                sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
+                                sh:select """
+                                    SELECT ?this
+                                    WHERE {
+                                        ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                                        FILTER NOT EXISTS {
+                                            ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                                            FILTER (isIRI(?same))
+                                        }
+                                    }
+                                """ ;
+                            ] ;
+                            sh:sparql [
+                                a sh:SPARQLConstraint ;
+                                sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/{bag:identificatie}." ;
+                                sh:select """
+                                    SELECT ?this
+                                    WHERE {
+                                        ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
+                                              <http://www.w3.org/2002/07/owl#sameAs> ?same .
+
+                                        FILTER (isIRI(?same))
+
+                                        BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/", STR(?id))) AS ?expected)
+                                        FILTER (?same != ?expected)
+                                    }
+                                """ ;
+                            ]
+                        ] ;
+                    ] ;
+                    sh:property [
+                        sh:path bag:ligtIn ;
+                        rdfs:comment "Verplichte eigenschap die de woonplaats waarop het adres ligt linkt." ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                        sh:nodeKind sh:BlankNodeOrIRI ;
+                        sh:node [
+                            a sh:NodeShape ;
+                            sh:class bag:Woonplaats ;
+                            sh:property [
+                                sh:path bag:naam ;
+                                sh:datatype xsd:string ;
+                                sh:minCount 1 ;
+                                sh:maxCount 1 ;
+                                sh:pattern "\\S" ;
+                            ] ;
+                            sh:property [
+                                sh:path bag:identificatie ;
+                                sh:datatype xsd:string ;
+                                sh:minCount 0 ;
+                                sh:maxCount 1 ;
+                                sh:pattern "\\S" ;
+                            ] ;
+                            sh:property [
+                                sh:path owl:sameAs ;
+                                sh:nodeKind sh:IRI ;
+                                sh:minCount 0 ;
+                                sh:maxCount 1 ;
+                            ] ;
+                            sh:sparql [
+                                a sh:SPARQLConstraint ;
+                                sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
+                                sh:select """
+                                    SELECT ?this
+                                    WHERE {
+                                        ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                                        FILTER NOT EXISTS {
+                                            ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                                            FILTER (isIRI(?same))
+                                        }
+                                    }
+                                """ ;
+                            ] ;
+                            sh:sparql [
+                                a sh:SPARQLConstraint ;
+                                sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/{bag:identificatie}." ;
+                                sh:select """
+                                    SELECT ?this
+                                    WHERE {
+                                        ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
+                                              <http://www.w3.org/2002/07/owl#sameAs> ?same .
+
+                                        FILTER (isIRI(?same))
+
+                                        BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/", STR(?id))) AS ?expected)
+                                        FILTER (?same != ?expected)
+                                    }
+                                """ ;
+                            ]
+                        ] ;
+                    ] ;
+                    sh:property [
+                        sh:path bag:maaktDeelUitVan ;
+                        rdfs:comment "Optionele eigenschap om een Pand in de BAG te linken." ;
+                        sh:minCount 0 ;
+                        sh:maxCount 1 ;
+                        sh:nodeKind sh:BlankNodeOrIRI ;
+                        sh:node [
+                            a sh:NodeShape ;
+                            sh:class bag:Pand ;
+                            sh:property [
+                                sh:path bag:identificatie ;
+                                sh:datatype xsd:string ;
+                                sh:minCount 1 ;
+                                sh:maxCount 1 ;
+                                sh:pattern "\\S" ;
+                            ] ;
+                            sh:property [
+                                sh:path owl:sameAs ;
+                                sh:nodeKind sh:IRI ;
+                                sh:minCount 1 ;
+                                sh:maxCount 1 ;
+                            ] ;
+                            sh:sparql [
+                                a sh:SPARQLConstraint ;
+                                sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/pand/{bag:identificatie}." ;
+                                sh:select """
+                                    SELECT ?this
+                                    WHERE {
+                                        ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
+                                              <http://www.w3.org/2002/07/owl#sameAs> ?same .
+
+                                        FILTER (isIRI(?same))
+
+                                        BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/pand/", STR(?id))) AS ?expected)
+                                        FILTER (?same != ?expected)
+                                    }
+                                """ ;
+                            ]
+                        ] ;
                     ] ;
                     sh:sparql [
                         a sh:SPARQLConstraint ;
