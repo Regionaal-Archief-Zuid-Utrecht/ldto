@@ -128,14 +128,14 @@ Additionally, RAZU manages its own [thesauri](https://github.com/Regionaal-Archi
 #### 2.1. Formal definition of LDTO plus
 
 - [shacl/ldto-plus.ttl](shacl/ldto-plus.ttl): The LDTO Plus application profile in SHACL shapes without references to RAZU thesauri.
-- [shacl/ldto-plus-razu.ttl](shacl/ldto-plus-razu.ttl): The LDTO Plus application profile in SHACL shapes with references to RAZU thesauri.
+- [shacl/ldto-razu.ttl](shacl/ldto-razu.ttl): The LDTO Plus application profile in SHACL shapes with references to RAZU thesauri.
 
 Although the aim is to arrive at a stable model, the shapes will be further expanded in the coming years as more types of material are loaded into the e-depot to meet the information needs. In the current state of affairs, the model is mainly based on experiments with the publication of the RAZU board archive and of aerial photographs digitized by the municipality of Houten. The [RAZU newspaper archive](https://viewer.razu.nl/search?q=&filters=%7B%22base%22:%7B%22archief%22:%7B%22type%22:2,%22fieldIds%22:%5B%22archief%22%5D,%22valueIds%22:%5B%22Collectie%20kranten%20RAZU%22%5D%7D%7D%7D) is the first collection published with LDTO plus.
 
 
 ### 3. Examples
 
-Examples of RDF metadata using LDTO Plus can be found in the 'examples' folder. All these examples are valid according to the strictest SHACL shape [(ldto-plus-razu.ttl)](shacl/ldto-plus-razu.ttl).
+Examples of RDF metadata using LDTO Plus can be found in the 'examples' folder. All these examples are valid according to the strictest SHACL shape [(ldto-razu.ttl)](shacl/ldto-razu.ttl).
 
 * [examples/kranten](examples/kranten): various example files such as use in describing the collection of digitized newspapers of the RAZU.
 * [examples/bestuursarchief.ttl](examples/bestuursarchief.ttl): a (still experimental) design used in the test phase to describe material from the RAZU board archive.
