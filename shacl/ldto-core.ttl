@@ -169,7 +169,7 @@ ldto_sh:InformatieobjectShape
         sh:path ldto:dekkingInRuimte ;
         sh:minCount 0 ;
         rdfs:comment "Indien van toepassing, verplicht." ;
-        sh:nodeKind sh:IRI
+        sh:nodeKind sh:BlankNodeOrIRI
     ] ;
     sh:property [
         sh:name "Event" ;

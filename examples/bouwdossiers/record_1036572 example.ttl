@@ -32,7 +32,11 @@ razu:nl-wbdrazu-g0352-403-1 # Toplevel 'archive', uri gemeentecode creator(see a
     # add dekkingintijd
     ldto:archiefvormer  <https://data.razu.nl/id/actor/54c9a2e607988deae23c920dae4f43e4>; # Gem. Wijk bij Duurstede
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> ; # "Archief"
-    .
+    ldto:dekkingInTijd [
+        a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
+        ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] .
 
 # are we creating an inbetween level? any reason too?
 
@@ -140,10 +144,9 @@ razu:nl-wbdrazu-g0352-403-2    #
         geo:sfWithin <https://data.razu.nl/id/perceel/ctn00/c/7> # geo:sfWithin indicates the location is within the cadastral parcel #LOWERCASE
         # see the file kadastrale-gemeentecodes.tsv
     ] ;
-
     ldto:dekkingInTijd [
         a ldto:DekkingInTijdGegevens ;
-        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/d2d98bd975f9f71657784f68554c7d2e>;   # "geldend" / "valid"
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
         ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
     ] .
 
@@ -158,7 +161,11 @@ razu:nl-wbdrazu-g0352-403-3    #
     # Niet ideaal om classificaties te combineren, maar hier zitten aanvraag en vergunning in 1 document:
     ldto:classificatie <https://data.razu.nl/id/soort/b9e9be259c9c122c5a27bea9f53633d3> ,   # aanvraag vergunning
         <https://data.razu.nl/id/soort/6c83ee878ab36b68facbf10bf20b2819>  ;                 # bouwvergunning  
-   .
+    ldto:dekkingInTijd [
+        a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
+        ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] .
 
 razu:nl-wbdrazu-g0352-403-4
     a ldto:Bestand ;
@@ -172,9 +179,9 @@ razu:nl-wbdrazu-g0352-403-4
     ldto:omvang 123456 ; # in bytes
     ldto:checksum [
         a ldto:ChecksumGegevens ;
-        ldto:algoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ; # md5
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ; # md5
         ldto:checksumWaarde "123456" ; # obtainable from bag manifest
-        ldto:checksumDatum "2025-10-16"^^xsd:date ; # obtainable from bag manifest
+        ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime # obtainable from bag manifest
     ]
     .
 
@@ -191,7 +198,11 @@ razu:nl-wbdrazu-g0352-403-5    #
     ldto:naam "Tekeningen"; # from  './403 - Cothen tot 1996/403-325/403-325_2-TEKENINGEN.pdf'
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;  #archiefstuk
     ldto:classificatie <https://data.razu.nl/id/soort/6904a889b403cfc53a8ac87427a1b041>  ; # bouwtekening
-   .
+    ldto:dekkingInTijd [
+        a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
+        ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] .
 
 razu:nl-wbdrazu-g0352-403-6
     a ldto:Bestand ;
@@ -205,9 +216,9 @@ razu:nl-wbdrazu-g0352-403-6
     ldto:omvang 123456 ; # in bytes
     ldto:checksum [
         a ldto:ChecksumGegevens ;
-        ldto:algoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ; # md5
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ; # md5
         ldto:checksumWaarde "123456" ; # obtainable from bag manifest
-        ldto:checksumDatum "2025-10-16"^^xsd:date ; # obtainable from bag manifest
+        ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime; # obtainable from bag manifest
     ]
     .
 
