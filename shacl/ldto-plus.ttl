@@ -10,6 +10,7 @@
 @prefix dcterms:  <http://purl.org/dc/terms/> .
 @prefix premis:   <http://www.loc.gov/premis/rdf/v3/> .
 @prefix schema:   <http://schema.org/> .
+@prefix bag: <http://bag.basisregistraties.overheid.nl/def/bag#> .   # But the incomplete (and incorrect ?) 'labs' LD enviroment for the BAG (https://data.labs.kadaster.nl/bag/lv/) as LD uses https://
 
 ldto_sh:plus 
     a owl:Ontology ;
@@ -192,3 +193,5 @@ ldto_sh:PublicationVolumeShape
         sh:minCount 0 ;
         sh:maxCount 1 
     ] .
+
+# ldto_sh:PublicationVolumeShape

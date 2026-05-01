@@ -140,6 +140,7 @@ def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_
             data_graph,
             shacl_graph=shapes_graph,
             inference='rdfs',
+            advanced=True,
             abort_on_first=False,
             meta_shacl=False,
             debug=False

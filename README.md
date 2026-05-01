@@ -33,6 +33,8 @@ Voorbeelden van `LDTO plus` metadata zijn te vinden in de map `examples`. Al dez
 
 * [examples/kranten](examples/kranten)
 Verschillende voorbeeldbestanden zoals gebruik bij het beschrijven van de collectie gedigitaliseerde kranten van het RAZU.
+* [examples/bouwdossiers](examples/bouwdossiers)
+Model voor bouwdossiers, een werk in uitvoering dus waarschijnlijk nog aan veranderingen onderhevig.
 * [examples/bestuursarchief.ttl](examples/bestuursarchief.ttl)
 Een in de testfase gebruikte (nog experimentele) opzet voor het beschrijven van materiaal uit het RAZU-bestuursarchief.
 * [examples/luchtfotos.ttl](examples/luchtfotos.ttl)
@@ -138,6 +140,7 @@ Although the aim is to arrive at a stable model, the shapes will be further expa
 Examples of RDF metadata using LDTO Plus can be found in the 'examples' folder. All these examples are valid according to the strictest SHACL shape [(ldto-razu.ttl)](shacl/ldto-razu.ttl).
 
 * [examples/kranten](examples/kranten): various example files such as use in describing the collection of digitized newspapers of the RAZU.
+* [examples/bouwdossiers](examples/bouwdossiers): model for building permits, a work in progress.
 * [examples/bestuursarchief.ttl](examples/bestuursarchief.ttl): a (still experimental) design used in the test phase to describe material from the RAZU board archive.
 * [examples/luchtfotos.ttl](examples/luchtfotos.ttl): a (still experimental) design used in the test phase to describe digitized aerial photographs of the municipality of Houten.
 
