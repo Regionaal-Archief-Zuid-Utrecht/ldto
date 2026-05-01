@@ -66,6 +66,8 @@ ldto_sh:NaamPropertyShape
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
+    sh:pattern "\\S" ;
+    sh:message "ldto:naam mag niet leeg zijn of enkel spaties bevatten" ;
     sh:minLength 1 .
 
 ldto_sh:InformatieobjectShape
@@ -107,7 +109,8 @@ ldto_sh:InformatieobjectShape
         sh:path ldto:omschrijving ;
         sh:datatype xsd:string ;
         sh:minCount 0 ; 
-        rdfs:comment "Een omschrijving is zeer wenselijk, maar niet vereist." ;
+        sh:pattern "\\S" ;
+        sh:message "Een omschrijving is zeer wenselijk, maar niet vereist. Als er een beschrijving is mag deze niet leeg zijn." ;
         sh:minLength 1 
     ] ;
     sh:property [

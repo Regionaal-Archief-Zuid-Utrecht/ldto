@@ -106,7 +106,7 @@ razu:nl-wbdrazu-g0352-403-2    #
 
             bag:postcode "2524AB" ;  # without space in between; see previous query
             bag:identificatie "0321200000005558" ;  # sqlite3 bag.sqlite "select n.bagID from Nummeraanduidingen n JOIN OpenbareRuimte o ON n.ligtAan = o.bagID JOIN WPL w ON n.ligtIn = w.identificatie WHERE n.huisnummer=8 AND n.huisletter IS NULL AND n.huisnummertoevoeging IS NULL AND o.naam='Caspargauw' AND w.naam='Cothen'"
-            owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/{bag:identificatie}> ;
+            owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/0321200000005558> ;
             bag:ligtAan [
                 a bag:OpenbareRuimte ; # always, also when we can't find the OpenbareRuimte in the BAG
                 bag:naam "Caspargauw" ; # only required field here, we get it from the source metadata
