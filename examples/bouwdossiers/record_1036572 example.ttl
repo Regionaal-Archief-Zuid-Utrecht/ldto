@@ -165,6 +165,14 @@ razu:nl-wbdrazu-g0352-403-3    #
         a ldto:DekkingInTijdGegevens ;
         ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
         ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] ;
+    ldto:beperkingGebruik [
+        a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/f5fb6f6efcdb8c2392af00c73b918412> ; # eerbiediging persoonlijke levenssfeer / avg
+        # hier misschien ook aangeven tot wanneer we deze beperking er op willen houden
+    ] , [ 
+        a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/c9ff6ea52d650cc82c5c04dd054aeb1f> ; # geen auteursrechtlijke beperkingen / cco0
     ] .
 
 razu:nl-wbdrazu-g0352-403-4
@@ -185,6 +193,9 @@ razu:nl-wbdrazu-g0352-403-4
     ]
     .
 
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.pdf>
+    a premis:File ;
+    premis:originalName "./403 - Cothen tot 1996/403-325/403-325_1-AANVRAAG-EN-VERGUNNING.pdf" . # relative to the data folder in the bag
 
 razu:nl-wbdrazu-g0352-403-5    #
     a ldto:Informatieobject ;
@@ -197,6 +208,13 @@ razu:nl-wbdrazu-g0352-403-5    #
         a ldto:DekkingInTijdGegevens ;
         ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
         ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] ;
+    ldto:beperkingGebruik [
+        a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/3f71885c8fdcf4390a055fcb65af0232>; # beperkt gebruik, rechten onbekend
+    ] , [ 
+        a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20>; # geen openbaarheidsbeperkingen
     ] .
 
 razu:nl-wbdrazu-g0352-403-6
@@ -217,10 +235,13 @@ razu:nl-wbdrazu-g0352-403-6
     ]
     .
 
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-6.pdf> 
+    a premis:File ;
+    premis:originalName "./403 - Cothen tot 1996/403-325/403-325_2-TEKENINGEN.pdf" . # relative to the data folder in the bag
+
 
 <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-1.meta.json>
     a premis:File .
-
 
 <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-2.meta.json>
     a premis:File .
@@ -238,14 +259,6 @@ razu:nl-wbdrazu-g0352-403-6
     a premis:File .
 
 
-<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.pdf>
-    a premis:File ;
-    premis:originalName "./403 - Cothen tot 1996/403-325/403-325_1-AANVRAAG-EN-VERGUNNING.pdf" . # relative to the data folder in the bag
-
-
-<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-6.pdf> 
-    a premis:File ;
-    premis:originalName "./403 - Cothen tot 1996/403-325/403-325_2-TEKENINGEN.pdf" . # relative to the data folder in the bag
 
 # there are two more files but they are essentially empty
 # I prefer to see if we can recognize they are empty and skip them
