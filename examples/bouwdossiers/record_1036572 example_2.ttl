@@ -1,0 +1,266 @@
+#BD_ID   |TOEGANG_ID |NUMMER |CODE   |VOORLOPIG_NUMMER   |BOUWWERK                                                   |KADNUMMER  |DATERING   |USERMUTATED    |DATEMUTATED    |TOEGANG_NUMMER |ADRS_ID    |BD_ID      |PLAATS_TEMP    |STRAAT_TEMP|HUISNUMMERS    |ROL ADRES  |DATEMUTATED    |CON_STRN_ID    |TOEGANG_NUMMER |ID         |PLAATSNAAM |STRAATNAAM |WIJKNAAM
+#1036572 |739521     |325    |       |480                |Oprichten houten schuur voor berging landbouwwerktuigen    |C 7        |1955       |SKR_01         |               |403            |4312024    |1036572    |               |           |8              |Adres      |               |4443370.0      |403            |4443370.0  |Cothen     |Caspargauw |
+
+# compared to *example.ttl this version uses a thesaurus link for bag:Woonplaats
+
+# not all namespace here are actually used here:
+@prefix pico: <https://personsincontext.org/model#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix pnv:  <https://w3id.org/pnv#> .
+@prefix schema:  <http://schema.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> . 
+@prefix bag: <http://bag.basisregistraties.overheid.nl/def/bag#> .   # But the incomplete (and incorrect ?) 'labs' LD enviroment for the BAG (https://data.labs.kadaster.nl/bag/lv/) as LD uses https://
+@prefix geo:   <http://www.opengis.net/ont/geosparql#>.
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix ldto: <https://data.razu.nl/def/ldto/> .
+@prefix razu:   <https://data.example.org/id/> .             
+@prefix po: <https://data.razu.nl/id/persoonsvermelding/> . # Thesaurus for person observations (pico)
+@prefix pn: <https://data.razu.nl/id/persoonsnaam/> .       # Thesaurus for person names
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+
+
+razu:nl-wbdrazu-g0352-403-1 # Toplevel 'archive', uri gemeentecode creator(see actor thesaurus) - {toegang} - {just a unique number} 
+    a ldto:Informatieobject ;
+    dct:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-1.meta.json> ; #dubbelcheck
+    ldto:naam "Bouwvergunningen Wijk bij Duurstede {van}-{tot}" ;
+    ldto:omschrijving "Gedigitaliseerde bouwvergunningen Rhenen {van}-{tot}." ;   # Useful to have an 'omschrijving' (?) but this example does not add much. # WB: See 'Inleiding' in the regular 'toegang' for an example of what I think we should include here: https://www.razu.nl/collectie/online-zoeken-in-archieven/?mivast=74&mizig=210&miadt=74&miview=inv2&milang=nl&mizk_alle=bouwvergunningen&micode=256#inv3t1
+    ldto:identificatie [ 
+        a ldto:IdentificatieGegevens ;
+        ldto:identificatieBron "Toegangen collectiebeheersysteem RAZU" ;
+        ldto:identificatieKenmerk "403"
+    ] ;
+    # add dekkingintijd
+    ldto:archiefvormer  <https://data.razu.nl/id/actor/54c9a2e607988deae23c920dae4f43e4>; # Gem. Wijk bij Duurstede
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> ; # "Archief"
+    ldto:dekkingInTijd [
+        a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
+        ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] .
+
+# are we creating an inbetween level? any reason too?
+
+# A 'dossier', the record above:
+razu:nl-wbdrazu-g0352-403-2    #
+    a ldto:Informatieobject ;
+    dct:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-2.meta.json> ;
+    ldto:isOnderdeelVan razu:nl-wbdrazu-g0352-403-1 ; 
+    ldto:naam "Bouwvergunning - Oprichten houten schuur voor berging landbouwwerktuigen"  ; # Always 'bouwvergunning', here we add {BOUWWERK} to create a more meaningful name.
+    ldto:omschrijving "Bouwvergunning - Oprichten houten schuur voor berging landbouwwerktuigen. Caspargauw 8 te Cothen" ; # Kind of a summary, a combination of fields from the export (object, adres en opmerkingen, opmerkingen intern).
+
+    ldto:identificatie [ 
+        a ldto:IdentificatieGegevens ;
+        ldto:identificatieBron "Gemeente Wijk bij Duurstede" ; # We should mention the system or provide more context, if possible. The source as a system, not an organization. Might go for URIs?
+        ldto:identificatieKenmerk "1"  #  Do we have such a thing here, what field is it in the metadata?
+    ] , [ 
+        a ldto:IdentificatieGegevens ;
+        ldto:identificatieBron "RAZU, inventarisnummer toegang 403" ;
+        ldto:identificatieKenmerk "{INVNUMMER}"  # Or is it in {NUMMER+CODE} changed in newer export to INVNUMMER
+    ] ;
+
+    # Using trefwoorden in a way previously suggested does not seem to be worthwile here (too much low semantic value words)
+    # ldto:trefwoord "Oprichten houten schuur voor berging landbouwwerktuigen" ;  
+
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ; # Dossier 
+    ldto:classificatie <https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c>  ; # "Bouwdossier" 
+    
+    # For this very record, we don't have any betrokkene information in the export:
+    # This gave no results: sqlite3 maisexp.sqlite3 "SELECT * FROM bd JOIN piv ON bd.BD_ID = piv.BD_ID " | grep 1036572
+    # Is it correct this info is not in the export?
+    # ldto:betrokkene [ 
+    #     a ldto:BetrokkeneGegevens ;
+    #     ldto:betrokkeneTypeRelatie <https://data.razu.nl/id/betrokkenheid/80535b4e36061f628427ba168cc4bd5c> ; # "Aanvrager"
+    #     ldto:betrokkeneActor po:po1 
+    # ] ;
+    # Same for sqlite3 maisexp.sqlite3 "SELECT * FROM bd JOIN rpiv ON bd.BD_ID = rpiv.BD_ID " | grep 1036572
+    #ldto:betrokkene [
+    #    a ldto:BetrokkeneGegevens ;
+    #    ldto:betrokkeneTypeRelatie <https://data.razu.nl/id/betrokkenheid/4bb5da084da7cbef67d5f21bcb933af7> ; # "Architect" (need to add "Aannemer" too)
+    #    ldto:betrokkeneActor po:po2 
+    #] ;
+
+    # We register the location separate from the building itself, since that fits mdto/ldto and the  'dekkingInRuimte'-predicates best.
+    ldto:dekkingInRuimte [         # Should there always be just one? It might consists of multiple 'percelen' or addresses 
+        a ldto:Locatie, bag:_AdresseerbaarObject ;  # or should / can we be more specific and use bag:Verblijfsobject but is that always correct? Not sure.
+                                                    # "Een Adresseerbaar object is een (abstract) object waaraan adressen kunnen worden toegekend"        
+        # The source metadata usually does not explicitly mention a bag:+AdresseerbaarObject (or Verblijfsobject). 
+        
+        # When it does, we'll addd the relevant bag:identificatie and owl:sameAs URI:
+        #bag:identificatie  "0321010000005558" ;
+        #owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/verblijfsobject/0321010000005558>  ;
+
+        # Each ldto:Locatie SHOULD - in this context have at least one 'address'. Since we usually will not know for sure if it is the bag-hoofdadres or bag-nevenadres, we use the generic schema:address relation
+        # We might use two (multiple) addresses is we have a current address (which is in the BAG) and a historic address (which is not in the BAG).
+        # Only current addresses have a  bag-identifier and owl:sameAs URI. Historical addresses have an rds:comment "Historisch adres, niet in huidige BAG"@nl .
+
+
+        schema:address [        
+            a schema:PostalAddress,     # always use this, since it is the most generic
+                bag:Nummeraanduiding ;  # only use this when we have any "nummer"-aanduiding
+            rdfs:label "Caspargauw 8, 3945PH Cothen" ;    # only required field here, we get it from the source metadata, add postcode, see following query
+            # sqlite3 bag.sqlite "select n.postcode from Nummeraanduidingen n JOIN OpenbareRuimte o ON n.ligtAan = o.bagID JOIN WPL w ON n.ligtIn = w.identificatie WHERE n.huisnummer=8 AND n.huisletter IS NULL AND n.huisnummertoevoeging IS NULL AND o.naam='Caspargauw' AND w.naam='Cothen'"
+            bag:huisnummer 8 ; # integer indeed!
+            # If available, add the huisletter and huisnummertoevoeging:
+            # bag:huisletter "A" ; # mind that BAG uses both upper and lower case: we normalize to uppercase only!
+            # bag:huisnummerToevoeging # is this like 'bis'?
+
+            bag:postcode "2524AB" ;  # without space in between; see previous query
+            bag:identificatie "0321200000005558" ;  # sqlite3 bag.sqlite "select n.bagID from Nummeraanduidingen n JOIN OpenbareRuimte o ON n.ligtAan = o.bagID JOIN WPL w ON n.ligtIn = w.identificatie WHERE n.huisnummer=8 AND n.huisletter IS NULL AND n.huisnummertoevoeging IS NULL AND o.naam='Caspargauw' AND w.naam='Cothen'"
+            owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/0321200000005558> ;
+            bag:ligtAan [
+                a bag:OpenbareRuimte ; # always, also when we can't find the OpenbareRuimte in the BAG
+                bag:naam "Caspargauw" ; # only required field here, we get it from the source metadata
+                bag:identificatie "0352300000000247" ; # sqlite3 bag.sqlite "select o.bagID from OpenbareRuimte o JOIN WPL w ON o.ligtIn = w.identificatie WHERE o.naam='Caspargauw' AND w.naam='Cothen'"
+                owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/0352300000000247>
+            ] ;
+            # Official bag data shows that ligtIn is used a a property of OpenbareRuimte, not of Nummeraanduiding. However, it is allowed to use it on Nummeraanduiding as well.
+            # Less nesting improves the readability of the data. 
+
+            bag:ligtIn <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151> ;  #cothen
+
+            # When the metadata provides a bag:Pand identification, we'll include like it is done here.
+            # bag:maaktDeelUitVan [
+            #     a bag:Pand; 
+            #     bag:identificatie "0321100000015890";
+            #     owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/pand/0321100000015890>
+            # ]
+        ] ;
+
+        # The location should always have geolocation, based on either the address (using geonames?, or the 'percelen' data (see below):
+        geo:hasGeometry [ 
+            a geo:Geometry ;
+            rdfs:label "Representatief punt" ;
+            geo:asWKT "POINT({longitude} {latitude})"^^geo:wktLiteral ;  #sqlite3 bag.sqlite "select n.longitude, n.latitude from Nummeraanduidingen n JOIN OpenbareRuimte o ON n.ligtAan = o.bagID JOIN WPL w ON n.ligtIn = w.identificatie WHERE n.huisnummer=8 AND n.huisletter IS NULL AND n.huisnummertoevoeging IS NULL AND o.naam='Caspargauw' AND w.naam='Cothen'"
+            # if we have a perceel, we might use that too
+            geo:crs <http://www.opengis.net/def/crs/OGC/1.3/CRS84> 
+        ] ;
+
+        # When we have 'percelen' (parcels) metadata we add them using RAZU URIs. The URI's follow a very structured pattern.
+        geo:sfWithin <https://data.razu.nl/id/perceel/ctn00/c/7> # geo:sfWithin indicates the location is within the cadastral parcel #LOWERCASE
+        # see the file kadastrale-gemeentecodes.tsv
+    ] ;
+    ldto:dekkingInTijd [
+        a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
+        ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] .
+
+### files section:
+
+razu:nl-wbdrazu-g0352-403-3    #
+    a ldto:Informatieobject ;
+    dct:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-3.meta.json> ;
+    ldto:isOnderdeelVan razu:nl-wbdrazu-g0352-403-2 ;
+    ldto:naam "Aanvraag en vergunning"; # from  "./403 - Cothen tot 1996/403-325/403-325_1-AANVRAAG-EN-VERGUNNING.pdf"
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;  #archiefstuk
+    # Niet ideaal om classificaties te combineren, maar hier zitten aanvraag en vergunning in 1 document:
+    ldto:classificatie <https://data.razu.nl/id/soort/b9e9be259c9c122c5a27bea9f53633d3> ,   # aanvraag vergunning
+        <https://data.razu.nl/id/soort/6c83ee878ab36b68facbf10bf20b2819>  ;                 # bouwvergunning  
+    ldto:dekkingInTijd [
+        a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
+        ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] ;
+    ldto:beperkingGebruik [
+        a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/f5fb6f6efcdb8c2392af00c73b918412> ; # eerbiediging persoonlijke levenssfeer / avg
+        # hier misschien ook aangeven tot wanneer we deze beperking er op willen houden
+    ] , [ 
+        a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/c9ff6ea52d650cc82c5c04dd054aeb1f> ; # geen auteursrechtlijke beperkingen / cco0
+    ] .
+
+razu:nl-wbdrazu-g0352-403-4
+    a ldto:Bestand ;
+    dct:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.meta.json> ;
+    ldto:isRepresentatieVan razu:nl-wbdrazu-g0352-403-3 ;
+    ldto:naam "nl-wbdrazu-g0352-403-4.pdf" ;
+    ldto:URLBestand <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.pdf> ;
+    schema:width 1920 ;
+    schema:height 1080 ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/307b52df680f0cb359907d78e4cc1f52>; # "fmt/354" check bag pronom-ids file
+    ldto:omvang 123456 ; # in bytes
+    ldto:checksum [
+        a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ; # md5
+        ldto:checksumWaarde "123456" ; # obtainable from bag manifest
+        ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime # obtainable from bag manifest
+    ]
+    .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.pdf>
+    a premis:File ;
+    premis:originalName "./403 - Cothen tot 1996/403-325/403-325_1-AANVRAAG-EN-VERGUNNING.pdf" . # relative to the data folder in the bag
+
+razu:nl-wbdrazu-g0352-403-5    #
+    a ldto:Informatieobject ;
+    dct:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-5.meta.json> ;
+    ldto:isOnderdeelVan razu:nl-wbdrazu-g0352-403-2 ;
+    ldto:naam "Tekeningen"; # from  './403 - Cothen tot 1996/403-325/403-325_2-TEKENINGEN.pdf'
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;  #archiefstuk
+    ldto:classificatie <https://data.razu.nl/id/soort/6904a889b403cfc53a8ac87427a1b041>  ; # bouwtekening
+    ldto:dekkingInTijd [
+        a ldto:DekkingInTijdGegevens ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
+        ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
+    ] ;
+    ldto:beperkingGebruik [
+        a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/3f71885c8fdcf4390a055fcb65af0232>; # beperkt gebruik, rechten onbekend
+    ] , [ 
+        a ldto:BeperkingGebruikGegevens ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20>; # geen openbaarheidsbeperkingen
+    ] .
+
+razu:nl-wbdrazu-g0352-403-6
+    a ldto:Bestand ;
+    dct:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-6.meta.json> ;
+    ldto:isRepresentatieVan razu:nl-wbdrazu-g0352-403-5 ;
+    ldto:naam "nl-wbdrazu-g0352-403-6.pdf" ;
+    ldto:URLBestand <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-6.pdf> ;
+    schema:width 1920 ;
+    schema:height 1080 ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/307b52df680f0cb359907d78e4cc1f52>; # "fmt/354" check bag pronom-ids file
+    ldto:omvang 123456 ; # in bytes
+    ldto:checksum [
+        a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ; # md5
+        ldto:checksumWaarde "123456" ; # obtainable from bag manifest
+        ldto:checksumDatum "2025-01-13T10:28:59.004406+00:00"^^xsd:dateTime; # obtainable from bag manifest
+    ]
+    .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-6.pdf> 
+    a premis:File ;
+    premis:originalName "./403 - Cothen tot 1996/403-325/403-325_2-TEKENINGEN.pdf" . # relative to the data folder in the bag
+
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-1.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-2.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-3.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-4.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-5.meta.json>
+    a premis:File .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-6.meta.json>
+    a premis:File .
+
+
+
+# there are two more files but they are essentially empty
+# I prefer to see if we can recognize they are empty and skip them
+# './403 - Cothen tot 1996/403-325/403-325_3-OVERIGE-DOCUMENTEN.pdf'
+# './403 - Cothen tot 1996/403-325/403-325_2-TEKENINGEN.pdf'
+
+
+# can be found using  find . -type f -name "*OVERIGE-DOCUMENTEN.pdf" -exec pdfgrep -Hi "Geen documenten" {} \;  (I'll be putting the list in the bag)
