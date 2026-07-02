@@ -122,10 +122,10 @@ def load_shapes_with_imports(shapes_type: str) -> Graph:
 
     return shapes_graph
 
-def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_patterns=None):
+def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_patterns=None, rdf_format=None):
     # Load the data graph from the input file
     data_graph = Graph()
-    data_graph.parse(input_file)
+    data_graph.parse(input_file, format=rdf_format)
 
     # Load the SHACL shapes graph
     shapes_file = Path(__file__).parent.parent / "shacl" / f"ldto-{shapes_type}.ttl"
@@ -187,6 +187,7 @@ def main():
     parser.add_argument("shapes_variant", nargs="?", default="core", help="Shapes variant (default: core)")
     parser.add_argument("--check-resolvable", action="store_true", help="Check if external URIs are resolvable")
     parser.add_argument("--ignore-pattern", action="append", help="Substring patterns to ignore when checking resolvability (can be used multiple times)")
+    parser.add_argument("--format", choices=["turtle"], default=None, help="Force RDF parse format (e.g. turtle)")
     
     args = parser.parse_args()
 
@@ -208,12 +209,12 @@ def main():
             p for p in input_path.rglob("*")
             if p.is_file() and any(str(p).endswith(ext) for ext in ALLOWED_EXTENSIONS)
         ):
-            status = validate_rdf(str(file_path), shapes_type, args.check_resolvable, args.ignore_pattern)
+            status = validate_rdf(str(file_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format)
             if status > overall_status:
                 overall_status = status
         return overall_status
     else:
-        return validate_rdf(str(input_path), shapes_type, args.check_resolvable, args.ignore_pattern)
+        return validate_rdf(str(input_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format)
 
 if __name__ == "__main__":
     sys.exit(main())

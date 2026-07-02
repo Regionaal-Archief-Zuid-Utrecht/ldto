@@ -12,7 +12,7 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix ldto: <https://data.razu.nl/def/ldto/> .
-@prefix razu:   <https://data.example.org/id/> .             
+@prefix razu:   <https://data.example.org/id/doc/> .             
 @prefix po: <https://data.razu.nl/id/persoonsvermelding/> . # Thesaurus for person observations (pico)
 @prefix pn: <https://data.razu.nl/id/persoonsnaam/> .       # Thesaurus for person names
 @prefix dct: <http://purl.org/dc/terms/> .
@@ -45,8 +45,8 @@ razu:nl-wbdrazu-g0352-403-2    #
     a ldto:Informatieobject ;
     dct:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-2.meta.json> ;
     ldto:isOnderdeelVan razu:nl-wbdrazu-g0352-403-1 ; 
-    ldto:naam "Bouwvergunning - Oprichten houten schuur voor berging landbouwwerktuigen"  ; # Always 'bouwvergunning', here we add {BOUWWERK} to create a more meaningful name.
-    ldto:omschrijving "Bouwvergunning - Oprichten houten schuur voor berging landbouwwerktuigen. Caspargauw 8 te Cothen" ; # Kind of a summary, a combination of fields from the export (object, adres en opmerkingen, opmerkingen intern).
+    ldto:naam "Bouwdossier - Oprichten houten schuur voor berging landbouwwerktuigen. Caspargauw 8 te Cothen"  ; # Always 'bouwvergunning', here we add {BOUWWERK} plus address to create a more meaningful name.
+ #   ldto:omschrijving "Opmerkingen: {opmerkingen}" ;  # we use this field only when there are additional 'unstructured' remarks in the source metadata, prepended with "Opmerkingen: "
 
     ldto:identificatie [ 
         a ldto:IdentificatieGegevens ;
@@ -54,7 +54,7 @@ razu:nl-wbdrazu-g0352-403-2    #
         ldto:identificatieKenmerk "1"  #  Do we have such a thing here, what field is it in the metadata?
     ] , [ 
         a ldto:IdentificatieGegevens ;
-        ldto:identificatieBron "RAZU, inventarisnummer toegang 403" ;
+        ldto:identificatieBron "RAZU, inventarisnummers voor toegang 403" ;
         ldto:identificatieKenmerk "{INVNUMMER}"  # Or is it in {NUMMER+CODE} changed in newer export to INVNUMMER
     ] ;
 
@@ -156,7 +156,10 @@ razu:nl-wbdrazu-g0352-403-3    #
     a ldto:Informatieobject ;
     dct:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/403/000/000/nl-wbdrazu-g0352-403-3.meta.json> ;
     ldto:isOnderdeelVan razu:nl-wbdrazu-g0352-403-2 ;
-    ldto:naam "Aanvraag en vergunning"; # from  "./403 - Cothen tot 1996/403-325/403-325_1-AANVRAAG-EN-VERGUNNING.pdf"
+    ldto:naam "Aanvraag vergunning, Bouwvergunning"; # from  "./403 - Cothen tot 1996/403-325/403-325_1-AANVRAAG-EN-VERGUNNING.pdf"
+        # when we don't have a title in the metadata, we base it on the classificaton(s), using the skos:prefLabel
+        # For combinations of classifications, we just append the labels (using ", " as a separator)
+
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;  #archiefstuk
     # Niet ideaal om classificaties te combineren, maar hier zitten aanvraag en vergunning in 1 document:
     ldto:classificatie <https://data.razu.nl/id/soort/b9e9be259c9c122c5a27bea9f53633d3> ,   # aanvraag vergunning
@@ -167,6 +170,7 @@ razu:nl-wbdrazu-g0352-403-3    #
         ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
     ] ;
     ldto:beperkingGebruik [
+        
         a ldto:BeperkingGebruikGegevens ;
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/f5fb6f6efcdb8c2392af00c73b918412> ; # eerbiediging persoonlijke levenssfeer / avg
         # hier misschien ook aangeven tot wanneer we deze beperking er op willen houden

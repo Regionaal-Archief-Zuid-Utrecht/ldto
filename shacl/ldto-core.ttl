@@ -316,7 +316,7 @@ ldto_sh:InformatieobjectShape
                 sh:path ldto:betrokkeneActor ;
                 sh:minCount 1 ;
                 sh:maxCount 1 ;
-                sh:nodeKind sh:IRI
+                sh:nodeKind sh:BlankNodeOrIRI
             ]
         ] 
     ] .

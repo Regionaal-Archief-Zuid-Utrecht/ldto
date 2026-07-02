@@ -84,6 +84,12 @@ Met `--ignore-pattern` kunnen specifieke URIs (bijvoorbeeld die een bepaalde sub
 python scripts/validate.py path/to/file.ttl --check-resolvable --ignore-pattern "example.com" --ignore-pattern "localhost"
 ```
 
+Met `--format` kan het RDF-formaat geforceerd worden. Dit is nuttig als een bestand geen standaard RDF-extensie heeft maar wel Turtle-inhoud bevat (zoals `.meta.json`):
+
+```bash
+python scripts/validate.py path/to/file.meta.json --format turtle
+```
+
 
 -----------------------------------------------------------------------------------------
 
