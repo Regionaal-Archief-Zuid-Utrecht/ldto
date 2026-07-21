@@ -1,0 +1,274 @@
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ldto: <https://data.razu.nl/def/ldto/> .
+@prefix pnv: <https://w3id.org/pnv#> .
+@prefix bag: <http://bag.basisregistraties.overheid.nl/def/bag#> .
+@prefix schema: <http://schema.org/> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1> a ldto:Informatieobject ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/000/nl-wbdrazu-g0352-008-1.meta.json> ;
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> ; # Archief
+    ldto:archiefvormer <https://data.razu.nl/id/actor/9291cee91d27d3eb899db7ca97fcc826> ;   # voormalige gemeente Langbroek
+    ldto:dekkingInTijd [ a ldto:DekkingInTijdGegevens ;
+        rdfs:label "1811-1949" ;
+        ldto:dekkingInTijdBeginDatum "1811"^^xsd:gYear ;
+        ldto:dekkingInTijdEindDatum "1949"^^xsd:gYear ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9> ] ; # Tijdsbestek
+    ldto:dekkingInRuimte 
+        <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404> , #Langbroek
+        <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151> ; # Cothen
+    ldto:identificatie [ 
+        a ldto:IdentificatieGegevens ;
+        rdfs:label "008";
+        ldto:identificatieBron "Toegangen collectiebeheersysteem RAZU" ;
+        ldto:identificatieKenmerk "008" ] ;
+    ldto:naam "Gemeentebestuur Langbroek 1811-1949" ;
+    ldto:omschrijving "Dit is een test-conversie van een ingest in voorbereiding." ;
+    rdfs:comment "Dit is een test-conversie van een ingest in voorbereiding."@nl
+.
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/000/nl-wbdrazu-g0352-008-1.meta.json> a <http://www.loc.gov/premis/rdf/v3/File> .
+
+
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-222> a ldto:Informatieobject ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/000/nl-wbdrazu-g0352-008-222.meta.json> ;
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ; # Dossier
+    ldto:archiefvormer <https://data.razu.nl/id/actor/9291cee91d27d3eb899db7ca97fcc826> ;   # voormalige gemeente Langbroek
+    rdfs:comment "Dit is een test-conversie van ingest in voorbereiding, perceeldata is handmatig toegevoeg, mogelijk een ander perceel dan ten tijde van de aanvraag."@nl ;
+    ldto:betrokkene [ 
+        a ldto:BetrokkeneGegevens ;
+        ldto:betrokkeneActor [ 
+            a ldto:Actor, <https://personsincontext.org/model#PersonObservation> ;
+            rdfs:label "Aanvrager van de bouwvergunning" ;
+            prov:hadPrimarySource <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-222> ;
+            pnv:hasName [ 
+                a pnv:PersonName ;
+                rdfs:label "J. van Doorn" ;
+                pnv:baseSurname "Doorn" ;
+                pnv:givenName "J." ;
+                pnv:literalName "J. van Doorn" ;
+                pnv:surname "van Doorn" ;
+                pnv:surnamePrefix "van" 
+            ] 
+        ] ;
+        ldto:betrokkeneTypeRelatie <https://data.razu.nl/id/betrokkenheid/80535b4e36061f628427ba168cc4bd5c>  # Aanvrager
+    ] ;
+    ldto:classificatie <https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c> ; # Bouwdossier
+    ldto:dekkingInRuimte [ 
+        a bag:_AdresseerbaarObject,
+        ldto:Locatie ;
+        schema:address [ 
+            a bag:Nummeraanduiding,
+            schema:PostalAddress ;
+            rdfs:label "Rhodensteijnselaan 26, Langbroek" ;
+            bag:huisnummer 26 ;
+            bag:ligtAan [ a bag:OpenbareRuimte ;
+                rdfs:label "Rhodensteijnselaan" ;
+                bag:bagID "0352300000000317" ;
+                bag:naam "Rhodensteijnselaan" ;
+                owl:sameAs <https://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/0352300000000317> ] ;
+            bag:ligtIn <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404> 
+        ] ;
+        geo:hasGeometry [ 
+            a geo:Geometry ;
+            rdfs:label "Representatief punt" ;
+            geo:asWKT "POINT(5.3189676 52.0178155)"^^geo:wktLiteral ;
+            geo:crs <http://www.opengis.net/def/crs/OGC/1.3/CRS84> 
+        ];
+	    geo:sfWithin <https://data.razu.nl/id/perceel/lbk02/a/2271>  
+    ] ;
+    ldto:dekkingInTijd [ 
+        a ldto:DekkingInTijdGegevens ;
+        rdfs:label "1943" ;
+        ldto:dekkingInTijdBeginDatum "1943"^^xsd:gYear ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/c8f575d14cf17c15461fc24c8eddb4f3> 
+    ] ;
+    ldto:identificatie [ 
+        a ldto:IdentificatieGegevens ;
+        rdfs:label "898" ;
+        ldto:identificatieBron "RAZU, inventarisnummers voor toegang 008" ;
+        ldto:identificatieKenmerk "898" 
+    ] ;
+    ldto:isOnderdeelVan <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1> ;
+    ldto:naam "Dossier - toegang 008 - invnummer 898 - schuur - Rhodensteijnselaan - Langbroek" .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/000/nl-wbdrazu-g0352-008-222.meta.json> a <http://www.loc.gov/premis/rdf/v3/File> .
+
+
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1722> a ldto:Informatieobject ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1722.meta.json> ;
+    rdfs:comment "Dit is een test-conversie van ingest in voorbereiding."@nl  ;
+    ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;  # Archiefstuk
+    ldto:archiefvormer <https://data.razu.nl/id/actor/9291cee91d27d3eb899db7ca97fcc826> ;   # voormalige gemeente Langbroek
+    ldto:classificatie <https://data.razu.nl/id/soort/22b96f5bcaec05c55fd50039022db638>,    # Document - niet nader gespecificeerd
+        <https://data.razu.nl/id/soort/6904a889b403cfc53a8ac87427a1b041>,                   # Bouwtekening
+        <https://data.razu.nl/id/soort/6c83ee878ab36b68facbf10bf20b2819>,                   # Bouwvergunning
+        <https://data.razu.nl/id/soort/b9e9be259c9c122c5a27bea9f53633d3> ;                  # Aanvraag vergunning
+    ldto:dekkingInTijd [ a ldto:DekkingInTijdGegevens ;
+        rdfs:label "1943" ;
+        ldto:dekkingInTijdBeginDatum "1943"^^xsd:gYear ;
+        ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/c8f575d14cf17c15461fc24c8eddb4f3> 
+    ] ;
+
+    ldto:beperkingGebruik [        
+        a ldto:BeperkingGebruikGegevens ;
+        rdfs:comment "Beperkingen ten aanzien van de openbaarheid van dit archiefstuk"@nl ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20> ; # Geen openbaarheidsbeperkingen
+        # hier misschien ook aangeven tot wanneer we deze beperking er op willen houden
+    ] , [ 
+        a ldto:BeperkingGebruikGegevens ;
+        rdfs:comment "Auteursrechtelijke beperkingen met betrekking tot dit archiefstuk"@nl ;
+        ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/3f71885c8fdcf4390a055fcb65af0232> ; # Rechten onbekend
+    ] ;
+
+    ldto:isOnderdeelVan <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-222> ;
+    ldto:naam "[geen naam vastgelegd]" .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1722.meta.json> a <http://www.loc.gov/premis/rdf/v3/File> .
+
+
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1411> a ldto:Bestand ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1411.meta.json> ;
+	rdfs:comment "Dit is een test-conversie van ingest in voorbereiding."@nl  ;
+    schema:height 3591 ;
+    schema:width 2557 ;
+    ldto:URLBestand <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1411.jpg> ; 
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/159f7f525dd2df49645de2b16beeb731> ; # identifier-> 'fmt/43'
+    ldto:checksum [ 
+        a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ; #md5sum
+        ldto:checksumDatum "2026-07-06T08:36:42.836580"^^xsd:dateTime ;
+        ldto:checksumWaarde "29ff66383b0389d7c50b80d295f4d52a" ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1722> ;
+    ldto:naam "nl-wbdrazu-g0352-008-1411.jpg" ;
+    ldto:omvang 932611 .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1411.jpg> a premis:File ;
+    premis:originalName "./8 - Langbroek, 1908-1949/8_898/8_898_0006.jpg" .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1411.meta.json> a premis:File .
+
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1412> a ldto:Bestand ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1412.meta.json> ;
+	rdfs:comment "Dit is een test-conversie van ingest in voorbereiding."@nl  ;
+    schema:height 1522 ;
+    schema:width 2547 ;
+    ldto:URLBestand <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1412.jpg> ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/159f7f525dd2df49645de2b16beeb731> ;
+    ldto:checksum [ a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+        ldto:checksumDatum "2026-07-06T08:36:42.835573"^^xsd:dateTime ;
+        ldto:checksumWaarde "83f0f922b3749ee42580098109807b65" ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1722> ;
+    ldto:naam "nl-wbdrazu-g0352-008-1412.jpg" ;
+    ldto:omvang 431010 .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1412.jpg> a premis:File ;
+    premis:originalName "./8 - Langbroek, 1908-1949/8_898/8_898_0005.jpg" .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1412.meta.json> a premis:File .
+
+
+
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1413> a ldto:Bestand ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1413.meta.json> ;
+	rdfs:comment "Dit is een test-conversie van ingest in voorbereiding."@nl  ;
+    schema:height 3193 ;
+    schema:width 2494 ;
+    ldto:URLBestand <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1413.jpg> ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/159f7f525dd2df49645de2b16beeb731> ;
+    ldto:checksum [ a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+        ldto:checksumDatum "2026-07-06T08:36:42.833497"^^xsd:dateTime ;
+        ldto:checksumWaarde "c177434d659a0beeef118f96a3782a33" ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1722> ;
+    ldto:naam "nl-wbdrazu-g0352-008-1413.jpg" ;
+    ldto:omvang 819912 .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1413.jpg> a premis:File ;
+    premis:originalName "./8 - Langbroek, 1908-1949/8_898/8_898_0003.jpg" .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1413.meta.json> a premis:File .
+
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1414> a ldto:Bestand ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1414.meta.json> ;
+	rdfs:comment "Dit is een test-conversie van ingest in voorbereiding."@nl  ;
+    schema:height 1519 ;
+    schema:width 2529 ;
+    ldto:URLBestand <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1414.jpg> ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/159f7f525dd2df49645de2b16beeb731> ;
+    ldto:checksum [ a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+        ldto:checksumDatum "2026-07-06T08:36:42.834520"^^xsd:dateTime ;
+        ldto:checksumWaarde "c9ef351cae6d045aeeb8dd891bb97b00" ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1722> ;
+    ldto:naam "nl-wbdrazu-g0352-008-1414.jpg" ;
+    ldto:omvang 409071 .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1414.jpg> a premis:File ;
+    premis:originalName "./8 - Langbroek, 1908-1949/8_898/8_898_0004.jpg" .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1414.meta.json> a premis:File .
+
+
+
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1415> a ldto:Bestand ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1415.meta.json> ;
+rdfs:comment "Dit is een test-conversie van ingest in voorbereiding."@nl  ;
+    schema:height 4663 ;
+    schema:width 6667 ;
+    ldto:URLBestand <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1415.jpg> ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/159f7f525dd2df49645de2b16beeb731> ;
+    ldto:checksum [ a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+        ldto:checksumDatum "2026-07-06T08:36:42.831354"^^xsd:dateTime ;
+        ldto:checksumWaarde "a51507e46e878b45cb0676781a636c6f" ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1722> ;
+    ldto:naam "nl-wbdrazu-g0352-008-1415.jpg" ;
+    ldto:omvang 4700608 .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1415.jpg> a premis:File ;
+    premis:originalName "./8 - Langbroek, 1908-1949/8_898/8_898_0001.jpg" .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1415.meta.json> a premis:File .
+
+
+
+
+<https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1416> a ldto:Bestand ;
+    dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1416.meta.json> ;
+	rdfs:comment "Dit is een test-conversie van ingest in voorbereiding."@nl  ;
+    schema:height 3597 ;
+    schema:width 2568 ;
+    ldto:URLBestand <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1416.jpg> ;
+    ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/159f7f525dd2df49645de2b16beeb731> ;
+    ldto:checksum [ a ldto:ChecksumGegevens ;
+        ldto:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+        ldto:checksumDatum "2026-07-06T08:36:42.832405"^^xsd:dateTime ;
+        ldto:checksumWaarde "9851b019061f3ef8dae9038ff841b467" ] ;
+    ldto:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-1722> ;
+    ldto:naam "nl-wbdrazu-g0352-008-1416.jpg" ;
+    ldto:omvang 1100855 .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1416.jpg> a premis:File ;
+    premis:originalName "./8 - Langbroek, 1908-1949/8_898/8_898_0002.jpg" .
+
+<https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1416.meta.json> a premis:File .
+
+
+
+
+
