@@ -25,7 +25,7 @@
         <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151> ; # Cothen
     ldto:identificatie [ 
         a ldto:IdentificatieGegevens ;
-        rdfs:label "008";
+        rdfs:label "Toegang 008";
         ldto:identificatieBron "Toegangen collectiebeheersysteem RAZU" ;
         ldto:identificatieKenmerk "008" ] ;
     ldto:naam "Gemeentebestuur Langbroek 1811-1949" ;

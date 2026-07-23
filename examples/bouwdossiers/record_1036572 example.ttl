@@ -26,6 +26,7 @@ razu:nl-wbdrazu-g0352-403-1 # Toplevel 'archive', uri gemeentecode creator(see a
     ldto:omschrijving "Gedigitaliseerde bouwvergunningen Rhenen {van}-{tot}." ;   # Useful to have an 'omschrijving' (?) but this example does not add much. # WB: See 'Inleiding' in the regular 'toegang' for an example of what I think we should include here: https://www.razu.nl/collectie/online-zoeken-in-archieven/?mivast=74&mizig=210&miadt=74&miview=inv2&milang=nl&mizk_alle=bouwvergunningen&micode=256#inv3t1
     ldto:identificatie [ 
         a ldto:IdentificatieGegevens ;
+        rdfs:label "Toegang 403";
         ldto:identificatieBron "Toegangen collectiebeheersysteem RAZU" ;
         ldto:identificatieKenmerk "403"
     ] ;
@@ -34,9 +35,14 @@ razu:nl-wbdrazu-g0352-403-1 # Toplevel 'archive', uri gemeentecode creator(see a
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> ; # "Archief"
     ldto:dekkingInTijd [
         a ldto:DekkingInTijdGegevens ;
+         rdfs:label "1855-" ;
         ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
         ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
-    ] .
+    ] ;
+    ldto:dekkingInRuimte # just some example data 
+        <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404> , #Langbroek
+        <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151>  # Cothen.
+    .
 
 # are we creating an inbetween level? any reason too?
 
@@ -50,10 +56,12 @@ razu:nl-wbdrazu-g0352-403-2    #
 
     ldto:identificatie [ 
         a ldto:IdentificatieGegevens ;
+        rdfs:label "1" ; # ideally with some prefix to provide context to the user that sees this label
         ldto:identificatieBron "Gemeente Wijk bij Duurstede" ; # We should mention the system or provide more context, if possible. The source as a system, not an organization. Might go for URIs?
         ldto:identificatieKenmerk "1"  #  Do we have such a thing here, what field is it in the metadata?
     ] , [ 
         a ldto:IdentificatieGegevens ;
+        rdfs:label "Inventarisnr. {}";
         ldto:identificatieBron "RAZU, inventarisnummers voor toegang 403" ;
         ldto:identificatieKenmerk "{INVNUMMER}"  # Or is it in {NUMMER+CODE} changed in newer export to INVNUMMER
     ] ;
@@ -108,6 +116,7 @@ razu:nl-wbdrazu-g0352-403-2    #
             bag:identificatie "0321200000005558" ;  # sqlite3 bag.sqlite "select n.bagID from Nummeraanduidingen n JOIN OpenbareRuimte o ON n.ligtAan = o.bagID JOIN WPL w ON n.ligtIn = w.identificatie WHERE n.huisnummer=8 AND n.huisletter IS NULL AND n.huisnummertoevoeging IS NULL AND o.naam='Caspargauw' AND w.naam='Cothen'"
             owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/0321200000005558> ;
             bag:ligtAan [
+                rdfs:label "Caspargauw" ;
                 a bag:OpenbareRuimte ; # always, also when we can't find the OpenbareRuimte in the BAG
                 bag:naam "Caspargauw" ; # only required field here, we get it from the source metadata
                 bag:identificatie "0352300000000247" ; # sqlite3 bag.sqlite "select o.bagID from OpenbareRuimte o JOIN WPL w ON o.ligtIn = w.identificatie WHERE o.naam='Caspargauw' AND w.naam='Cothen'"
@@ -116,12 +125,7 @@ razu:nl-wbdrazu-g0352-403-2    #
             # Official bag data shows that ligtIn is used a a property of OpenbareRuimte, not of Nummeraanduiding. However, it is allowed to use it on Nummeraanduiding as well.
             # Less nesting improves the readability of the data. 
 
-            bag:ligtIn [  # bag type, URI & identicatie are now in locaties thesaurus, so simply link to that
-                a bag:Woonplaats ; # likely, all places are in the bag?
-                bag:identificatie "1304"; # sqlite3 bag.sqlite "select w.identificatie from OpenbareRuimte o JOIN WPL w ON o.ligtIn = w.identificatie WHERE o.naam='Caspargauw' AND w.naam='Cothen'"
-                bag:naam "Cothen" ;
-                owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/1304>
-            ] ;
+            bag:ligtIn <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404> ;
 
             # When the metadata provides a bag:Pand identification, we'll include like it is done here.
             # bag:maaktDeelUitVan [
@@ -146,6 +150,7 @@ razu:nl-wbdrazu-g0352-403-2    #
     ] ;
     ldto:dekkingInTijd [
         a ldto:DekkingInTijdGegevens ;
+        rdfs:label "1955";
         ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
         ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
     ] .
@@ -166,11 +171,11 @@ razu:nl-wbdrazu-g0352-403-3    #
         <https://data.razu.nl/id/soort/6c83ee878ab36b68facbf10bf20b2819>  ;                 # bouwvergunning  
     ldto:dekkingInTijd [
         a ldto:DekkingInTijdGegevens ;
+        rdfs:label "1955";
         ldto:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/70a06aa707497017b24a599d24a4f9c9>;   # tijdbestek: geeft generiek aan welke periode documenten van zijn
         ldto:dekkingInTijdBeginDatum "1955"^^xsd:gYear ; # Only a startdate, a gYear since we that is what we have in the database.
     ] ;
     ldto:beperkingGebruik [
-        
         a ldto:BeperkingGebruikGegevens ;
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/f5fb6f6efcdb8c2392af00c73b918412> ; # eerbiediging persoonlijke levenssfeer / avg
         # hier misschien ook aangeven tot wanneer we deze beperking er op willen houden
@@ -215,11 +220,14 @@ razu:nl-wbdrazu-g0352-403-5    #
     ] ;
     ldto:beperkingGebruik [
         a ldto:BeperkingGebruikGegevens ;
+        rdfs:comment "Auteursrechtelijke beperkingen met betrekking tot dit archiefstuk"@nl ;
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/3f71885c8fdcf4390a055fcb65af0232>; # beperkt gebruik, rechten onbekend
     ] , [ 
         a ldto:BeperkingGebruikGegevens ;
+        rdfs:comment "Beperkingen ten aanzien van de openbaarheid van dit archiefstuk"@nl ;
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20>; # geen openbaarheidsbeperkingen
-    ] .
+    ] 
+    .
 
 razu:nl-wbdrazu-g0352-403-6
     a ldto:Bestand ;
