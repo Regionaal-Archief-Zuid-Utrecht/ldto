@@ -84,6 +84,13 @@
         ];
 	    geo:sfWithin <https://data.razu.nl/id/perceel/lbk02/a/2271>  
     ] ;
+    # example / proposal of how to add a pand: 
+    schema:about [ 
+        a bag:Pand ;
+        rdfs:label "Pand 0340100000325586" ;
+        bag:bagID "0340100000325586" ;
+        owl:sameAs <https://bag.basisregistraties.overheid.nl/bag/id/pand/0340100000325586>
+    ] ;
     ldto:dekkingInTijd [ 
         a ldto:DekkingInTijdGegevens ;
         rdfs:label "1943" ;
