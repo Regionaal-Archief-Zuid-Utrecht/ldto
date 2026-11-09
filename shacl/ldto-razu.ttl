@@ -128,6 +128,11 @@ ldto_sh:BouwdossierShape
         sh:minCount 1 ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         rdfs:comment "Een IRI-verwijzing naar een elders beschreven locatie volstaat; een inline locatie (blank node) wordt gevalideerd door ldto_sh:BouwdossierLocatieShape." ;
+    ] ;
+    sh:property [
+        sh:path ldto:identificatie ;
+        sh:minCount 1 ;
+        rdfs:comment "Een bouwdossier heeft minimaal één ldto:identificatie (bijvoorbeeld het inventarisnummer)." ;
     ] .
 
 

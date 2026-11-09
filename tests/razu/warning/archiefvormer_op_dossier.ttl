@@ -16,6 +16,12 @@ razu:g0352-403-2
     ldto:isOnderdeelVan razu:g0352-403-1 ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ;
     ldto:classificatie <https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c> ;
+    ldto:identificatie [
+        a ldto:IdentificatieGegevens ;
+        rdfs:label "Inventarisnummer 325" ;
+        ldto:identificatieBron "RAZU, inventarisnummers voor toegang 403" ;
+        ldto:identificatieKenmerk "325"
+    ] ;
     ldto:archiefvormer <https://data.razu.nl/id/actor/54c9a2e607988deae23c920dae4f43e4> ;
     ldto:dekkingInTijd [
         a ldto:DekkingInTijdGegevens ;

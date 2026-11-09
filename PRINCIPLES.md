@@ -35,8 +35,8 @@ The RAZU edepot requires level 3 compliance. A usecase for level 2 compliance va
 
 In addition to what MDTO and thus LDTO requires (LDTO-core), there are additional requirements for RAZU RDF entities.
 
-- The ldto:aggreggatieniveau predicate is required for each Informatieobject and should point to a term in the "aggregatieniveau"-thesaurus.
-- The ldto:classificatie predicate is required for each Informatieobject and should point to a term in the "soort"-thesaurus.
+- The ldto:aggreggatieniveau predicate is required for each Informatieobject and should point to a term in the "aggregatieniveau"-thesaurus (<https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee>).
+- The ldto:classificatie predicate is required for each Informatieobject and should point to a term in the "soort"-thesaurus (<https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a>).
 
 
 
@@ -46,6 +46,9 @@ TODO
 
 ### Principles for a newspaper collection
 
+From a collection perspective, there is a single archive consisting of series, where each series aggregates a title. A series *is* not the title itself — the title is considered an abstract entity — but rather *concerns* a title, expressed via `schema:mainEntity`. The (abstract) bibliographic title is modelled as a `schema:Newspaper`. A series consists of file items (*archiefstukken*), each of which *concerns* an issue. These too are linked to the abstract bibliographic issue via `schema:mainEntity`, modelled as a `schema:PublicationIssue`.
+
+Pages as such do not occur in the model. They are represented by files carrying a sequence number (`schema:position`) that indicates the order of the pages within the issue. For each page there may be multiple files, for example an ALTO-XML file, an image (the scan), and sometimes a second image format as well. Although a page does not occur as such in the RDF, it can still be identified by a URI: the URI of the issue followed by `#{page-number}`. This identifier can be useful, for example for page references in the Elasticsearch index.
 
 
 ### Principles for an archive with bouwvergunningen
