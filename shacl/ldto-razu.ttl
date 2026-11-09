@@ -127,297 +127,544 @@ ldto_sh:BouwdossierShape
         sh:path ldto:dekkingInRuimte ;
         sh:minCount 1 ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:node [
-            a sh:NodeShape ;
-            sh:and (
-                [ sh:class ldto:Locatie ]
-                [ sh:class bag:_AdresseerbaarObject ]
-            ) ;
-            sh:property [
-                sh:path schema:address ;
-                rdfs:comment "Adres moet in ieder geval een plaats (ligtIn) en straat (ligtAan) hebben." ;
-                sh:minCount 1 ;
-                sh:nodeKind sh:BlankNodeOrIRI ;
-                sh:node [
-                    a sh:NodeShape ;
-                    sh:and (
-                        [ sh:class schema:PostalAddress ]
-                        [ sh:class bag:Nummeraanduiding ]
-                    ) ;
-                    sh:property [
-                        sh:path rdfs:label ;
-                        sh:minCount 1 ;
-                        rdfs:comment "Bijvoorbeeld 'Caspargauw 8, 3945PH Cothen'" ;
-                    ] ;
-                    sh:property [
-                        sh:path bag:huisnummer ;
-                        sh:datatype xsd:integer ;
-                        sh:minCount 0 ;
-                        sh:maxCount 1 ;
-                    ] ;
-                    sh:property [
-                        sh:path bag:huisletter ;
-                        sh:datatype xsd:string ;
-                        sh:minCount 0 ;
-                        sh:maxCount 1 ;
-                        sh:pattern "^[A-Z]$" ;
-                        sh:message "Huisletter moet een hoofdletter zijn" ;
-                    ] ;
-                    sh:property [
-                        sh:path bag:huisnummerToevoeging ;
-                        sh:datatype xsd:string ;
-                        sh:minCount 0 ;
-                        sh:maxCount 1 ;
-                    ] ;
-                        sh:property [
-                            sh:path bag:postcode ;
-                            sh:datatype xsd:string ;
-                            sh:minCount 0 ;
-                            sh:maxCount 1 ;
-                            sh:pattern "^[1-9][0-9]{3}[A-Z]{2}$" ;
-                            sh:message "Postcode moet voldoen aan het formaat 1234AB" ;
-                        ] ;
-                    sh:property [
-                        sh:path bag:identificatie ;
-                        sh:datatype xsd:string ;
-                        sh:minCount 0 ;
-                        sh:maxCount 1 ;
-                        sh:pattern "\\S" ;
-                    ] ;
-                    sh:property [
-                        sh:path owl:sameAs ;
-                        sh:nodeKind sh:IRI ;
-                        sh:minCount 0 ;
-                        sh:maxCount 1 ;
-                    ] ;
-                    sh:property [
-                        sh:path bag:ligtAan ;
-                        rdfs:comment "Verplichte eigenschap die de straat waarop het adres ligt linkt." ;
-                        sh:minCount 1 ;
-                        sh:maxCount 1 ;
-                        sh:nodeKind sh:BlankNodeOrIRI ;
-                        sh:node [
-                            a sh:NodeShape ;
-                            sh:class bag:OpenbareRuimte ;
-                            sh:property [
-                                sh:path bag:naam ;
-                                sh:datatype xsd:string ;
-                                sh:minCount 1 ;
-                                sh:maxCount 1 ;
-                                sh:pattern "\\S" ;
-                            ] ;
-                            sh:property [
-                                sh:path bag:identificatie ;
-                                sh:datatype xsd:string ;
-                                sh:minCount 0 ;
-                                sh:maxCount 1 ;
-                                sh:pattern "\\S" ;
-                            ] ;
-                            sh:property [
-                                sh:path owl:sameAs ;
-                                sh:nodeKind sh:IRI ;
-                                sh:minCount 0 ;
-                                sh:maxCount 1 ;
-                            ] ;
-                            sh:sparql [
-                                a sh:SPARQLConstraint ;
-                                sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
-                                sh:select """
-                                    SELECT ?this
-                                    WHERE {
-                                        ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
-                                        FILTER NOT EXISTS {
-                                            ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
-                                            FILTER (isIRI(?same))
-                                        }
-                                    }
-                                """ ;
-                            ] ;
-                            sh:sparql [
-                                a sh:SPARQLConstraint ;
-                                sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/{bag:identificatie}." ;
-                                sh:select """
-                                    SELECT ?this
-                                    WHERE {
-                                        ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
-                                              <http://www.w3.org/2002/07/owl#sameAs> ?same .
+        rdfs:comment "Een IRI-verwijzing naar een elders beschreven locatie volstaat; een inline locatie (blank node) wordt gevalideerd door ldto_sh:BouwdossierLocatieShape." ;
+    ] .
 
-                                        FILTER (isIRI(?same))
 
-                                        BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/", STR(?id))) AS ?expected)
-                                        FILTER (?same != ?expected)
-                                    }
-                                """ ;
-                            ]
-                        ] ;
-                    ] ;
-                    sh:property [
-                        sh:path bag:ligtIn ;
-                        rdfs:comment "Verplichte eigenschap die de woonplaats waarop het adres ligt linkt." ;
-                        sh:minCount 1 ;
-                        sh:maxCount 1 ;
-                        sh:or (
-                            [ sh:nodeKind sh:IRI ]
-                            [
-                                sh:nodeKind sh:BlankNode ;
-                                sh:node [
-                                    a sh:NodeShape ;
-                                    sh:class bag:Woonplaats ;
-                                    sh:property [
-                                        sh:path bag:naam ;
-                                        sh:datatype xsd:string ;
-                                        sh:minCount 1 ;
-                                        sh:maxCount 1 ;
-                                        sh:pattern "\\S" ;
-                                    ] ;
-                                    sh:property [
-                                        sh:path bag:identificatie ;
-                                        sh:datatype xsd:string ;
-                                        sh:minCount 0 ;
-                                        sh:maxCount 1 ;
-                                        sh:pattern "\\S" ;
-                                    ] ;
-                                    sh:property [
-                                        sh:path owl:sameAs ;
-                                        sh:nodeKind sh:IRI ;
-                                        sh:minCount 0 ;
-                                        sh:maxCount 1 ;
-                                    ] ;
-                                    sh:sparql [
-                                        a sh:SPARQLConstraint ;
-                                        sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
-                                        sh:select """
-                                            SELECT ?this
-                                            WHERE {
-                                                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
-                                                FILTER NOT EXISTS {
-                                                    ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
-                                                    FILTER (isIRI(?same))
-                                                }
-                                            }
-                                        """ ;
-                                    ] ;
-                                    sh:sparql [
-                                        a sh:SPARQLConstraint ;
-                                        sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/{bag:identificatie}." ;
-                                        sh:select """
-                                            SELECT ?this
-                                            WHERE {
-                                                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
-                                                      <http://www.w3.org/2002/07/owl#sameAs> ?same .
+# Een inline (blank node) locatie van een bouwdossier: de locatiegegevens staan
+# dan in dezelfde graaf. Als ldto:dekkingInRuimte een IRI is, volstaat de
+# verwijzing zelf.
+ldto_sh:BouwdossierLocatieShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?io a <https://data.razu.nl/def/ldto/Informatieobject> ;
+                    <https://data.razu.nl/def/ldto/aggregatieniveau> <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ;
+                    <https://data.razu.nl/def/ldto/classificatie> <https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c> ;
+                    <https://data.razu.nl/def/ldto/dekkingInRuimte> ?this .
+                FILTER(isBlank(?this))
+            }
+        """ ;
+    ] ;
+    sh:and (
+        [ sh:class ldto:Locatie ]
+        [ sh:class bag:Verblijfsobject ]
+    ) ;
+    sh:property [
+        sh:path schema:address ;
+        rdfs:comment "Adres moet in ieder geval een plaats (ligtIn) en straat (ligtAan) hebben. Een IRI-verwijzing volstaat; een inline adres (blank node) wordt gevalideerd door ldto_sh:AdresShape." ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+    sh:property [
+        sh:path schema:address ;
+        sh:severity sh:Warning ;
+        sh:message "Een adres-URI hoort het patroon https://data.razu.nl/id/adres/{16-cijferige nummeraanduiding} of https://data.razu.nl/id/adres/hist-{12 hex} te volgen." ;
+        sh:or (
+            [ sh:nodeKind sh:BlankNode ]
+            [ sh:pattern "^https://data\\.razu\\.nl/id/adres/(\\d{16}|hist-[0-9a-f]{12})$" ]
+        ) ;
+    ] ;
+    sh:property [
+        sh:path bag:maaktDeelUitVan ;
+        rdfs:comment "Optionele eigenschap om een Pand in de BAG te linken. Een IRI-verwijzing volstaat; een inline Pand (blank node) wordt gevalideerd door ldto_sh:PandShape." ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+    sh:property [
+        sh:path bag:identificatie ;
+        rdfs:comment "Optionele BAG-identificatie van het Verblijfsobject." ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:pattern "^\\S+$" ;
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                FILTER NOT EXISTS {
+                    ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                    FILTER (isIRI(?same))
+                }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/verblijfsobject/{bag:identificatie}." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
+                      <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                FILTER (isIRI(?same))
+                BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/verblijfsobject/", STR(?id))) AS ?expected)
+                FILTER (?same != ?expected)
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path geo:hasGeometry ;
+        rdfs:comment "Een IRI-verwijzing volstaat; een inline geometrie (blank node) wordt gevalideerd door ldto_sh:GeometryShape." ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+    sh:property [
+        rdfs:comment "Als we metadata over 'percelen' hebben, voegen we die toe met RAZU-URI's. Die URI's volgen een vast patroon, bijvoorbeeld <https://data.razu.nl/id/perceel/ctn00/c/7>" ;
+        sh:path geo:sfWithin ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:pattern "^https://data\\.razu\\.nl/id/perceel/[a-z]+\\d+/[a-z]{1,2}/\\d+$" ;
+        sh:message "geo:sfWithin moet een RAZU-perceel-URI zijn, bijvoorbeeld https://data.razu.nl/id/perceel/ctn00/c/7" ;
+    ] .
 
-                                                FILTER (isIRI(?same))
 
-                                                BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/", STR(?id))) AS ?expected)
-                                                FILTER (?same != ?expected)
-                                            }
-                                        """ ;
-                                    ]
-                                ]
-                            ]
-                        ) ;
-                    ] ;
-                    sh:property [
-                        sh:path bag:maaktDeelUitVan ;
-                        rdfs:comment "Optionele eigenschap om een Pand in de BAG te linken." ;
-                        sh:minCount 0 ;
-                        sh:maxCount 1 ;
-                        sh:nodeKind sh:BlankNodeOrIRI ;
-                        sh:node [
-                            a sh:NodeShape ;
-                            sh:class bag:Pand ;
-                            sh:property [
-                                sh:path bag:identificatie ;
-                                sh:datatype xsd:string ;
-                                sh:minCount 1 ;
-                                sh:maxCount 1 ;
-                                sh:pattern "\\S" ;
-                            ] ;
-                            sh:property [
-                                sh:path owl:sameAs ;
-                                sh:nodeKind sh:IRI ;
-                                sh:minCount 1 ;
-                                sh:maxCount 1 ;
-                            ] ;
-                            sh:sparql [
-                                a sh:SPARQLConstraint ;
-                                sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/pand/{bag:identificatie}." ;
-                                sh:select """
-                                    SELECT ?this
-                                    WHERE {
-                                        ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
-                                              <http://www.w3.org/2002/07/owl#sameAs> ?same .
+# Een adres met de volledige adresbeschrijving: inline (blank node) bij de
+# locatie van een bouwdossier, of in de adres-referentielijst (dan is de
+# URI voldoende verwijzing). Zie examples/bouwdossiers/README.md.
+# Let op: ldto_sh:HistorischAdresShape gebruikt dezelfde target-query; houd ze synchroon.
+ldto_sh:AdresShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                {
+                    ?this a <http://schema.org/PostalAddress> .
+                } UNION {
+                    ?io a <https://data.razu.nl/def/ldto/Informatieobject> ;
+                        <https://data.razu.nl/def/ldto/aggregatieniveau> <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ;
+                        <https://data.razu.nl/def/ldto/classificatie> <https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c> ;
+                        <https://data.razu.nl/def/ldto/dekkingInRuimte> ?loc .
+                    ?loc <http://schema.org/address> ?this .
+                    FILTER(isBlank(?this))
+                }
+            }
+        """ ;
+    ] ;
+    sh:class schema:PostalAddress ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        rdfs:comment "Bijvoorbeeld 'Caspargauw 8, 3945PH Cothen'" ;
+    ] ;
+    sh:property [
+        sh:path bag:huisnummer ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path bag:huisletter ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:pattern "^[A-Z]$" ;
+        sh:message "Huisletter moet een hoofdletter zijn" ;
+    ] ;
+    sh:property [
+        sh:path bag:huisnummerToevoeging ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path bag:postcode ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:pattern "^[1-9][0-9]{3}[A-Z]{2}$" ;
+        sh:message "Postcode moet voldoen aan het formaat 1234AB" ;
+    ] ;
+    sh:property [
+        sh:path bag:identificatie ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:pattern "^\\S+$" ;
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path bag:ligtAan ;
+        rdfs:comment "Verplichte eigenschap die de straat waarop het adres ligt linkt. Een IRI-verwijzing volstaat; een inline OpenbareRuimte (blank node) wordt gevalideerd door ldto_sh:OpenbareRuimteShape." ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+    sh:property [
+        sh:path bag:ligtIn ;
+        rdfs:comment "Verplichte eigenschap die de woonplaats waarop het adres ligt linkt. Een IRI-verwijzing volstaat; een inline Woonplaats (blank node) wordt gevalideerd door ldto_sh:WoonplaatsShape." ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                FILTER NOT EXISTS {
+                    ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                    FILTER (isIRI(?same))
+                }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/{bag:identificatie}." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
+                      <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                FILTER (isIRI(?same))
+                BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/", STR(?id))) AS ?expected)
+                FILTER (?same != ?expected)
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Een adres met bag:identificatie is een actueel BAG-adres en moet ook a bag:Nummeraanduiding zijn." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                FILTER NOT EXISTS {
+                    ?this a <http://bag.basisregistraties.overheid.nl/def/bag#Nummeraanduiding> .
+                }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "De URI van een actueel adres moet https://data.razu.nl/id/adres/{bag:identificatie} zijn." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                FILTER (isIRI(?this))
+                FILTER (STRSTARTS(STR(?this), "https://data.razu.nl/id/adres/"))
+                BIND(IRI(CONCAT("https://data.razu.nl/id/adres/", STR(?id))) AS ?expected)
+                FILTER (?this != ?expected)
+            }
+        """ ;
+    ] .
 
-                                        FILTER (isIRI(?same))
 
-                                        BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/pand/", STR(?id))) AS ?expected)
-                                        FILTER (?same != ?expected)
-                                    }
-                                """ ;
-                            ]
-                        ] ;
-                    ] ;
-                    sh:sparql [
-                        a sh:SPARQLConstraint ;
-                        sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
-                        sh:select """
-                            SELECT ?this
-                            WHERE {
-                                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
-                                FILTER NOT EXISTS {
-                                    ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
-                                    FILTER (isIRI(?same))
-                                }
-                            }
-                        """ ;
-                    ] ;
-                    sh:sparql [
-                        a sh:SPARQLConstraint ;
-                        sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/{bag:identificatie}." ;
-                        sh:select """
-                            SELECT ?this
-                            WHERE {
-                                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
-                                      <http://www.w3.org/2002/07/owl#sameAs> ?same .
+# Een (historisch) adres zonder bag:identificatie hoort een rdfs:comment te
+# hebben, bijvoorbeeld 'Historisch adres, niet in huidige BAG'.
+# Let op: de target-query is identiek aan die van ldto_sh:AdresShape; houd ze synchroon.
+ldto_sh:HistorischAdresShape
+    a sh:NodeShape ;
+    sh:severity sh:Warning ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                {
+                    ?this a <http://schema.org/PostalAddress> .
+                } UNION {
+                    ?io a <https://data.razu.nl/def/ldto/Informatieobject> ;
+                        <https://data.razu.nl/def/ldto/aggregatieniveau> <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ;
+                        <https://data.razu.nl/def/ldto/classificatie> <https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c> ;
+                        <https://data.razu.nl/def/ldto/dekkingInRuimte> ?loc .
+                    ?loc <http://schema.org/address> ?this .
+                    FILTER(isBlank(?this))
+                }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Een (historisch) adres zonder bag:identificatie hoort een rdfs:comment te hebben, bijvoorbeeld 'Historisch adres, niet in huidige BAG'." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                FILTER NOT EXISTS {
+                    ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                }
+                FILTER NOT EXISTS {
+                    ?this <http://www.w3.org/2000/01/rdf-schema#comment> ?c .
+                }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "bag:Nummeraanduiding hoort alleen gebruikt te worden als er ook een bag:identificatie is." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this a <http://bag.basisregistraties.overheid.nl/def/bag#Nummeraanduiding> .
+                FILTER NOT EXISTS {
+                    ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                }
+            }
+        """ ;
+    ] .
 
-                                FILTER (isIRI(?same))
 
-                                BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/", STR(?id))) AS ?expected)
-                                FILTER (?same != ?expected)
-                            }
-                        """ ;
-                    ] ;
-                    
-                ] ;
-            ] ;
-            sh:property [
-                sh:path geo:hasGeometry ;
-                sh:minCount 1 ;
-                sh:nodeKind sh:BlankNodeOrIRI ;
-                sh:node [
-                    a sh:NodeShape ;
-                    sh:class geo:Geometry ;
-                    sh:property [
-                        sh:path rdfs:label ;
-                        sh:minCount 1 ;
-                        rdfs:comment "Bijvoorbeeld 'Representatief punt'" ;
-                    ] ;
-                    sh:property [
-                        sh:path geo:asWKT ;
-                        sh:minCount 1 ;
-                    ] ;
-                    sh:property [
-                        sh:path geo:crs ;
-                        sh:minCount 1 ;
-                        sh:hasValue <http://www.opengis.net/def/crs/OGC/1.3/CRS84> ;
-                    ]
-                ] ;
-            ] ;
-            sh:property [
-                rdfs:comment "Als we metadata over 'percelen' hebben, voegen we die toe met RAZU-URI's. Die URI's volgen een vast patroon, bijvoorbeeld <https://data.razu.nl/id/perceel/ctn00/c/7>" ;
-                sh:path geo:sfWithin ;
-                sh:minCount 0 ;
-                sh:nodeKind sh:IRI ;
-            ]
-        ] ;
+# Een inline (blank node) OpenbareRuimte: de BAG-gegevens staan dan in dezelfde
+# graaf. Als bag:ligtAan een IRI is, volstaat de verwijzing zelf.
+ldto_sh:OpenbareRuimteShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?node <http://bag.basisregistraties.overheid.nl/def/bag#ligtAan> ?this .
+                FILTER(isBlank(?this))
+            }
+        """ ;
+    ] ;
+    sh:class bag:OpenbareRuimte ;
+    sh:property [
+        sh:path bag:naam ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "^\\S+( \\S+)*$" ;
+    ] ;
+    sh:property [
+        sh:path bag:identificatie ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:pattern "^\\S+$" ;
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                FILTER NOT EXISTS {
+                    ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                    FILTER (isIRI(?same))
+                }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/{bag:identificatie}." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
+                      <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                FILTER (isIRI(?same))
+                BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/", STR(?id))) AS ?expected)
+                FILTER (?same != ?expected)
+            }
+        """ ;
+    ] .
+
+
+# Een inline (blank node) Woonplaats: de BAG-gegevens staan dan in dezelfde
+# graaf. Als bag:ligtIn een IRI is, volstaat de verwijzing zelf.
+ldto_sh:WoonplaatsShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?node <http://bag.basisregistraties.overheid.nl/def/bag#ligtIn> ?this .
+                FILTER(isBlank(?this))
+            }
+        """ ;
+    ] ;
+    sh:class bag:Woonplaats ;
+    sh:property [
+        sh:path bag:naam ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "^\\S+( \\S+)*$" ;
+    ] ;
+    sh:property [
+        sh:path bag:identificatie ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:pattern "^\\S+$" ;
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Als bag:identificatie is ingevuld, moet er ook een owl:sameAs zijn." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id .
+                FILTER NOT EXISTS {
+                    ?this <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                    FILTER (isIRI(?same))
+                }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/{bag:identificatie}." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
+                      <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                FILTER (isIRI(?same))
+                BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/", STR(?id))) AS ?expected)
+                FILTER (?same != ?expected)
+            }
+        """ ;
+    ] .
+
+
+# Een inline (blank node) Pand: de BAG-gegevens staan dan in dezelfde graaf.
+# Als bag:maaktDeelUitVan een IRI is, volstaat de verwijzing zelf.
+ldto_sh:PandShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?node <http://bag.basisregistraties.overheid.nl/def/bag#maaktDeelUitVan> ?this .
+                FILTER(isBlank(?this))
+            }
+        """ ;
+    ] ;
+    sh:class bag:Pand ;
+    sh:property [
+        sh:path bag:identificatie ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "^\\S+$" ;
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "owl:sameAs moet gelijk zijn aan http://bag.basisregistraties.overheid.nl/bag/id/pand/{bag:identificatie}." ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <http://bag.basisregistraties.overheid.nl/def/bag#identificatie> ?id ;
+                      <http://www.w3.org/2002/07/owl#sameAs> ?same .
+                FILTER (isIRI(?same))
+                BIND(IRI(CONCAT("http://bag.basisregistraties.overheid.nl/bag/id/pand/", STR(?id))) AS ?expected)
+                FILTER (?same != ?expected)
+            }
+        """ ;
+    ] .
+
+
+# Een inline (blank node) geometrie: de gegevens staan dan in dezelfde graaf.
+# Als geo:hasGeometry een IRI is, volstaat de verwijzing zelf.
+ldto_sh:GeometryShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?node <http://www.opengis.net/ont/geosparql#hasGeometry> ?this .
+                FILTER(isBlank(?this))
+            }
+        """ ;
+    ] ;
+    sh:class geo:Geometry ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        rdfs:comment "Bijvoorbeeld 'Representatief punt'" ;
+    ] ;
+    sh:property [
+        sh:path geo:asWKT ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path geo:crs ;
+        sh:minCount 1 ;
+        sh:hasValue <http://www.opengis.net/def/crs/OGC/1.3/CRS84> ;
+    ] .
+
+
+# Een rdfs:label op IdentificatieGegevens is niet verplicht maar wel gewenst:
+# geef het kenmerk context voor de gebruiker, bijvoorbeeld 'Inventarisnr. 325'.
+ldto_sh:IdentificatieGegevensShape
+    a sh:NodeShape ;
+    sh:targetClass ldto:IdentificatieGegevens ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+    ] .
+
+
+# ldto:archiefvormer hoort alleen op een informatieobject met
+# aggregatieniveau 'archief'.
+ldto_sh:ArchiefvormerShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            SELECT ?this
+            WHERE {
+                ?this <https://data.razu.nl/def/ldto/archiefvormer> ?av .
+                FILTER NOT EXISTS {
+                    ?this <https://data.razu.nl/def/ldto/aggregatieniveau> <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> .
+                }
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path ldto:archiefvormer ;
+        sh:maxCount 0 ;
+        sh:severity sh:Warning ;
+        sh:message "ldto:archiefvormer hoort alleen op een informatieobject met ldto:aggregatieniveau 'archief' (<https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705>)." ;
     ] .

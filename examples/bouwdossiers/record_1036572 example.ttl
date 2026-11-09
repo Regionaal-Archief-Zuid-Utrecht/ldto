@@ -1,7 +1,10 @@
+# an example of a bouwdossier
+# based on following data
+
 #BD_ID   |TOEGANG_ID |NUMMER |CODE   |VOORLOPIG_NUMMER   |BOUWWERK                                                   |KADNUMMER  |DATERING   |USERMUTATED    |DATEMUTATED    |TOEGANG_NUMMER |ADRS_ID    |BD_ID      |PLAATS_TEMP    |STRAAT_TEMP|HUISNUMMERS    |ROL ADRES  |DATEMUTATED    |CON_STRN_ID    |TOEGANG_NUMMER |ID         |PLAATSNAAM |STRAATNAAM |WIJKNAAM
 #1036572 |739521     |325    |       |480                |Oprichten houten schuur voor berging landbouwwerktuigen    |C 7        |1955       |SKR_01         |               |403            |4312024    |1036572    |               |           |8              |Adres      |               |4443370.0      |403            |4443370.0  |Cothen     |Caspargauw |
 
-# not all namespace here are actually used here:
+
 @prefix pico: <https://personsincontext.org/model#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix pnv:  <https://w3id.org/pnv#> .
@@ -44,8 +47,6 @@ razu:nl-wbdrazu-g0352-403-1 # Toplevel 'archive', uri gemeentecode creator(see a
         <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151>  # Cothen.
     .
 
-# are we creating an inbetween level? any reason too?
-
 # A 'dossier', the record above:
 razu:nl-wbdrazu-g0352-403-2    #
     a ldto:Informatieobject ;
@@ -87,11 +88,12 @@ razu:nl-wbdrazu-g0352-403-2    #
     #    ldto:betrokkeneActor po:po2 
     #] ;
 
+
+
     # We register the location separate from the building itself, since that fits mdto/ldto and the  'dekkingInRuimte'-predicates best.
     ldto:dekkingInRuimte [         # Should there always be just one? It might consists of multiple 'percelen' or addresses 
-        a ldto:Locatie, bag:_AdresseerbaarObject ;  # or should / can we be more specific and use bag:Verblijfsobject but is that always correct? Not sure.
-                                                    # "Een Adresseerbaar object is een (abstract) object waaraan adressen kunnen worden toegekend"        
-        # The source metadata usually does not explicitly mention a bag:+AdresseerbaarObject (or Verblijfsobject). 
+        a ldto:Locatie, bag:Verblijfsobject ;  # 'stepup' node to a bag:Pand; the abstract bag:_AdresseerbaarObject is not used
+        # The source metadata usually does not explicitly mention a bag:Verblijfsobject. 
         
         # When it does, we'll addd the relevant bag:identificatie and owl:sameAs URI:
         #bag:identificatie  "0321010000005558" ;
@@ -104,7 +106,7 @@ razu:nl-wbdrazu-g0352-403-2    #
 
         schema:address [        
             a schema:PostalAddress,     # always use this, since it is the most generic
-                bag:Nummeraanduiding ;  # only use this when we have any "nummer"-aanduiding
+                bag:Nummeraanduiding ;  # only use this when we have a bag "nummer"-aanduiding with and bag:identificatie
             rdfs:label "Caspargauw 8, 3945PH Cothen" ;    # only required field here, we get it from the source metadata, add postcode, see following query
             # sqlite3 bag.sqlite "select n.postcode from Nummeraanduidingen n JOIN OpenbareRuimte o ON n.ligtAan = o.bagID JOIN WPL w ON n.ligtIn = w.identificatie WHERE n.huisnummer=8 AND n.huisletter IS NULL AND n.huisnummertoevoeging IS NULL AND o.naam='Caspargauw' AND w.naam='Cothen'"
             bag:huisnummer 8 ; # integer indeed!
@@ -152,8 +154,8 @@ razu:nl-wbdrazu-g0352-403-2    #
     schema:about [ 
         a bag:Pand ;
         rdfs:label "Pand 0340100000325586" ;
-        bag:bagID "0340100000325586" ;
-        owl:sameAs <https://bag.basisregistraties.overheid.nl/bag/id/pand/0340100000325586>
+        bag:identificatie "0340100000325586" ;
+        owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/pand/0340100000325586>
     ] ;
     ldto:dekkingInTijd [
         a ldto:DekkingInTijdGegevens ;

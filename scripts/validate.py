@@ -2,12 +2,14 @@
 
 import sys
 import argparse
+import re
 import urllib.request
 import urllib.error
 from functools import lru_cache
 from pathlib import Path
 import pyshacl
-from rdflib import Graph, OWL, URIRef
+from rdflib import BNode, Graph, OWL, URIRef
+from rdflib.namespace import RDF, RDFS, SH
 import time
 
 ALLOWED_EXTENSIONS = {".ttl", ".meta.json"}
@@ -106,10 +108,12 @@ def load_shapes_with_imports(shapes_type: str) -> Graph:
 
         filename = IMPORT_MAP.get(iri)
         if not filename:
+            print(f"Warning: no local mapping for owl:imports <{iri}>; skipping import", file=sys.stderr)
             continue
 
         import_path = base_dir / filename
         if not import_path.exists():
+            print(f"Warning: owl:imports <{iri}> resolves to missing file {import_path}; skipping", file=sys.stderr)
             continue
 
         shapes_graph.parse(import_path)
@@ -122,7 +126,125 @@ def load_shapes_with_imports(shapes_type: str) -> Graph:
 
     return shapes_graph
 
-def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_patterns=None, rdf_format=None):
+def compact_report(results_graph: Graph, data_graph: Graph = None, include_warnings: bool = True) -> str:
+    """Build a compact report from a SHACL results graph: one line per
+    leaf violation, grouped by focus node."""
+    detailed = set(results_graph.objects(None, SH.detail))
+    top_level = [
+        r for r in results_graph.subjects(RDF.type, SH.ValidationResult)
+        if r not in detailed
+    ]
+
+    def leaf_results(node):
+        children = list(results_graph.objects(node, SH.detail))
+        if not children:
+            yield node
+        for child in children:
+            yield from leaf_results(child)
+
+    grouped = {}
+    for r in top_level:
+        for leaf in leaf_results(r):
+            focus = results_graph.value(leaf, SH.focusNode)
+            item = (
+                results_graph.value(leaf, SH.resultPath),
+                results_graph.value(leaf, SH.value),
+                results_graph.value(leaf, SH.resultMessage),
+                results_graph.value(leaf, SH.sourceConstraintComponent),
+                results_graph.value(leaf, SH.resultSeverity),
+            )
+            grouped.setdefault(focus, set()).add(item)
+
+    if not grouped:
+        return ""
+
+    nm = results_graph.namespace_manager
+
+    def q(term):
+        return term.n3(nm) if term is not None else "-"
+
+    def local(uri):
+        s = str(uri)
+        return s.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
+
+    def describe(focus):
+        """Label for a focus node; for blank nodes add a type hint."""
+        label = q(focus)
+        if data_graph is not None and isinstance(focus, BNode):
+            types = [
+                t for t in data_graph.objects(focus, RDF.type)
+                if t not in (RDFS.Resource, OWL.Thing)
+            ]
+            if types:
+                label += f" (a {q(sorted(types, key=str)[0])})"
+        return label
+
+    def clean_message(msg, focus):
+        text = str(msg)
+        # "Node <huge node dump> must conform ..." -> "must conform ..."
+        text = re.sub(r"^Node\b.*?\bmust\b", "must", text, flags=re.S)
+        # "... shapes in [ <shape turtle> ] ..." -> list the constrained
+        # classes/properties instead of dumping the shapes
+        m = re.search(r"must conform to (all|one or more) shapes in (.*)", text, flags=re.S)
+        if m:
+            quantifier = "all of" if m.group(1) == "all" else "one or more of"
+            refs = re.findall(r"sh:(?:class|path)\s+([^\s\],;]+)", m.group(2))
+            if refs:
+                text = f"must conform to {quantifier}: {', '.join(dict.fromkeys(refs))}"
+        # "... on <node>->path" / "... on [ <bnode dump> ]->path" -> drop it
+        text = re.sub(
+            r"\s+on\s+(<[^>]+>|_:\S+|\[.*\])(->\S*)?$", "", text, flags=re.S
+        )
+        if focus is not None:
+            text = text.replace(str(focus), "this")
+        if len(text) > 300:
+            text = text[:300].rsplit(" ", 1)[0] + " ..."
+        return text
+
+    lines = []
+    n_viol = 0
+    n_warn_shown = 0
+    n_warn_hidden = 0
+    for focus in sorted(grouped, key=lambda f: str(f)):
+        items = sorted(
+            grouped[focus], key=lambda i: (str(i[0]), str(i[3]), str(i[2]))
+        )
+        shown = []
+        for item in items:
+            sev = item[4]
+            if sev in (None, SH.Violation):
+                n_viol += 1
+                shown.append(item)
+            elif include_warnings:
+                n_warn_shown += 1
+                shown.append(item)
+            else:
+                n_warn_hidden += 1
+        if not shown:
+            continue
+        lines.append(describe(focus))
+        for path, value, msg, comp, sev in shown:
+            text = clean_message(msg, focus) if msg else "does not conform"
+            location = f"{q(path)}: " if path is not None else ""
+            val = f" (value: {q(value)})" if value is not None and value != focus else ""
+            sev_tag = "" if sev in (None, SH.Violation) else f" [{local(sev)}]"
+            comp_tag = f" [{local(comp)}]" if comp is not None else ""
+            lines.append(f"  - {location}{text}{comp_tag}{val}{sev_tag}")
+        lines.append("")
+
+    if not lines:
+        return f"({n_warn_hidden} warning(s) suppressed)" if n_warn_hidden else ""
+
+    parts = [f"{n_viol} violation(s)"] if n_viol else []
+    if n_warn_shown:
+        parts.append(f"{n_warn_shown} warning(s)")
+    if n_warn_hidden:
+        parts.append(f"{n_warn_hidden} warning(s) suppressed")
+    lines.append(", ".join(parts) + " total")
+    return "\n".join(lines)
+
+
+def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_patterns=None, rdf_format=None, verbose=False, include_warnings=True):
     # Load the data graph from the input file
     data_graph = Graph()
     data_graph.parse(input_file, format=rdf_format)
@@ -148,6 +270,15 @@ def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_
         
         conforms, results_graph, results_text = validation_result
 
+        # Per the SHACL spec only sh:Violation results break conformance;
+        # pyshacl's `conforms` is False whenever any result (incl. warnings)
+        # exists, so recompute it from the result severities.
+        conforms = not any(
+            sev in (None, SH.Violation)
+            for r in results_graph.subjects(RDF.type, SH.ValidationResult)
+            for sev in [results_graph.value(r, SH.resultSeverity)]
+        )
+
         resolvable_ok = True
         if check_resolvable:
             external_uris = get_external_uris(data_graph)
@@ -168,11 +299,14 @@ def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_
 
         if conforms and resolvable_ok:
             print(f"Validation successful: {input_file} conforms to ldto-{shapes_type}.ttl.")
+            report = results_text if verbose else compact_report(results_graph, data_graph, include_warnings)
+            if report:
+                print(report)
             return 0
         else:
             if not conforms:
                 print(f"Validation failed for {input_file}:")
-                print(results_text)
+                print(results_text if verbose else compact_report(results_graph, data_graph, include_warnings))
             if not resolvable_ok:
                 print(f"Validation failed for {input_file}: Unresolvable external URIs found.")
             return 1
@@ -188,6 +322,8 @@ def main():
     parser.add_argument("--check-resolvable", action="store_true", help="Check if external URIs are resolvable")
     parser.add_argument("--ignore-pattern", action="append", help="Substring patterns to ignore when checking resolvability (can be used multiple times)")
     parser.add_argument("--format", choices=["turtle"], default=None, help="Force RDF parse format (e.g. turtle)")
+    parser.add_argument("--verbose", action="store_true", help="Print the full pySHACL report instead of a compact summary")
+    parser.add_argument("--no-warnings", action="store_true", help="Hide sh:Warning results (only show violations)")
     
     args = parser.parse_args()
 
@@ -209,12 +345,12 @@ def main():
             p for p in input_path.rglob("*")
             if p.is_file() and any(str(p).endswith(ext) for ext in ALLOWED_EXTENSIONS)
         ):
-            status = validate_rdf(str(file_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format)
+            status = validate_rdf(str(file_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format, args.verbose, not args.no_warnings)
             if status > overall_status:
                 overall_status = status
         return overall_status
     else:
-        return validate_rdf(str(input_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format)
+        return validate_rdf(str(input_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format, args.verbose, not args.no_warnings)
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -90,6 +90,15 @@ Met `--format` kan het RDF-formaat geforceerd worden. Dit is nuttig als een best
 python scripts/validate.py path/to/file.meta.json --format turtle
 ```
 
+Het script rapporteert compact: één regel per schending, gegroepeerd per knooppunt. Naast echte schendingen (`sh:Violation`) kunnen de shapes ook waarschuwingen (`sh:Warning`) geven; waarschuwingen laten de validatie niet falen.
+
+```bash
+python scripts/validate.py path/to/file.ttl razu --no-warnings   # verberg waarschuwingen
+python scripts/validate.py path/to/file.ttl razu --verbose       # volledige pySHACL-rapportage
+```
+
+De testsuite gebruikt een conventie op directory-niveau: `tests/<profiel>/valid/` moet valideren, `tests/<profiel>/invalid/` moet falen, en `tests/<profiel>/warning/` moet valideren én minstens één waarschuwing geven.
+
 
 -----------------------------------------------------------------------------------------
 
@@ -195,3 +204,18 @@ With '--ignore-pattern', specific URIs (e.g. containing a certain substring) can
 ```bash
 python scripts/validate.py path/to/file.ttl --check-resolvable --ignore-pattern "example.com" --ignore-pattern "localhost"
 ```
+
+With `--format` the RDF format can be forced. This is useful when a file does not have a standard RDF extension but does contain Turtle content (such as `.meta.json`):
+
+```bash
+python scripts/validate.py path/to/file.meta.json --format turtle
+```
+
+The script reports compactly: one line per violation, grouped by node. Besides actual violations (`sh:Violation`), the shapes can also emit warnings (`sh:Warning`); warnings do not fail validation.
+
+```bash
+python scripts/validate.py path/to/file.ttl razu --no-warnings   # hide warnings
+python scripts/validate.py path/to/file.ttl razu --verbose       # full pySHACL report
+```
+
+The test suite uses a directory-level convention: `tests/<profile>/valid/` must conform, `tests/<profile>/invalid/` must fail, and `tests/<profile>/warning/` must conform while producing at least one warning.

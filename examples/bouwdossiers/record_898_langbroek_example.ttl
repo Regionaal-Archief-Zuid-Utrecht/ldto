@@ -1,3 +1,4 @@
+# an example of a bouwdossier
 
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
@@ -40,7 +41,6 @@
 <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-222> a ldto:Informatieobject ;
     dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/000/nl-wbdrazu-g0352-008-222.meta.json> ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ; # Dossier
-    ldto:archiefvormer <https://data.razu.nl/id/actor/9291cee91d27d3eb899db7ca97fcc826> ;   # voormalige gemeente Langbroek
     rdfs:comment "Dit is een test-conversie van ingest in voorbereiding, perceeldata is handmatig toegevoeg, mogelijk een ander perceel dan ten tijde van de aanvraag."@nl ;
     ldto:betrokkene [ 
         a ldto:BetrokkeneGegevens ;
@@ -50,32 +50,29 @@
             prov:hadPrimarySource <https://data.razu.nl/id/object/nl-wbdrazu-g0352-008-222> ;
             pnv:hasName [ 
                 a pnv:PersonName ;
-                rdfs:label "J. van Doorn" ;
-                pnv:baseSurname "Doorn" ;
+                rdfs:label "J. van den Berg" ;
+                pnv:baseSurname "Berg" ;
                 pnv:givenName "J." ;
-                pnv:literalName "J. van Doorn" ;
-                pnv:surname "van Doorn" ;
-                pnv:surnamePrefix "van" 
+                pnv:literalName "J. van den Berg" ;
+                pnv:surname "van den Berg" ;
+                pnv:surnamePrefix "van den" 
             ] 
         ] ;
         ldto:betrokkeneTypeRelatie <https://data.razu.nl/id/betrokkenheid/80535b4e36061f628427ba168cc4bd5c>  # Aanvrager
     ] ;
     ldto:classificatie <https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c> ; # Bouwdossier
     ldto:dekkingInRuimte [ 
-        a bag:_AdresseerbaarObject,
-        ldto:Locatie ;
-        schema:address [ 
-            a bag:Nummeraanduiding,
-            schema:PostalAddress ;
-            rdfs:label "Rhodensteijnselaan 26, Langbroek" ;
-            bag:huisnummer 26 ;
-            bag:ligtAan [ a bag:OpenbareRuimte ;
-                rdfs:label "Rhodensteijnselaan" ;
-                bag:bagID "0352300000000317" ;
-                bag:naam "Rhodensteijnselaan" ;
-                owl:sameAs <https://bag.basisregistraties.overheid.nl/bag/id/openbare-ruimte/0352300000000317> ] ;
-            bag:ligtIn <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404> 
+        a ldto:Locatie, bag:Verblijfsobject ;
+
+        # example link to a bag:Pand, nt in the source data
+        bag:maaktDeelUitVan [
+            a bag:Pand ;
+            rdfs:label "Pand 0340100000325586" ;
+            bag:identificatie "0340100000325586" ;
+            owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/pand/0340100000325586>
         ] ;
+
+        schema:address <https://data.razu.nl/id/adres/1234567890123456> ; # dummy URI used here
         geo:hasGeometry [ 
             a geo:Geometry ;
             rdfs:label "Representatief punt" ;
@@ -84,13 +81,7 @@
         ];
 	    geo:sfWithin <https://data.razu.nl/id/perceel/lbk02/a/2271>  
     ] ;
-    # example / proposal of how to add a pand: 
-    schema:about [ 
-        a bag:Pand ;
-        rdfs:label "Pand 0340100000325586" ;
-        bag:bagID "0340100000325586" ;
-        owl:sameAs <https://bag.basisregistraties.overheid.nl/bag/id/pand/0340100000325586>
-    ] ;
+    
     ldto:dekkingInTijd [ 
         a ldto:DekkingInTijdGegevens ;
         rdfs:label "1943" ;
@@ -114,7 +105,6 @@
     dcterms:hasFormat <https://g0352.opslag.razu.nl/nl-wbdrazu/g0352/008/000/001/nl-wbdrazu-g0352-008-1722.meta.json> ;
     rdfs:comment "Dit is een test-conversie van ingest in voorbereiding."@nl  ;
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;  # Archiefstuk
-    ldto:archiefvormer <https://data.razu.nl/id/actor/9291cee91d27d3eb899db7ca97fcc826> ;   # voormalige gemeente Langbroek
     ldto:classificatie <https://data.razu.nl/id/soort/22b96f5bcaec05c55fd50039022db638>,    # Document - niet nader gespecificeerd
         <https://data.razu.nl/id/soort/6904a889b403cfc53a8ac87427a1b041>,                   # Bouwtekening
         <https://data.razu.nl/id/soort/6c83ee878ab36b68facbf10bf20b2819>,                   # Bouwvergunning
