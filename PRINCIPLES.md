@@ -39,7 +39,6 @@ In addition to what MDTO and thus LDTO requires (LDTO-core), there are additiona
 - The ldto:classificatie predicate is required for each Informatieobject and should point to a term in the "soort"-thesaurus (<https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a>).
 
 
-
 ## Additional principles for specific materals
 
 TODO
