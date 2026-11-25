@@ -63,7 +63,7 @@ razu:nl-wbdrazu-g0352-403-2    #
 
 
     # NOTE: to be more in line with bag and provide room for a bag:Pand, the fairly abstract bag:_AdresseerbaarObject was removed below,
-    # and as a 'stepup' node to Pand the bag:Verblijfsobject was added (which might be even usefull in itself).
+    # and as a 'set up' node to Pand the bag:Verblijfsobject was added (which might be even useful in itself).
     # bag modelling based on https://www.gemeentelijkgegevensmodel.nl/latest/domeinen/bag/
 
     ldto:dekkingInRuimte [         
@@ -72,8 +72,8 @@ razu:nl-wbdrazu-g0352-403-2    #
         # but it is handy to always add the 'bag:Verblijfsobject' for uniformity (makes it easier to create SPARQL queries)
 
         # { when we do have bag:Verblijfsobject data: (a future proof approach, might get this kind of data eventually):
-        bag:identificatie "0321010000005558" ;
-        owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/verblijfsobject/0321010000005558> ;
+        # bag:identificatie "0321010000005558" ;
+        # owl:sameAs <http://bag.basisregistraties.overheid.nl/bag/id/verblijfsobject/0321010000005558> ;
         # }
 
         # { When the metadata provides a bag:Pand identification, we'll include a structure like this
