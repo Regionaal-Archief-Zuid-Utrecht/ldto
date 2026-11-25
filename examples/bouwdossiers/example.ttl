@@ -171,7 +171,7 @@ razu:nl-wbdrazu-g0352-403-3    #
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/f5fb6f6efcdb8c2392af00c73b918412> ; # eerbiediging persoonlijke levenssfeer / avg
         # TermijnEinddatum should be added. It is either provided with the metadata or can be calculated: for AVG dekkingInTijd + 82 years
         # ldto:beperkingGebruikTermijn [
-        #      a ldto:Termijngegevens;
+        #      a ldto:TermijnGegevens;
         #      ldto:termijnEinddatum "2037-01-01"^^xsd:date 
         # ]
     ] , [ 
@@ -220,7 +220,7 @@ razu:nl-wbdrazu-g0352-403-5    #
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/3f71885c8fdcf4390a055fcb65af0232>; # beperkt gebruik, rechten onbekend
         # TermijnEinddatum should be added. for Copyright dekkingInTijd + 82 years + 70 years (70 years after the death of the author, which is assumed to be 18 years old at least when the material is published
         # ldto:beperkingGebruikTermijn [
-        #      a ldto:Termijngegevens;
+        #      a ldto:TermijnGegevens;
         #      ldto:termijnEinddatum "2107-01-01"^^xsd:date 
         # ]
     ] , [ 
