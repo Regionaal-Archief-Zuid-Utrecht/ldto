@@ -167,10 +167,16 @@ razu:nl-wbdrazu-g0352-403-3    #
     ] ;
     ldto:beperkingGebruik [
         a ldto:BeperkingGebruikGegevens ;
+        rdfs:comment "Beperkingen ten aanzien van de openbaarheid van dit archiefstuk"@nl ;
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/f5fb6f6efcdb8c2392af00c73b918412> ; # eerbiediging persoonlijke levenssfeer / avg
-        # hier misschien ook aangeven tot wanneer we deze beperking er op willen houden
+        # TermijnEinddatum should be added. It is either provided with the metadata or can be calculated: for AVG dekkingInTijd + 82 years
+        # ldto:beperkingGebruikTermijn [
+        #      a ldto:Termijngegevens;
+        #      ldto:termijnEinddatum "2037-01-01"^^xsd:date 
+        # ]
     ] , [ 
         a ldto:BeperkingGebruikGegevens ;
+        rdfs:comment "Auteursrechtelijke beperkingen met betrekking tot dit archiefstuk"@nl ;
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/c9ff6ea52d650cc82c5c04dd054aeb1f> ; # geen auteursrechtlijke beperkingen / cco0
     ] .
 
@@ -212,6 +218,11 @@ razu:nl-wbdrazu-g0352-403-5    #
         a ldto:BeperkingGebruikGegevens ;
         rdfs:comment "Auteursrechtelijke beperkingen met betrekking tot dit archiefstuk"@nl ;
         ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/3f71885c8fdcf4390a055fcb65af0232>; # beperkt gebruik, rechten onbekend
+        # TermijnEinddatum should be added. for Copyright dekkingInTijd + 82 years + 70 years (70 years after the death of the author, which is assumed to be 18 years old at least when the material is published
+        # ldto:beperkingGebruikTermijn [
+        #      a ldto:Termijngegevens;
+        #      ldto:termijnEinddatum "2107-01-01"^^xsd:date 
+        # ]
     ] , [ 
         a ldto:BeperkingGebruikGegevens ;
         rdfs:comment "Beperkingen ten aanzien van de openbaarheid van dit archiefstuk"@nl ;
