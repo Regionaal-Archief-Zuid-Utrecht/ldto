@@ -68,7 +68,9 @@ razu:nl-wbdrazu-g0352-403-2    #
 
     ldto:dekkingInRuimte [         
         # *each* source adres wil result in one blank node, one example given here: 
-        a ldto:Locatie, bag:Verblijfsobject;  # the latter required only when we have a bag Pand in the sibling structure, even when we don't have a bag:identificatie for the bag:Verblijfsobject
+        
+        a ldto:Locatie, bag:Verblijfsobject;  
+        # the latter required only when we have a bag Pand in the sibling structure, even when we don't have a bag:identificatie for the bag:Verblijfsobject
         # but it is handy to always add the 'bag:Verblijfsobject' for uniformity (makes it easier to create SPARQL queries)
 
         # { when we do have bag:Verblijfsobject data: (a future proof approach, might get this kind of data eventually):
