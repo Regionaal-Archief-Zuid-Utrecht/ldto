@@ -45,7 +45,20 @@ razu:nl-wbdrazu-g0352-403-2    #
 
     ldto:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04> ; # Dossier 
     ldto:classificatie <https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c>  ; # "Bouwdossier" 
-    
+
+    # there might be restrictions on the Dossier (type 1b: Belang staat en zijn bondgenoten; or type 1c: Onevenredige benadeling ander belang. 
+    # In such case, this restriction is inherited by archiefstukken.
+    # ldto:beperkingGebruik [
+    #     a ldto:BeperkingGebruikGegevens ;
+    #     rdfs:comment "Beperkingen ten aanzien van de openbaarheid van dit archiefstuk"@nl ;
+    #     ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/6d9800579bad4dbeddc7b370aa5c2505> ; # Belang Staat of zijn bondgenoten
+    #     TermijnEinddatum should be added. It is either provided with the metadata or can be calculated: for AVG dekkingInTijd + 82 years
+    #         ldto:beperkingGebruikTermijn [
+        #     a ldto:TermijnGegevens;
+        #      ldto:termijnEinddatum "2047-01-01"^^xsd:date 
+        # ]
+    # ] ,
+
     # For this very record, we don't have any betrokkene information in the export:
     # This gave no results: sqlite3 maisexp.sqlite3 "SELECT * FROM bd JOIN piv ON bd.BD_ID = piv.BD_ID " | grep 1036572
     # Is it correct this info is not in the export?
