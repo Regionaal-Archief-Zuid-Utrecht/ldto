@@ -104,7 +104,7 @@ razu:nl-wbdrazu-g0352-403-2    #
             bag:huisnummer 8 ; # an integer indeed!
             # { When available, add the huisletter and huisnummertoevoeging:
             #bag:huisletter "A" ; # mind that BAG uses both upper and lower case: we normalize to uppercase only!
-            #    bag:huisnummerToevoeging "bis" ; 
+            #    bag:huisnummertoevoeging "bis" ; 
             # }
 
             bag:postcode "2524AB" ;  # without space in between; see previous query

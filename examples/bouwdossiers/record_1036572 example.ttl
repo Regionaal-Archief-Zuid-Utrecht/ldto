@@ -112,7 +112,7 @@ razu:nl-wbdrazu-g0352-403-2    #
             bag:huisnummer 8 ; # integer indeed!
             # If available, add the huisletter and huisnummertoevoeging:
             # bag:huisletter "A" ; # mind that BAG uses both upper and lower case: we normalize to uppercase only!
-            # bag:huisnummerToevoeging # is this like 'bis'?
+            # bag:huisnummertoevoeging # is this like 'bis'?
 
             bag:postcode "2524AB" ;  # without space in between; see previous query
             bag:identificatie "0321200000005558" ;  # sqlite3 bag.sqlite "select n.bagID from Nummeraanduidingen n JOIN OpenbareRuimte o ON n.ligtAan = o.bagID JOIN WPL w ON n.ligtIn = w.identificatie WHERE n.huisnummer=8 AND n.huisletter IS NULL AND n.huisnummertoevoeging IS NULL AND o.naam='Caspargauw' AND w.naam='Cothen'"

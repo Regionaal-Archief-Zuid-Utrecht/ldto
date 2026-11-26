@@ -126,14 +126,10 @@ def load_shapes_with_imports(shapes_type: str) -> Graph:
 
     return shapes_graph
 
-def compact_report(results_graph: Graph, data_graph: Graph = None, include_warnings: bool = True) -> str:
-    """Build a compact report from a SHACL results graph: one line per
-    leaf violation, grouped by focus node."""
+def _iter_leaf_results(results_graph: Graph):
+    """Yield (focus, path, value, message, component, severity) for every
+    leaf sh:ValidationResult, descending through sh:detail."""
     detailed = set(results_graph.objects(None, SH.detail))
-    top_level = [
-        r for r in results_graph.subjects(RDF.type, SH.ValidationResult)
-        if r not in detailed
-    ]
 
     def leaf_results(node):
         children = list(results_graph.objects(node, SH.detail))
@@ -142,18 +138,84 @@ def compact_report(results_graph: Graph, data_graph: Graph = None, include_warni
         for child in children:
             yield from leaf_results(child)
 
-    grouped = {}
-    for r in top_level:
+    for r in results_graph.subjects(RDF.type, SH.ValidationResult):
+        if r in detailed:
+            continue
         for leaf in leaf_results(r):
-            focus = results_graph.value(leaf, SH.focusNode)
-            item = (
+            yield (
+                results_graph.value(leaf, SH.focusNode),
                 results_graph.value(leaf, SH.resultPath),
                 results_graph.value(leaf, SH.value),
                 results_graph.value(leaf, SH.resultMessage),
                 results_graph.value(leaf, SH.sourceConstraintComponent),
                 results_graph.value(leaf, SH.resultSeverity),
             )
-            grouped.setdefault(focus, set()).add(item)
+
+
+def _local(uri) -> str:
+    return str(uri).rsplit("#", 1)[-1].rsplit("/", 1)[-1]
+
+
+def _describe_focus(focus, data_graph, nm) -> str:
+    """Label for a focus node; for blank nodes add a type hint and an
+    identifying literal (e.g. rdfs:label, bag:identificatie) so the node can
+    be located in the source file."""
+    label = focus.n3(nm)
+    if data_graph is not None and isinstance(focus, BNode):
+        types = [
+            t for t in data_graph.objects(focus, RDF.type)
+            if t not in (RDFS.Resource, OWL.Thing)
+        ]
+        if types:
+            label += f" (a {sorted(types, key=str)[0].n3(nm)})"
+        ident = None
+        for pred in (
+            RDFS.label,
+            URIRef("http://bag.basisregistraties.overheid.nl/def/bag#identificatie"),
+            URIRef("https://data.razu.nl/def/ldto/naam"),
+            URIRef("http://bag.basisregistraties.overheid.nl/def/bag#naam"),
+        ):
+            ident = data_graph.value(focus, pred)
+            if ident is not None:
+                break
+        if ident is not None:
+            label += f' "{ident}"'
+        else:
+            preds = sorted(set(data_graph.predicates(None, focus)), key=str)
+            if preds:
+                label += f" via {preds[0].n3(nm)}"
+    return label
+
+
+def _clean_message(msg, focus) -> str:
+    text = str(msg)
+    # "Node <huge node dump> must conform ..." -> "must conform ..."
+    text = re.sub(r"^Node\b.*?\bmust\b", "must", text, flags=re.S)
+    # "... shapes in [ <shape turtle> ] ..." -> list the constrained
+    # classes/properties instead of dumping the shapes
+    m = re.search(r"must conform to (all|one or more) shapes in (.*)", text, flags=re.S)
+    if m:
+        quantifier = "all of" if m.group(1) == "all" else "one or more of"
+        refs = re.findall(r"sh:(?:class|path)\s+([^\s\],;]+)", m.group(2))
+        if refs:
+            text = f"must conform to {quantifier}: {', '.join(dict.fromkeys(refs))}"
+    # "... on <node>->path" / "... on [ <bnode dump> ]->path" -> drop it
+    text = re.sub(
+        r"\s+on\s+(<[^>]+>|_:\S+|\[.*\])(->\S*)?$", "", text, flags=re.S
+    )
+    if focus is not None:
+        text = text.replace(str(focus), "this")
+    if len(text) > 300:
+        text = text[:300].rsplit(" ", 1)[0] + " ..."
+    return text
+
+
+def compact_report(results_graph: Graph, data_graph: Graph = None, include_warnings: bool = True) -> str:
+    """Build a compact report from a SHACL results graph: one line per
+    leaf violation, grouped by focus node."""
+    grouped = {}
+    for focus, path, value, msg, comp, sev in _iter_leaf_results(results_graph):
+        grouped.setdefault(focus, set()).add((path, value, msg, comp, sev))
 
     if not grouped:
         return ""
@@ -162,44 +224,6 @@ def compact_report(results_graph: Graph, data_graph: Graph = None, include_warni
 
     def q(term):
         return term.n3(nm) if term is not None else "-"
-
-    def local(uri):
-        s = str(uri)
-        return s.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
-
-    def describe(focus):
-        """Label for a focus node; for blank nodes add a type hint."""
-        label = q(focus)
-        if data_graph is not None and isinstance(focus, BNode):
-            types = [
-                t for t in data_graph.objects(focus, RDF.type)
-                if t not in (RDFS.Resource, OWL.Thing)
-            ]
-            if types:
-                label += f" (a {q(sorted(types, key=str)[0])})"
-        return label
-
-    def clean_message(msg, focus):
-        text = str(msg)
-        # "Node <huge node dump> must conform ..." -> "must conform ..."
-        text = re.sub(r"^Node\b.*?\bmust\b", "must", text, flags=re.S)
-        # "... shapes in [ <shape turtle> ] ..." -> list the constrained
-        # classes/properties instead of dumping the shapes
-        m = re.search(r"must conform to (all|one or more) shapes in (.*)", text, flags=re.S)
-        if m:
-            quantifier = "all of" if m.group(1) == "all" else "one or more of"
-            refs = re.findall(r"sh:(?:class|path)\s+([^\s\],;]+)", m.group(2))
-            if refs:
-                text = f"must conform to {quantifier}: {', '.join(dict.fromkeys(refs))}"
-        # "... on <node>->path" / "... on [ <bnode dump> ]->path" -> drop it
-        text = re.sub(
-            r"\s+on\s+(<[^>]+>|_:\S+|\[.*\])(->\S*)?$", "", text, flags=re.S
-        )
-        if focus is not None:
-            text = text.replace(str(focus), "this")
-        if len(text) > 300:
-            text = text[:300].rsplit(" ", 1)[0] + " ..."
-        return text
 
     lines = []
     n_viol = 0
@@ -222,13 +246,13 @@ def compact_report(results_graph: Graph, data_graph: Graph = None, include_warni
                 n_warn_hidden += 1
         if not shown:
             continue
-        lines.append(describe(focus))
+        lines.append(_describe_focus(focus, data_graph, nm))
         for path, value, msg, comp, sev in shown:
-            text = clean_message(msg, focus) if msg else "does not conform"
+            text = _clean_message(msg, focus) if msg else "does not conform"
             location = f"{q(path)}: " if path is not None else ""
             val = f" (value: {q(value)})" if value is not None and value != focus else ""
-            sev_tag = "" if sev in (None, SH.Violation) else f" [{local(sev)}]"
-            comp_tag = f" [{local(comp)}]" if comp is not None else ""
+            sev_tag = "" if sev in (None, SH.Violation) else f" [{_local(sev)}]"
+            comp_tag = f" [{_local(comp)}]" if comp is not None else ""
             lines.append(f"  - {location}{text}{comp_tag}{val}{sev_tag}")
         lines.append("")
 
@@ -244,7 +268,56 @@ def compact_report(results_graph: Graph, data_graph: Graph = None, include_warni
     return "\n".join(lines)
 
 
-def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_patterns=None, rdf_format=None, verbose=False, include_warnings=True):
+def summary_report(results_graph: Graph, data_graph: Graph = None, include_warnings: bool = True) -> str:
+    """Group leaf results by (path, constraint component, severity, message)
+    and show the count plus one example focus node per group."""
+    nm = results_graph.namespace_manager
+
+    def q(term):
+        return term.n3(nm) if term is not None else "-"
+
+    groups = {}
+    n_warn_hidden = 0
+    for focus, path, value, msg, comp, sev in _iter_leaf_results(results_graph):
+        if sev not in (None, SH.Violation) and not include_warnings:
+            n_warn_hidden += 1
+            continue
+        text = _clean_message(msg, focus) if msg else "does not conform"
+        key = (path, comp, sev, text)
+        groups.setdefault(key, set()).add((focus, value))
+
+    if not groups:
+        return f"({n_warn_hidden} warning(s) suppressed)" if n_warn_hidden else ""
+
+    # Violations first, then warnings; within each severity by count (desc).
+    ordered = sorted(
+        groups.items(),
+        key=lambda kv: (kv[0][2] not in (None, SH.Violation), -len(kv[1]), kv[0][3]),
+    )
+
+    lines = []
+    for (path, comp, sev, text), occurrences in ordered:
+        location = f"{q(path)}: " if path is not None else ""
+        comp_tag = f" [{_local(comp)}]" if comp is not None else ""
+        sev_tag = "" if sev in (None, SH.Violation) else f" [{_local(sev)}]"
+        lines.append(f"{len(occurrences)}×  {location}{text}{comp_tag}{sev_tag}")
+        focus, value = sorted(occurrences, key=lambda o: str(o[0]))[0]
+        val = f" (value: {q(value)})" if value is not None and value != focus else ""
+        lines.append(f"     e.g. {_describe_focus(focus, data_graph, nm)}{val}")
+        lines.append("")
+
+    n_viol = sum(len(o) for (p, c, s, t), o in groups.items() if s in (None, SH.Violation))
+    n_warn = sum(len(o) for (p, c, s, t), o in groups.items() if s not in (None, SH.Violation))
+    parts = [f"{n_viol} violation(s)"] if n_viol else []
+    if n_warn:
+        parts.append(f"{n_warn} warning(s)")
+    if n_warn_hidden:
+        parts.append(f"{n_warn_hidden} warning(s) suppressed")
+    lines.append(", ".join(parts) + f" in {len(groups)} group(s)")
+    return "\n".join(lines)
+
+
+def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_patterns=None, rdf_format=None, verbose=False, include_warnings=True, summary=False):
     # Load the data graph from the input file
     data_graph = Graph()
     data_graph.parse(input_file, format=rdf_format)
@@ -297,16 +370,22 @@ def validate_rdf(input_file, shapes_type='razu', check_resolvable=False, ignore_
                     print(f"  - {uri} ({reason})")
                 resolvable_ok = False
 
+        if verbose:
+            report = results_text
+        elif summary:
+            report = summary_report(results_graph, data_graph, include_warnings)
+        else:
+            report = compact_report(results_graph, data_graph, include_warnings)
+
         if conforms and resolvable_ok:
             print(f"Validation successful: {input_file} conforms to ldto-{shapes_type}.ttl.")
-            report = results_text if verbose else compact_report(results_graph, data_graph, include_warnings)
             if report:
                 print(report)
             return 0
         else:
             if not conforms:
                 print(f"Validation failed for {input_file}:")
-                print(results_text if verbose else compact_report(results_graph, data_graph, include_warnings))
+                print(report)
             if not resolvable_ok:
                 print(f"Validation failed for {input_file}: Unresolvable external URIs found.")
             return 1
@@ -323,6 +402,7 @@ def main():
     parser.add_argument("--ignore-pattern", action="append", help="Substring patterns to ignore when checking resolvability (can be used multiple times)")
     parser.add_argument("--format", choices=["turtle"], default=None, help="Force RDF parse format (e.g. turtle)")
     parser.add_argument("--verbose", action="store_true", help="Print the full pySHACL report instead of a compact summary")
+    parser.add_argument("--summary", action="store_true", help="Group identical results: show a count plus one example per group")
     parser.add_argument("--no-warnings", action="store_true", help="Hide sh:Warning results (only show violations)")
     
     args = parser.parse_args()
@@ -345,12 +425,12 @@ def main():
             p for p in input_path.rglob("*")
             if p.is_file() and any(str(p).endswith(ext) for ext in ALLOWED_EXTENSIONS)
         ):
-            status = validate_rdf(str(file_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format, args.verbose, not args.no_warnings)
+            status = validate_rdf(str(file_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format, args.verbose, not args.no_warnings, args.summary)
             if status > overall_status:
                 overall_status = status
         return overall_status
     else:
-        return validate_rdf(str(input_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format, args.verbose, not args.no_warnings)
+        return validate_rdf(str(input_path), shapes_type, args.check_resolvable, args.ignore_pattern, args.format, args.verbose, not args.no_warnings, args.summary)
 
 if __name__ == "__main__":
     sys.exit(main())
