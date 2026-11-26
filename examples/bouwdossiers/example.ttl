@@ -48,12 +48,12 @@ razu:nl-wbdrazu-g0352-403-2    #
 
     # there might be restrictions on the Dossier (type 1b: Belang staat en zijn bondgenoten; or type 1c: Onevenredige benadeling ander belang. 
     # In such case, this restriction is inherited by archiefstukken.
+    # TermijnEinddatum should be added and required in origin metadata.
     # ldto:beperkingGebruik [
     #     a ldto:BeperkingGebruikGegevens ;
     #     rdfs:comment "Beperkingen ten aanzien van de openbaarheid van dit archiefstuk"@nl ;
     #     ldto:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/6d9800579bad4dbeddc7b370aa5c2505> ; # Belang Staat of zijn bondgenoten
-    #     TermijnEinddatum should be added. It is either provided with the metadata or can be calculated: for AVG dekkingInTijd + 82 years
-    #         ldto:beperkingGebruikTermijn [
+    #     ldto:beperkingGebruikTermijn [
         #     a ldto:TermijnGegevens;
         #      ldto:termijnEinddatum "2047-01-01"^^xsd:date 
         # ]
