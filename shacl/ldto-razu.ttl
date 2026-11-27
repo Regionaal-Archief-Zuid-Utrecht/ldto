@@ -281,8 +281,8 @@ ldto_sh:AdresShape
         sh:datatype xsd:string ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
-        sh:pattern "^[A-Z]$" ;
-        sh:message "Huisletter moet een hoofdletter zijn" ;
+        sh:pattern "^[a-z]$" ;
+        sh:message "Huisletter moet een kleine letter zijn" ;
     ] ;
     sh:property [
         sh:path bag:huisnummertoevoeging ;
