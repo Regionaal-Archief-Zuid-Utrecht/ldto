@@ -94,6 +94,7 @@ Het script rapporteert compact: één regel per schending, gegroepeerd per knoop
 
 ```bash
 python scripts/validate.py path/to/file.ttl razu --no-warnings   # verberg waarschuwingen
+python scripts/validate.py path/to/file.ttl razu --summary       # groepeer identieke resultaten: aantal + één voorbeeld per groep
 python scripts/validate.py path/to/file.ttl razu --verbose       # volledige pySHACL-rapportage
 ```
 
@@ -215,6 +216,7 @@ The script reports compactly: one line per violation, grouped by node. Besides a
 
 ```bash
 python scripts/validate.py path/to/file.ttl razu --no-warnings   # hide warnings
+python scripts/validate.py path/to/file.ttl razu --summary       # group identical results: count + one example per group
 python scripts/validate.py path/to/file.ttl razu --verbose       # full pySHACL report
 ```
 

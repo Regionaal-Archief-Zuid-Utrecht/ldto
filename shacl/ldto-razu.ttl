@@ -271,6 +271,8 @@ ldto_sh:AdresShape
     sh:property [
         sh:path bag:huisnummer ;
         sh:datatype xsd:integer ;
+        sh:pattern "^[0-9]+$" ;
+        sh:message "Huisnummer moet een geheel getal zijn" ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
     ] ;
@@ -279,14 +281,21 @@ ldto_sh:AdresShape
         sh:datatype xsd:string ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
-        sh:pattern "^[A-Z]$" ;
-        sh:message "Huisletter moet een hoofdletter zijn" ;
+        sh:pattern "^[a-z]$" ;
+        sh:message "Huisletter moet een kleine letter zijn" ;
     ] ;
     sh:property [
-        sh:path bag:huisnummerToevoeging ;
+        sh:path bag:huisnummertoevoeging ;
         sh:datatype xsd:string ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path bag:huisnummertoevoeging ;
+        sh:maxLength 4 ;
+        sh:severity sh:Warning ;
+        sh:message "Huisnummertoevoeging is volgens de BAG maximaal 4 tekens" ;
+        rdfs:comment "Warning in plaats van violation: historische archiefdata kan langere toevoegingen bevatten die in hun tijd wel correct waren." ;
     ] ;
     sh:property [
         sh:path bag:postcode ;
